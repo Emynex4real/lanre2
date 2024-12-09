@@ -1,0 +1,90 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    background-color: rgba(239, 237, 237, 0.575);
+}
+
+.dashboard{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.dashboard-panel .head{
+    font-weight: 700;
+    background-color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.referral-link{
+    background-color: rgba(53, 148, 243, 0.402);
+    padding: 20px;
+}
+
+.earnings {
+  
+}
+.dashboard-mini-box {
+    /* border: 2px solid ; */
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+.dashboard-box .price{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.dashboard-box .text{
+    font-weight: 500;
+}
+.earning-box i{
+    font-size: 1.5rem;
+}
+.earnings .get-more {
+    background-color: dodgerblue;
+    height: 60px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 20px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.get-more i{
+    font-size: 1.5rem;
+    color: white;
+}
+#referral{
+    background-color: rgba(10, 193, 10, 0.692);
+}
+#task{
+    background-color: rgba(255, 0, 0, 0.732);
+}

@@ -1,0 +1,54 @@
+nav{
+    background-color: black;
+    position: relative;
+    /* overflow-y: hidden; */
+}
+.navigation-links{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.menu i{
+    color: white;
+    font-size: 1.3rem;
+}
+.side-bar{
+    background-color: white;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: -250px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 100vh;
+    transition: left 0.5s ease; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+
+}
+.side-bar ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.side-bar li{
+    list-style-type: none;
+}
+
+.side-bar a{
+    text-decoration: none;
+    color: black;
+}
+
+.side-bar .text{
+    font-weight: 700;
+}
+
+.active{
+    top: 0;
+    left: 0;
+}
