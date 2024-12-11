@@ -1,5 +1,11 @@
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+}
 nav{
-    background-color: black;
+    background-color: var(--primary-color);
     position: relative;
     /* overflow-y: hidden; */
 }
@@ -8,6 +14,26 @@ nav{
     display: flex;
     align-items: center;
     padding: 0 20px;
+}
+
+.menu{
+    text-align: end;
+    /* border: 2px solid red; */
+    width: 100%;
+    
+}
+.logo-menu{
+    display: flex;
+}
+.logo-image{
+    /* border: 2px solid red; */
+
+    width: 150px;
+    height: 40px;
+}
+
+.logo-image img{
+    width: 100%;
 }
 
 .menu i{
@@ -19,13 +45,13 @@ nav{
     width: 250px;
     position: absolute;
     top: 0;
-    left: -250px;
+    right: -250px;
     padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 30px;
     min-height: 100vh;
-    transition: left 0.5s ease; 
+    transition: right 0.5s ease; 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     z-index: 10;
 
@@ -50,5 +76,5 @@ nav{
 
 .active{
     top: 0;
-    left: 0;
+    right: 0;
 }
