@@ -20,6 +20,11 @@
     --white-color: white;
     --very-bold: 700;
 }
+html{
+
+    contain: content;
+
+    }
 
 .navigation-links{
     /* overflow-x: hidden; */

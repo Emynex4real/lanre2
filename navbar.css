@@ -53,6 +53,7 @@ html{
 .side-bar{
     background-color: white;
     width: 250px;
+    height: 300vh;
     position: absolute;
     top: 0;
     right: -250px;

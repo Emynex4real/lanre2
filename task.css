@@ -18,9 +18,11 @@ main{
     background-color: rgba(239, 237, 237, 0.575);
 }
 header,
-main{
-    overflow-x: hidden;
-}
+html{
+
+    contain: content;
+
+    }
 
 .task{
     width: 90%;
