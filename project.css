@@ -20,7 +20,7 @@
     --white-color: white;
     --very-bold: 700;
 }
-body{
+.navigation-links{
     overflow-x: hidden;
 }
 main{
