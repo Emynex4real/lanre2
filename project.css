@@ -21,7 +21,7 @@
     --very-bold: 700;
 }
 body{
-    overflow-x: hidden;
+    overflow-y: hidden;
 }
 main{
     display: flex;
