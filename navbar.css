@@ -6,22 +6,26 @@
 }
 header{
     position: relative;
+    /* overflow-y: hidden; */
 }
 
 nav{
     background-color: var(--primary-color);
     /* position: relative; */
-    /* overflow-y: hidden; */
 }
 .navigation-links{
     height: 60px;
     display: flex;
     align-items: center;
     padding: 0 20px;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 
 }
+html{
 
+    contain: content;
+
+    }
 .menu{
     text-align: end;
     /* border: 2px solid red; */
@@ -85,4 +89,7 @@ nav{
 .active{
     top: 0;
     right: 0;
+}
+.coming-soon{
+    font-weight: 700;
 }
