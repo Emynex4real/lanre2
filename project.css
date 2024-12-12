@@ -21,7 +21,7 @@
     --very-bold: 700;
 }
 header{
-    overflow-x: hidden;
+    overflow: hidden;
 }
 main{
     display: flex;
