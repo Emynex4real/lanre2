@@ -17,6 +17,10 @@ main{
     justify-content: center;
     background-color: rgba(239, 237, 237, 0.575);
 }
+header,
+main{
+    overflow-x: hidden;
+}
 
 .task{
     width: 90%;

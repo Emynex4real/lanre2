@@ -20,7 +20,10 @@
     --white-color: white;
     --very-bold: 700;
 }
-
+header,
+main{
+    overflow-x: hidden;
+}
 main{
     display: flex;
     justify-content: center;

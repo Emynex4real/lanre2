@@ -29,7 +29,10 @@ main{
     gap: 30px;
     background-color: rgba(239, 237, 237, 0.575);
 }
-
+header,
+main{
+    overflow-x: hidden;
+}
 .subscription{
     width: 90%;
     display: flex;
