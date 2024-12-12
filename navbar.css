@@ -4,6 +4,10 @@
     --black-color: black;
     --white-color: white;
 }
+body{
+    overflow-x: hidden;
+}
+
 nav{
     background-color: var(--primary-color);
     position: relative;
