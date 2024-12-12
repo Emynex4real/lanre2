@@ -21,7 +21,7 @@
     --very-bold: 700;
 }
 .navigation-links{
-    overflow-x: hidden;
+    overflow: hidden;
 }
 main{
     display: flex;
@@ -38,7 +38,7 @@ main{
     gap: 30px;
 }
 .dashboard-panel{
-    /* border: 2px solid; */
+    border: 2px solid;
     width: 100%;
     padding: 0px 20px;
 
