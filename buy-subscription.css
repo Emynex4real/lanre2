@@ -22,7 +22,7 @@
 }
 header,
 main{
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 main{
     display: flex;

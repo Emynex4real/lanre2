@@ -20,8 +20,9 @@
     --white-color: white;
     --very-bold: 700;
 }
-header{
-    overflow: hidden;
+
+.navigation-links{
+    /* overflow-x: hidden; */
 }
 main{
     display: flex;

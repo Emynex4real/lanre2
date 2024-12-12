@@ -4,14 +4,13 @@
     --black-color: black;
     --white-color: white;
 }
-header,
-/* main{
-    overflow-x: hidden;
-} */
+header{
+    position: relative;
+}
 
 nav{
     background-color: var(--primary-color);
-    position: relative;
+    /* position: relative; */
     /* overflow-y: hidden; */
 }
 .navigation-links{
@@ -19,6 +18,8 @@ nav{
     display: flex;
     align-items: center;
     padding: 0 20px;
+    border: 2px solid red;
+
 }
 
 .menu{
@@ -59,6 +60,8 @@ nav{
     transition: right 0.5s ease; 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     z-index: 10;
+    border: 2px solid red;
+
 
 }
 .side-bar ul{
