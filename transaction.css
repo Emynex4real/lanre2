@@ -118,8 +118,28 @@ html{
     border-radius: 50%;
     color: green;
 }
+.withdraw i{
+    background-color: rgba(0, 128, 0, 0.4);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: green;
+}
+.pending i{
+    background-color: rgba(255, 166, 0, 0.618);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: orange;
+}
 .fail i{
-    background-color: rgba(255, 0, 0, 0.4);
+    background-color: rgba(255, 0, 0, 0.5);
     width: 40px;
     height: 40px;
     display: flex;
@@ -128,6 +148,7 @@ html{
     border-radius: 50%;
     color: red;
 }
+
 .info .name{
     font-weight: 700;
 }
@@ -135,14 +156,57 @@ html{
     color: green;
     font-weight: 700;
 }
-.fail .price{
-    color: red;
+
+.withdraw .price{
+    color: black;
     font-weight: 700;
 }
-.info .time,
-.price-status .status{
+.pending .price{
+    color: black;
+    font-weight: 700;
+}
+.fail .price{
+    color: black;
+    font-weight: 700;
+}
+.info .time{
     font-size: .9rem;
     color: #35004d8a;
+}
+
+.success .status{
+    font-size: .5rem;
+    background-color: rgba(0, 128, 0, 0.4);
+    padding: 2px 4px;
+    border-radius: 10px;
+    text-align: center;
+    color: green;
+}
+.withdraw .status{
+    font-size: .5rem;
+    background-color: rgba(0, 128, 0, 0.4);
+    padding: 2px 4px;
+    border-radius: 10px;
+    text-align: center;
+    color: green;
+}
+.fail .status{
+    font-size: .5rem;
+    background-color: rgba(255, 0, 0, 0.5);
+    padding: 2px 4px;
+    border-radius: 10px;
+    color: red;
+    text-align: center;
+
+}
+.pending .status{
+    font-size: .5rem;
+    background-color: rgba(255, 166, 0, 0.618);
+    padding: 2px 4px;
+    border-radius: 10px;
+    color: orange;
+    text-align: center;
+
 }
 
 .price-status{
