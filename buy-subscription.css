@@ -31,7 +31,6 @@ main{
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    background-color: rgba(239, 237, 237, 0.575);
     background-color: #F8E9FF;
     /* background-color: red; */
     background-image: url(images/bbb.png);

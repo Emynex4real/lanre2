@@ -11,13 +11,20 @@
     font-weight: 400;
     font-style: normal;
 }
-
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+    --very-bold: 700;
+}
 main{
     display: flex;
     justify-content: center;
     background-color: rgba(239, 237, 237, 0.575);
+    padding-bottom: 50px;
 }
-header,
+
 html{
 
     contain: content;
@@ -58,8 +65,8 @@ html{
 
 .task-container .head{
     font-weight: 500;
-    font-size: 1.2rem;
-    color: rgb(3, 179, 61);
+    font-size: 1.5rem;
+    color: var(--primary-color);
 }
 
 .task-container .date, .time{
@@ -76,12 +83,21 @@ html{
     color: black;
 }
 .participate{
-    background-color:rgb(48, 210, 102);
+    background-color: var(--primary-color);
+}
 
+.participate a{
+    color: var(--white-color);
 }
+
 .active{
-    background-color: orange;
+    background-color: var(--secondary-color);
 }
+
+.active a{
+    color: var(--white-color);
+}
+
 .task-content{
     display: flex;
     justify-content: space-evenly;
@@ -89,7 +105,7 @@ html{
 }
 
 .task-content{
-    background-color: rgb(48, 210, 102);
+    background-color: var(--primary-color);
     padding: 10px 30px;
     text-align: center;
     color: white;

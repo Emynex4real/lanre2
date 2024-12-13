@@ -12,6 +12,14 @@
     font-style: normal;
 }
 
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+    --very-bold: 700;
+}
+
 main{
     display: flex;
     justify-content: center;

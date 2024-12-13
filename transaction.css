@@ -35,13 +35,13 @@ html{
     contain: content;
 
     }
-.subscription{
+.transaction{
     width: 90%;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
-.subscription-panel{
+.transaction-panel{
     /* border: 2px solid; */
     width: 100%;
     padding: 0px 20px;
@@ -49,7 +49,7 @@ html{
     background-color: white;
 
 }
-.subscription-panel .head{
+.transaction-panel .head{
     font-weight: 700;
     height: 50px;
     display: flex;
@@ -57,7 +57,7 @@ html{
     /* border: 2px solid; */
 }
 
-.subscription-container{
+.transaction-container{
     display: flex;
     flex-direction: column;
     gap: 70px;
@@ -65,64 +65,94 @@ html{
     border-radius: 10px;
     padding: 20px;
     background-color: white;
-
-
 }
 
-.subscription .content{
+.categories-status{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.categories-status select{
+    width: 100%;
+    height: 30px;
+}
+.categories-status option{
+    font-size: .8rem;   
+}
+
+.content{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 }
-
-.head-buy{
-    display: flex;
-    justify-content: space-between;
-}
-.subscription-container img{
-    background-color: var(--white-color);
-    border-radius: inherit;
-
-}
-.head-buy .head{
-    font-weight: var(--very-bold);
-    font-size: 1.5rem;
-    /* color: var(--secondary-color); */
-}
-.content button{
-    height: 40px;
-    border-radius: 20px;
-    border: none;
-    background-color: var(--secondary-color);
-    
-}
-.content button a{
-    text-decoration: none;
-    color: var(--white-color);
+.content .bold{
     font-weight: 700;
-    
+    font-size: 1.2rem;
 }
-
-.content .details{
+.transaction-details{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.price,
-.days,
-.daily-income,
-.total-income{
+.transaction-details .details{
     display: flex;
     justify-content: space-between;
-    
 }
 
-.details .amount{
-    font-weight: var(--very-bold);
+.details .info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* text-align: center; */
 }
 
-.text, 
-.amount{
-    /* color: var(--secondary-color); */
+.success i{
+    background-color: rgba(0, 128, 0, 0.4);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: green;
+}
+.fail i{
+    background-color: rgba(255, 0, 0, 0.4);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: red;
+}
+.info .name{
+    font-weight: 700;
+}
+.success .price{
+    color: green;
+    font-weight: 700;
+}
+.fail .price{
+    color: red;
+    font-weight: 700;
+}
+.info .time,
+.price-status .status{
+    font-size: .9rem;
+    color: #35004d8a;
+}
+
+.price-status{
+    text-align: end;
+}
+
+hr{
+    width: 90%;
+    margin: auto;
+    height: 1px;
+    border: none;
+    background-color: #ccc;
 }
