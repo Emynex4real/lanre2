@@ -18,11 +18,13 @@
     --white-color: white;
     --very-bold: 700;
 }
+
 main{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: rgba(239, 237, 237, 0.575);
-    padding-bottom: 50px;
 }
 
 html{
@@ -37,9 +39,15 @@ html{
     flex-direction: column;
     gap: 30px;
 }
+.task-panel{
+    /* border: 2px solid; */
+    width: 100%;
+    padding: 0px 20px;
+    background-color: white;
+
+}
 .task-panel .head{
     font-weight: 700;
-    background-color: white;
     height: 50px;
     display: flex;
     align-items: center;
