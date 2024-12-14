@@ -61,9 +61,34 @@ main {
 .referral-link {
   background-color: #af07fd48;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px;
 }
+
+.referral-link a{
+    /* border: 2px solid; */
+    display: block;
+    width: 100px;
+    height: 40px;
+    
+}
+
+.referral-link button{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    border: none;
+    
+}
+
 .total-referral-earned{
     display: flex;
+    flex-direction: column;
     gap: 20px;
     justify-content: center;
 }
@@ -71,4 +96,24 @@ main {
 .total-earned{
     border: 2px solid;
     width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.total-referral i,
+.total-earned i{
+    font-size: 1.5rem;
+}
+
+.total-referral .text,
+.total-earned .text{
+    font-size: .8rem;
+}
+.total-referral .amount,
+.total-earned .amount{
+    font-weight: 900;
+    font-size: 1.2rem;
 }
