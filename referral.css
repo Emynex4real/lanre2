@@ -31,6 +31,7 @@ main {
   align-items: center;
   background-color: rgba(239, 237, 237, 0.575);
   gap: 20px;
+  background-color: #F8E9FF;
 }
 
 .referral {
@@ -99,7 +100,7 @@ main {
 }
 .total-referral,
 .total-earned{
-    border: 2px solid;
+    background-color: var(--primary-color);
     width: 100%;
     padding: 30px;
     border-radius: 10px;
@@ -111,21 +112,55 @@ main {
 .total-referral i,
 .total-earned i{
     font-size: 1.5rem;
+    color: white;
+
 }
 
 .total-referral .text,
 .total-earned .text{
     font-size: .8rem;
+    color: white;
+
 }
 .total-referral .amount,
 .total-earned .amount{
     font-weight: 900;
     font-size: 1.2rem;
+    color: white;
+
 }
 
 table, th, td{
-    border: 2px solid;
+    /* border: 2px solid; */
     font-size: .8rem;
+    text-align: left;
+    color: black;
+    
+}
+th{
+    font-weight: 700;
+    /* width: 100%; */
 }
 
+table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+th, td{
+    padding: 5px;
+}
 
+.user{
+    display: flex;
+    gap: 5px;
+    font-weight: 700;
+}
+table i{
+    font-size: .8rem;
+}
+td{
+    background-color: #af07fd48;
+    /* border-radius: 10px; */
+
+}
