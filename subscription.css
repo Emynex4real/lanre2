@@ -94,13 +94,15 @@ html{
     border-radius: 20px;
     border: none;
     background-color: var(--secondary-color);
-    
-}
-.content button a{
     text-decoration: none;
     color: var(--white-color);
     font-weight: 700;
-    
+    /* border: 2px solid red; */
+    width: 100%;
+}
+.content  a{
+    /* border: 2px solid red; */
+
 }
 
 .content .details{
