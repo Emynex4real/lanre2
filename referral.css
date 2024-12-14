@@ -32,6 +32,7 @@ main {
   background-color: rgba(239, 237, 237, 0.575);
   gap: 20px;
   background-color: #F8E9FF;
+  padding-bottom: 50px;
 }
 
 .referral {
@@ -128,6 +129,13 @@ main {
     font-size: 1.2rem;
     color: white;
 
+}
+
+.my-referrals{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 table, th, td{
