@@ -158,7 +158,7 @@ td{
 }
 table i{
     font-size: .8rem;
-    border: 2px solid;
+    /* border: 2px solid; */
 }
 td{
     background-color: #af07fd48;
