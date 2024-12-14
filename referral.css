@@ -58,13 +58,18 @@ main {
   flex-direction: column;
   gap: 20px;
 }
-.referral-link {
+.referral-link .details {
   background-color: #af07fd48;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 5px;
   border-radius: 10px;
+}
+
+.referral-link .texts{
+    font-weight: 700;
+    font-size: .8rem;
 }
 
 .referral-link a{
@@ -117,3 +122,10 @@ main {
     font-weight: 900;
     font-size: 1.2rem;
 }
+
+table, th, td{
+    border: 2px solid;
+    font-size: .8rem;
+}
+
+
