@@ -76,7 +76,6 @@ html{
 .categories-status select{
     width: 100%;
     height: 30px;
-    border: none;
     border-radius: 5px;
     padding-left: 10px;
     background-color: var(--white-color);
@@ -113,7 +112,7 @@ html{
 }
 
 .success i{
-    background-color: rgba(0, 128, 0, 0.4);
+    background-color: rgba(0, 128, 0, 0.3);
     width: 40px;
     height: 40px;
     display: flex;
@@ -123,7 +122,7 @@ html{
     color: green;
 }
 .withdraw i{
-    background-color: rgba(0, 128, 0, 0.4);
+    background-color: rgba(0, 128, 0, 0.3);
     width: 40px;
     height: 40px;
     display: flex;
@@ -133,7 +132,7 @@ html{
     color: green;
 }
 .pending i{
-    background-color: rgba(255, 166, 0, 0.618);
+    background-color: rgba(255, 166, 0, 0.3);
     width: 40px;
     height: 40px;
     display: flex;
@@ -143,7 +142,7 @@ html{
     color: orange;
 }
 .fail i{
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.3);
     width: 40px;
     height: 40px;
     display: flex;
@@ -180,7 +179,7 @@ html{
 
 .success .status{
     font-size: .5rem;
-    background-color: rgba(0, 128, 0, 0.4);
+    background-color: rgba(0, 128, 0, 0.3);
     padding: 2px 4px;
     border-radius: 10px;
     text-align: center;
@@ -188,7 +187,7 @@ html{
 }
 .withdraw .status{
     font-size: .5rem;
-    background-color: rgba(0, 128, 0, 0.4);
+    background-color: rgba(0, 128, 0, 0.3);
     padding: 2px 4px;
     border-radius: 10px;
     text-align: center;
@@ -196,7 +195,7 @@ html{
 }
 .fail .status{
     font-size: .5rem;
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.3);
     padding: 2px 4px;
     border-radius: 10px;
     color: red;
@@ -205,7 +204,7 @@ html{
 }
 .pending .status{
     font-size: .5rem;
-    background-color: rgba(255, 166, 0, 0.618);
+    background-color: rgba(255, 166, 0, 0.3);
     padding: 2px 4px;
     border-radius: 10px;
     color: orange;
