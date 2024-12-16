@@ -19,3 +19,15 @@ sideBar.addEventListener('click', (event) => {
     event.stopPropagation();
 });
 
+const lightMode = document.querySelector('.light')
+const darkMode = document.querySelector('.dark')
+
+
+lightMode.addEventListener('click', ()=>{
+    lightMode.style.display = 'none'
+    darkMode.style.display = 'block'
+})
+darkMode.addEventListener('click', ()=>{
+    lightMode.style.display = 'block'
+    darkMode.style.display = 'none'
+})

@@ -20,6 +20,14 @@
     --white-color: white;
     --very-bold: 700;
 }
+.darkMode{
+    --primary-color: white;
+    --secondary-color: #F3893F;
+    --black-color: white;
+    --white-color: #34004d;
+    --very-bold: 700;
+}
+
 html{
 
     contain: content;
@@ -48,7 +56,7 @@ main{
     /* border: 2px solid; */
     width: 100%;
     padding: 0px 20px;
-    background-color: white;
+    background-color: var(--white-color);
 
 }
 .dashboard-panel .head{
@@ -77,6 +85,7 @@ main{
     /* border: 2px solid ; */
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: var(--white-color);
 }
 
 .dashboard-box{
@@ -88,12 +97,15 @@ main{
 .dashboard-box .price{
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--primary-color);
 }
 .dashboard-box .text{
     font-weight: 500;
+    color: var(--primary-color);
 }
 .earning-box i{
     font-size: 1.5rem;
+    color: var(--primary-color);
 }
 .earnings .get-more {
     background-color: var(--primary-color);
@@ -107,10 +119,11 @@ main{
 
 .get-more i{
     font-size: 1.5rem;
-    color: white;
+    color: var(--white-color);
+    color: var(--white-color);
 }
 #referral{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 #task{
     background-color:var(--primary-color);
