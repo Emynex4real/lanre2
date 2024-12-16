@@ -55,7 +55,7 @@ html{
     font-size: 1.3rem;
 }
 .side-bar{
-    background-color: white;
+    background-color: var(--white-color);
     width: 250px;
     height: 300vh;
     position: absolute;
@@ -84,7 +84,8 @@ html{
 
 .side-bar a{
     text-decoration: none;
-    color: black;
+    color: var(--black-color);
+    
 }
 
 .side-bar .text{
