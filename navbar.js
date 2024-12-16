@@ -24,10 +24,13 @@ const darkMode = document.querySelector('.dark')
 
 
 lightMode.addEventListener('click', ()=>{
+    document.body.classList.remove('darkMode')
     lightMode.style.display = 'none'
     darkMode.style.display = 'block'
 })
 darkMode.addEventListener('click', ()=>{
+    document.body.classList.add('darkMode')
     lightMode.style.display = 'block'
     darkMode.style.display = 'none'
+
 })

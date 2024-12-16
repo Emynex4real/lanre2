@@ -43,7 +43,7 @@ html{
     /* border: 2px solid; */
     width: 100%;
     padding: 0px 20px;
-    background-color: white;
+    background-color: var(--white-color);
 
 }
 .task-panel .head{
@@ -51,6 +51,7 @@ html{
     height: 50px;
     display: flex;
     align-items: center;
+    color: var(--black-color);
 }
 
 .task-container{
@@ -59,6 +60,7 @@ html{
     gap: 70px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
+    background-color: var(--white-color);
 
 }
 
@@ -79,6 +81,7 @@ html{
 
 .task-container .date, .time{
     font-size: .8rem;
+    color: var(--black-color);
 }
 
 .participate-active button{
@@ -88,7 +91,7 @@ html{
 }
 .participate-active a{
     text-decoration: none;
-    color: black;
+    color: var(--black-color);
 }
 .participate{
     background-color: var(--primary-color);
@@ -116,7 +119,7 @@ html{
     background-color: var(--primary-color);
     padding: 10px 30px;
     text-align: center;
-    color: white;
+    color: var(--white-color);
     height: 100px;
     display: flex;
     align-items: center;

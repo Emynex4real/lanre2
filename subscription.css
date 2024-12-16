@@ -46,7 +46,7 @@ html{
     width: 100%;
     padding: 0px 20px;
     /* border: 2px solid; */
-    background-color: white;
+    background-color: var(--white-color);
 
 }
 .subscription-panel .head{
@@ -64,7 +64,7 @@ html{
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     padding: 20px;
-    background-color: white;
+    background-color: var(--white-color);
 
 
 }

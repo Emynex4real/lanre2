@@ -10,6 +10,7 @@
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
+    color: var(--black-color);
 }
 
 :root{
@@ -33,7 +34,7 @@ main{
     /* border: 2px solid; */
     width: 100%;
     padding: 0px 20px;
-    background-color: white;
+    background-color: var(--white-color);
 
 }
 
@@ -51,7 +52,7 @@ main{
 }
 
 .participate-container{
-    background-color: white;
+    background-color: var(--white-color);
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
@@ -74,8 +75,8 @@ main{
     height: 40px;
     border-radius: 5px;
     border: none;
-    background-color: rgb(101, 43, 226);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
 .participate-container1 .panel{
@@ -88,7 +89,7 @@ main{
 }
 .panel .number{
     background-color: rgba(101, 43, 226, 0.183);
-    color: rgb(101, 43, 226);
+    color: var(--primary-color);
     font-weight: 600;
     font-size: .8rem;
     display: flex;
@@ -110,7 +111,7 @@ main{
 }
 
 .participate-container1{
-    background-color: white;
+    background-color: var(--white-color);
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
