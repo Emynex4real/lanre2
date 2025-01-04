@@ -20,6 +20,10 @@ header{
     /* overflow-y: hidden; */
 }
 
+button {
+    cursor: pointer;
+}
+
 nav{
     background-color:#34004d;
     /* position: relative; */

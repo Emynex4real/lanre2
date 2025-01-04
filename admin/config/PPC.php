@@ -193,6 +193,7 @@
         private $status;
         private $daily_income;
         private $total_income;
+        private $purchase_limit;
         private $subscription_id;
 
         public function __construct() {
@@ -200,19 +201,21 @@
             $this->db = $db;
         }
 
-        public function createSubscriptionPlan($name, $price, $status, $duration, $daily_income) {
+        public function createSubscriptionPlan($name, $price, $status, $duration, $daily_income, $purchase_limit) {
             $this->name = $name;
             $this->price = $price;
             $this->status = $status;
+            $this->purchase_limit = $purchase_limit;
             $this->duration = (int) $duration;
             $this->daily_income = (int) $daily_income;
             (int) $this->total_income =  ($this->daily_income * ($this->daily_income * 30));
 
-            $sql = "INSERT INTO `subscriptions` (plan_name, price, duration_months, status, daily_income, total_income) VALUES (:name, :price, :duration, :status, :daily, :total)";
+            $sql = "INSERT INTO `subscriptions` (plan_name, price, duration_months, status, daily_income, total_income, purchase_limit) VALUES (:name, :price, :duration, :status, :daily, :total, :limit)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':name' => $this->name,
                 ':price' => $this->price,
+                ':limit' => $this->purchase_limit,
                 ':duration' => $this->duration,
                 ':status' => $this->status,
                 ':daily' => $this->daily_income,
@@ -222,16 +225,17 @@
         }
 
 
-        public function updateSubscriptionPlan($name, $price, $status, $duration, $plan_id, $daily_income) {
+        public function updateSubscriptionPlan($name, $price, $status, $duration, $plan_id, $daily_income, $purchase_limit) {
             $this->name = $name;
             $this->price = $price;
             $this->status = $status;
             $this->duration = $duration;
+            $this->purchase_limit = $purchase_limit;
             $this->daily_income = (int) $daily_income;
             $this->subscription_id = $plan_id;
             (int) $this->total_income =  ($this->daily_income * ($this->daily_income * 30));
 
-            $sql = "UPDATE `subscriptions` SET `plan_name` = :name, `price` = :price, `duration_months` = :duration, `status` = :status, `daily_income` = :daily, `total_income` = :total WHERE `subscription_id` = :plan_id";
+            $sql = "UPDATE `subscriptions` SET `plan_name` = :name, `price` = :price, `duration_months` = :duration, `status` = :status, `daily_income` = :daily, `total_income` = :total, `purchase_limit` = :limit WHERE `subscription_id` = :plan_id";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
                 ':plan_id' => $this->subscription_id,
@@ -240,7 +244,8 @@
                 ':duration' => $this->duration,
                 ':status' => $this->status,
                 ':daily' => $this->daily_income,
-                ':total' => $this->total_income
+                ':total' => $this->total_income,
+                ':limit' => $this->purchase_limit
             ])) {
             return $this->subscription_id; }
         }

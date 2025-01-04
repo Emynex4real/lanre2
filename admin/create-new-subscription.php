@@ -73,6 +73,12 @@
 						</div>
 
 						<div class="col-12">
+							<label for="duration">Purchase Limit:</label>
+							<input type="number" class="form-control shadow-none none" placeholder="Enter plan purchase limit e.g 2" id="purchase_limit" name="purchase_limit">
+							<p class="error" id="purchase_limitErr"></p>
+						</div>
+
+						<div class="col-12">
 							<label for="duration">Monthly Duration:</label>
 							<input type="number" class="form-control shadow-none" placeholder="Enter Monthly Duration e.g 1" id="duration" name="duration">
 							<p id="durationErr" class="error"></p>

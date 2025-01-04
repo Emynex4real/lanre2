@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="css/subscription.css" />
 	'; 
 
-require_once("layout/user-header.php"); ?>
+	require_once("layout/user-header.php"); ?>
 
 	<main>
 		<div class="subscription-panel">
