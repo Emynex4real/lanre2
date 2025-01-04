@@ -9,7 +9,7 @@
 		$logged_time = $_SESSION['last_login_timestamp'];
 		$user_info = get_admin_user_info($user);
 		
-		if (empty($user_info) || ($user_info["id"] != $user_id)) {
+		if (empty($user_info) || ($user_info["admin_id"] != $user_id)) {
 			session_destroy();
 			header("Location: logged_out");
 

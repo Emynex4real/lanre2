@@ -1,5 +1,5 @@
 <?php 
-	$page_title = "Admin Dashboard";
+	$page_title = "Manage bUsers";
 
 	require_once("config/function.php");
 	session_start(); 
@@ -10,7 +10,7 @@
 		$logged_time = $_SESSION['last_login_timestamp'];
 		$user_info = get_admin_user_info($user);
 		
-		if (empty($user_info) || ($user_info["id"] != $user_id)) {
+		if (empty($user_info) || ($user_info["admin_id"] != $user_id)) {
 			session_destroy();
 			header("Location: logged_out");
 
@@ -19,8 +19,7 @@
 		} 
 
 	} else {
-		echo $_SESSION['user'];
-		// session_destroy();
+		session_destroy();
 		header("Location: login");
 	}
 
@@ -77,7 +76,7 @@
 									<tbody id="users_data">
 										<?php
 											global $db;
-											$user_sql = "SELECT * FROM `users` ORDER BY ID DESC";
+											$user_sql = "SELECT * FROM `users` ORDER BY USER_ID DESC";
 											$user_query = $db->query($user_sql);
 											$user_query->execute();
 											$number_of_users = $user_query->rowCount();
@@ -85,27 +84,18 @@
 	
 											try {
 												if ($number_of_users > 0) { 
-													foreach ($user_details as $user): 
-														$user_balance = get_user_balances($user["id"]);
-														$deposit_balance = $user_balance ? number_format($user_balance["deposit_balance"]) : 0;
-														$income_balance = $user_balance ? number_format($user_balance["income_balance"]) : 0; 
-														$total_user_investments = get_total_user_investments($user["id"]) ? number_format(get_total_user_investments($user["id"])) : 0; 
-														$total_user_team_investment = checkUserTeamTotalInvestment($user["referral_code"]) ? number_format(checkUserTeamTotalInvestment($user["referral_code"])) : 0;
-														$user_deposits = check_if_user_has_ever_invested($user["id"]); ?>
+													foreach ($user_details as $user):  ?>
 
 														<tr>
 															<td scope="row" style="color: #000;"><b><?= $user["email"] ?></b></td>
 															<td><b><?= "₦" . $deposit_balance ?></b></td>
 															<td><b><?= "₦" . $income_balance ?></b></td>
 															<td><b><?= "₦" . $total_user_investments ?></b></td>
-															<td><b><?= get_user_team_size($user["referral_code"]) ?></b></td>
-															<td><b><?= get_user_valid_team_size($user["id"]) ?></b></td>
-															<td><b><?= "₦" . $total_user_team_investment ?></b></td>
 															<td><b><?= ucfirst($user["rank"]) ?></b></td>
 	
 															<td>
-																<?php if ($user["verification"] == 1 || $user["verification"] == 0) {
-																	if (check_if_user_has_ever_invested($user["id"]) > 0) {?>
+																<?php 
+																	if ($user["verification"] == 1 || $user["verification"] == 0) {?>
 																		<button class="success-btn mobile-w-fit">
 																			<i class="fa-solid fa-mark fa-lg"></i>
 																			<span>Active</span> 
@@ -117,13 +107,7 @@
 																			<span>Inactive</span> 
 																		</button>
 																	<?php } 
-
-																} else { ?>
-																	<button class="danger-btn mobile-w-fit">
-																		<i class="fa-solid fa-xmark fa-lg"></i>
-																		<span>Banned</span> 
-																	</button>
-																<?php } ?>
+																?>
 															</td>
 
 															<td style=" margin-right: 20px;">

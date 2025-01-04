@@ -571,6 +571,21 @@
     }
 
 
+    function getUserIP() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            // IP from shared internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            // IP passed from a proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            // Direct IP
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+
+
     function get_total_user_investments($userID) {
         $user_investments = get_another_user_investments($userID);
         $total_user_investment = 0;
