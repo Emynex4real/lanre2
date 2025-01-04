@@ -39,9 +39,7 @@ html{
 
     }
 .menu{
-    /* text-align: end; */
-    /* border: 2px solid red; */
-    /* width: 100%; */
+   cursor: pointer;
     
 }
 .logo-menu{
