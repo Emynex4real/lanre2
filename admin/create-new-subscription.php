@@ -55,21 +55,31 @@
 						<input type="hidden" id="ad_id" value="<?= $plan["subscription_id"] ?>" id="plan_id" name="plan_id">
 
 						<div class="col-12">
+							<label for="name">Plan Name</label>
 							<input type="text" class="form-control shadow-none none" placeholder="Enter Plan Name e.g Welcome Bonus" id="name" name="name">
 							<p class="error" id="nameErr"></p>
 						</div>
 		
 						<div class="col-12">
+							<label for="duration">Plan Price:</label>
 							<input type="number" class="form-control shadow-none none" placeholder="Enter Plan price Url e.g 500" id="price" name="price">
 							<p class="error" id="priceErr"></p>
 						</div>
 
 						<div class="col-12">
+							<label for="duration">Plan Daily Income:</label>
+							<input type="number" class="form-control shadow-none none" placeholder="Enter daily income e.g 50" id="daily_income" name="daily_income">
+							<p class="error" id="daily_incomeErr"></p>
+						</div>
+
+						<div class="col-12">
+							<label for="duration">Monthly Duration:</label>
 							<input type="number" class="form-control shadow-none" placeholder="Enter Monthly Duration e.g 1" id="duration" name="duration">
 							<p id="durationErr" class="error"></p>
 						</div>
 
 						<div class="col-12">
+							<label for="status">Plan Status</label>
 							<select class="form-control shadow-none none" name="status" id="status">
 								<option value="">Select Plan status</option>
 								<option value="active">Active</option>

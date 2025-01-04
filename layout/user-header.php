@@ -24,39 +24,48 @@
   <body class="darkMode">
     <header id="home">
       <nav id="nav">
-        <div class="navigation-links">
+        <div class="navigation-links underline">
             <div class="logo-image">
                 <img src="images/logo.png" alt="" />
             </div>
 
-            <div class="light-dark">
-                <i class="fas fa-sun light"></i>
-                <i class="fa-solid fa-moon dark"></i>
-            </div>
+            <div class="flex">
+                <div class="light-dark mr-3">
+                    <i class="fas fa-sun light"></i>
+                    <i class="fa-solid fa-moon dark"></i>
+                </div>
 
-            <div class="menu"><i class="fas fa-bars"></i></div>
-                <div class="side-bar">
-                    <p class="text">NAVIGATION</p>
-                    <ul>
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="">Profile</a></li>
-                    <li><a href="subscription.html">My Subscriptions</a></li>
-                    <li><a href="task.html">Tasks</a></li>
-                    <li><a href="transaction.html">Wallet History</a></li>
-                    <li><a href="referral.html">Referrals</a></li>
-                    <li><a href="">Cashouts</a></li>
-                    <li><a href="">Games</a></li>
-                    </ul>
-                    <p class="coming-soon">COMING SOON</p>
-                    <ul>
-                    <li><a href="">Contest</a></li>
-                    <li><a href="">VTU Services</a></li>
-                    <li><a href="">Bank Settings</a></li>
-                    <li><a href="">Bank Settings</a></li>
-                    <li><a href="">Market Place</a></li>
-                    <li><a href="">Blog</a></li>
-                    </ul>
+                <div class="menu">
+                    <i class="fas fa-bars"></i></div>
+                    
+                    <div class="side-bar">
+                        <p class="text underline pb-2">NAVIGATION</p>
+                        <ul>
+                            <li><a href="index.php">Dashboard</a></li>
+                            <li><a href="profile.php">Profile</a></li>
+                            <li><a href="subscription.php">My Subscriptions</a></li>
+                            <li><a href="task.php">Tasks</a></li>
+                            <li><a href="transaction.php">Wallet History</a></li>
+                            <li><a href="referral.php">Referrals</a></li>
+                            <li><a href="javascript:void(0)">Cashouts</a></li>
+                            <li><a href="javascript:void(0)">Games</a></li>
+                        </ul>
+
+                        <!-- Coming Soon links -->
+                        <div>
+                            <p class="coming-soon">COMING SOON</p>
+                            <ul>
+                                <li><a href="">Contest</a></li>
+                                <li><a href="">VTU Services</a></li>
+                                <li><a href="">Bank Settings</a></li>
+                                <li><a href="">Bank Settings</a></li>
+                                <li><a href="">Market Place</a></li>
+                                <li><a href="">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
       </nav>
     </header>

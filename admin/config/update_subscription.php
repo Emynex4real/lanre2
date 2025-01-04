@@ -10,6 +10,7 @@
         $price = trim($_POST['price'] ?? '');
         $duration = trim($_POST['duration'] ?? '');
         $status = trim($_POST['status'] ?? '');
+        $daily_income = trim($_POST['daily_income'] ?? '');
 
         // Validate inputs
         if (empty($name)) {
@@ -28,12 +29,16 @@
             $response['errors']['status'] = "Plan status is required.";
         }
 
+        if (empty($daily_income)) {
+            $response['errors']['daily_income'] = "Daily Income is required.";
+        }
+
 
         // If validation passes
         if (empty($response['errors'])) {
             require_once("PPC.php");
             $PPC = new PPCPlan();
-            $result = $PPC->updateSubscriptionPlan($name, $price, $status, $duration, $plan_id);
+            $result = $PPC->updateSubscriptionPlan($name, $price, $status, $duration, $plan_id, $daily_income);
 
             if ($result) {
                 $response['success'] = true;

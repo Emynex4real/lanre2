@@ -76,6 +76,12 @@
 						</div>
 
 						<div class="col-12">
+							<label for="duration">Plan Daily Income:</label>
+							<input type="number" class="form-control shadow-none none" placeholder="Enter daily income e.g 50" id="daily_income" name="daily_income">
+							<p class="error" id="daily_incomeErr"></p>
+						</div>
+
+						<div class="col-12">
 							<label for="duration">Monthly Duration:</label>
 							<input type="number" class="form-control shadow-none" placeholder="Enter Monthly Duration e.g 1" id="duration" value="<?= ucfirst($plan["duration_months"]) ?>" name="duration">
 							<p id="durationErr" class="error"></p>
