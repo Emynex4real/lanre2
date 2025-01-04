@@ -76,10 +76,18 @@
 				<p class="price">&#8358;<?= number_format($plan["price"]) ?></p>
 				<p class="payment">Payment</p>
 			</div>
-			<button class="buy">Go to Buy</button>
+			<button class="buy" id="buy-subscription-btn">Go to Buy</button>
 		</div>
 	</main>
 
-	<script src="navbar.js"></script>
+	<div id="purchaseModal" class="modal">
+		<div class="modal-content">
+			<div id="loader" class="spinner"></div>
+			<p id="modalMessage">Processing your purchase...</p>
+		</div>
+	</div>
+
+	<script src="js/modal.js"></script>
+	<script src="js/navbar.js"></script>
 </body>
 </html>

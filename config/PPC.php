@@ -8,9 +8,10 @@
         private $username;
         private $subscription_status;
 
-        public function __construct() {
+        public function __construct($user_id) {
             global $db;
             $this->db = $db;
+            $this->user_id = $user_id;
         }
 
 
@@ -46,13 +47,23 @@
         }
 
 
-        public function getUserById($user_id) {
-            $sql = "SELECT * FROM users WHERE user_id = :user_id";
+        public function getUserById() {
+            $sql = "SELECT * FROM `users` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':user_id' => $user_id]);
+            $stmt->execute([':user_id' => $this->user_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
+        public function payForSubscription($price) {
+            $sql = "UPDATE `users` SET `deposit_balance` = deposit_balance - :price WHERE `user_id` = :user_id";
+            $stmt = $this->db->prepare($sql);
+            if ($stmt->execute([
+                ':user_id' => $this->user_id,
+                ':price'   => $price
+            ])) {
+            return true; }
+        }
+        
 
         public function updateUserSubscription($user_id, $subscription_status) {
             $sql = "UPDATE `users` SET `subscription_status` = :subscription_status WHERE user_id = :user_id";
@@ -71,6 +82,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
+    
 
     
     class PPCAd {
@@ -185,12 +197,93 @@
     }
 
 
+
+    class PPCSubscribe {
+        private $db;
+        private $user_id;
+        private $status;
+        private $price;
+        private $plan_id;
+
+        public function __construct() {
+            global $db;
+            $this->db = $db;
+        }
+
+        public function subscribeNow($user_id, $plan_id) {
+            $this->user_id = $user_id;
+            $this->plan_id = $plan_id;
+            $this->price = $this->getPlanPrice($plan_id);
+
+            // Check if User has enough balance
+            $payNow = $this->getSubscriptionFeeAndPay();
+
+            if ($payNow) {
+                $sql = "INSERT INTO `user_subscriptions` (user_id, subscription_id) VALUES (:user, :plan)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([
+                    ':user' => $this->user_id,
+                    ':plan' => $this->plan_id,
+                    ':status' => $this->status
+                ]);
+                return ["success" => true, "message" => "Subscription purchased"];
+            } else {
+                return ["success" => false, "message" => "Insufficient balance"];
+            }
+        }
+
+        
+
+        public function getSubscriptionPlanById($plan_id) {
+            $sql = "SELECT * FROM `user_subscriptions` WHERE `user_subscription_id` = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':id' => $plan_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+
+        public function getAllUserSubscriptions() {
+            $sql = "SELECT * FROM `user_subscriptions` ORDER BY USER_SUBSCRIPTION_ID";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        public function getPlanPrice($plan_id) {
+            $sql = "SELECT * FROM `subscriptions` WHERE `subscription_id` = :plan_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':plan_id' => $plan_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC)["price"];
+        }
+
+
+        public function getSubscriptionFeeAndPay() {
+            $PPC = new PPCUser($this->user_id);
+            $user = $PPC->getUserById();
+            $user_balance = $user["deposit_balance"];
+
+            if (($user_balance - $this->price) >= 0) {
+                if ($user->payForSubscription()) {
+                    return true;
+                } 
+            }
+            
+            return false;
+        }
+    }
+
+
+
     class PPCPlan {
         private $db;
         private $name;
         private $price;
         private $duration;
         private $status;
+        private $daily_income;
+        private $total_income;
+        private $purchase_limit;
         private $subscription_id;
 
         public function __construct() {
@@ -198,39 +291,51 @@
             $this->db = $db;
         }
 
-        public function createSubscriptionPlan($name, $price, $status, $duration) {
+        public function createSubscriptionPlan($name, $price, $status, $duration, $daily_income, $purchase_limit) {
             $this->name = $name;
             $this->price = $price;
             $this->status = $status;
-            $this->duration = $duration;
+            $this->purchase_limit = $purchase_limit;
+            $this->duration = (int) $duration;
+            $this->daily_income = (int) $daily_income;
+            (int) $this->total_income =  ($this->daily_income * ($this->daily_income * 30));
 
-            $sql = "INSERT INTO `subscriptions` (plan_name, price, duration_months, status) VALUES (:name, :price, :duration, :status)";
+            $sql = "INSERT INTO `subscriptions` (plan_name, price, duration_months, status, daily_income, total_income, purchase_limit) VALUES (:name, :price, :duration, :status, :daily, :total, :limit)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':name' => $this->name,
                 ':price' => $this->price,
+                ':limit' => $this->purchase_limit,
                 ':duration' => $this->duration,
-                ':status' => $this->status
+                ':status' => $this->status,
+                ':daily' => $this->daily_income,
+                ':total' => $this->total_income
             ]);
             return $this->db->lastInsertId();
         }
 
 
-        public function updateSubscriptionPlan($name, $price, $status, $duration, $plan_id) {
+        public function updateSubscriptionPlan($name, $price, $status, $duration, $plan_id, $daily_income, $purchase_limit) {
             $this->name = $name;
             $this->price = $price;
             $this->status = $status;
             $this->duration = $duration;
+            $this->purchase_limit = $purchase_limit;
+            $this->daily_income = (int) $daily_income;
             $this->subscription_id = $plan_id;
+            (int) $this->total_income =  ($this->daily_income * ($this->daily_income * 30));
 
-            $sql = "UPDATE `subscriptions` SET `plan_name` = :name, `price` = :price, `duration_months` = :duration, `status` = :status WHERE `subscription_id` = :plan_id";
+            $sql = "UPDATE `subscriptions` SET `plan_name` = :name, `price` = :price, `duration_months` = :duration, `status` = :status, `daily_income` = :daily, `total_income` = :total, `purchase_limit` = :limit WHERE `subscription_id` = :plan_id";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
                 ':plan_id' => $this->subscription_id,
                 ':name' => $this->name,
                 ':price' => $this->price,
                 ':duration' => $this->duration,
-                ':status' => $this->status
+                ':status' => $this->status,
+                ':daily' => $this->daily_income,
+                ':total' => $this->total_income,
+                ':limit' => $this->purchase_limit
             ])) {
             return $this->subscription_id; }
         }
@@ -274,6 +379,7 @@
             return $stmt->fetch(PDO::FETCH_ASSOC)["plan_name"];
         }
     }
+
 
 
 
@@ -321,6 +427,58 @@
                 ':user_id' => $this->user_id
             ]);
             return $stmt->rowCount();
+        }
+    }
+
+
+
+    
+    class PPCTransaction {
+        private $db;
+        private $user_id;
+   
+
+        public function __construct() {
+            global $db;
+            $this->db = $db;
+        }
+
+        
+        private function newTransaction($description, $amount, $status, $type) {
+            global $db; global $user_id;
+            $transaction_id = substr(md5(rand()),0,5);
+			$transaction_code = str_pad(rand(0, pow(10, 3)-1), 3, '0', STR_PAD_LEFT);
+            $transaction_id .= $transaction_code;
+
+            try {
+                $stmt = $db->prepare("INSERT INTO `transactions` (user_id, description, amount, status, transaction_id, transaction_type) VALUES (:id, :type, :amount, :status, :transaction_id, :trans_type)");
+                $stmt->execute([
+                    ':id'             =>  $user_id,
+                    ':trans_type'     =>  $type,
+                    ':type'           =>  $description,
+                    ':amount'         =>  $amount,
+                    ':status'         =>  $status,
+                    ':transaction_id' =>  $transaction_id
+                ]);
+            } catch (PDOException $e) { echo $e; }
+        }
+
+
+        public function getTransactionByID($transaction_id) {
+            $sql = "SELECT * FROM `transactions` WHERE `id` = :transaction_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':transaction_id' => $transaction_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        public function getUserTransactionHistory() {
+            $sql = "SELECT * FROM `transactions` WHERE `user_id` = :user_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':user_id' => $this->user_id
+            ]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 

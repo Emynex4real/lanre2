@@ -59,6 +59,13 @@
 		</section>
 	</main>
 
-	<script src="navbar.js"></script>
+	<div id="purchaseModal" class="modal">
+    	<div class="modal-content">
+			<div id="loader" class="spinner"></div>
+			<p id="modalMessage">Processing your purchase...</p>
+		</div>
+	</div>
+
+	<script src="js/modal.js"></script>
 </body>
 </html>
