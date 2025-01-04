@@ -1,0 +1,137 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+    --very-bold: 700;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    background-color: rgba(239, 237, 237, 0.575);
+}
+
+html{
+
+    contain: content;
+
+    }
+
+.task{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.task-panel{
+    /* border: 2px solid; */
+    width: 100%;
+    padding: 0px 20px;
+    background-color: var(--white-color);
+
+}
+.task-panel .head{
+    font-weight: 700;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: var(--black-color);
+}
+
+.task-container{
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: var(--white-color);
+
+}
+
+.task-container .header{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    top: 30px;
+    left: 20px;
+}
+
+.task-container .head{
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.task-container .date, .time{
+    font-size: .8rem;
+    color: var(--black-color);
+}
+
+.participate-active button{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+}
+.participate-active a{
+    text-decoration: none;
+    color: var(--black-color);
+}
+.participate{
+    background-color: var(--primary-color);
+}
+
+.participate a{
+    color: var(--white-color);
+}
+
+.active{
+    background-color: var(--secondary-color);
+}
+
+.active a{
+    color: var(--white-color);
+}
+
+.task-content{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+.task-content{
+    background-color: var(--primary-color);
+    padding: 10px 30px;
+    text-align: center;
+    color: var(--white-color);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-radius: 0px 0px 10px 10px;    
+}
+
+.task-content .price{
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.task-content .text{
+    font-size: .8rem;
+}

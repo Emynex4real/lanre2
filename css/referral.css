@@ -1,0 +1,175 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--primary-color);
+}
+
+:root {
+  --primary-color: #34004d;
+  --secondary-color: #f3893f;
+  --black-color: black;
+  --white-color: white;
+  --very-bold: 700;
+}
+html {
+  contain: content;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(239, 237, 237, 0.575);
+  gap: 20px;
+  background-color: #F8E9FF;
+  padding-bottom: 50px;
+}
+
+.referral {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.referral-panel {
+  /* border: 2px solid; */
+  width: 100%;
+  padding: 0px 20px;
+  background-color: var(--white-color);
+}
+.referral-panel .head {
+  font-weight: 700;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  /* border: 2px solid; */
+}
+
+.referral-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.referral-link .details {
+  background-color: #af07fd48;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px;
+}
+
+.referral-link .texts{
+    font-weight: 700;
+    font-size: .8rem;
+}
+
+.referral-link a{
+    /* border: 2px solid; */
+    display: block;
+    width: 100px;
+    height: 40px;
+    
+}
+
+.referral-link button{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-weight: 700;
+    border: none;
+    
+}
+
+.total-referral-earned{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+.total-referral,
+.total-earned{
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.total-referral i,
+.total-earned i{
+    font-size: 1.5rem;
+    color: var(--white-color);
+
+}
+
+.total-referral .text,
+.total-earned .text{
+    font-size: .8rem;
+    color: var(--white-color);
+
+}
+.total-referral .amount,
+.total-earned .amount{
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--white-color);
+
+}
+
+.my-referrals{
+  background-color: var(--white-color);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+table, th, td{
+    /* border: 2px solid; */
+    font-size: .8rem;
+    text-align: left;
+    color: var(--black-color);
+    
+}
+th{
+    font-weight: 700;
+    /* width: 100%; */
+}
+
+table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+td{
+    padding: 10px;
+}
+
+.user{
+    display: flex;
+    gap: 5px;
+    font-weight: 700;
+}
+table i{
+    font-size: .8rem;
+    /* border: 2px solid; */
+}
+td{
+    background-color: #af07fd48;
+    /* border-radius: 10px; */
+
+}

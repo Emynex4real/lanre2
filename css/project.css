@@ -1,0 +1,134 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--primary-color);
+}
+
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+    --very-bold: 700;
+}
+.darkMode{
+    --primary-color: white;
+    --secondary-color: #F3893F;
+    --black-color: white;
+    --white-color: #34004d;
+    --very-bold: 700;
+}
+
+html{
+
+    contain: content;
+
+    }
+
+.navigation-links{
+    /* overflow-x: hidden; */
+}
+main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(239, 237, 237, 0.575);
+    gap: 20px;
+}
+
+.dashboard{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.dashboard-panel{
+    /* border: 2px solid; */
+    width: 100%;
+    padding: 0px 20px;
+    background-color: var(--white-color);
+
+}
+.dashboard-panel .head{
+    font-weight: 700;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    /* border: 2px solid; */
+}
+
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.referral-link{
+    background-color: #af07fd48;
+    padding: 20px;
+}
+
+.earnings {
+  
+}
+.dashboard-mini-box {
+    /* border: 2px solid ; */
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: var(--white-color);
+}
+
+.dashboard-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+.dashboard-box .price{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.dashboard-box .text{
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.earning-box i{
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+.earnings .get-more {
+    background-color: var(--primary-color);
+    height: 60px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 20px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.get-more i{
+    font-size: 1.5rem;
+    color: var(--white-color);
+    color: var(--white-color);
+}
+#referral{
+    background-color: var(--primary-color);
+}
+#task{
+    background-color:var(--primary-color);
+}
+
+.coming-soon{
+    font-weight: var(--very-bold);
+}

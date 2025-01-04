@@ -1,0 +1,136 @@
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+}
+
+
+.darkMode{
+    --primary-color: white;
+    --secondary-color: #F3893F;
+    --black-color: white;
+    --white-color: #34004d;
+    --very-bold: 700;
+}
+
+
+header{
+    position: relative;
+    /* overflow-y: hidden; */
+}
+
+nav{
+    background-color:#34004d;
+    /* position: relative; */
+}
+.navigation-links{
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    /* border: 2px solid red; */
+
+}
+html{
+
+    contain: content;
+
+    }
+.menu{
+    /* text-align: end; */
+    /* border: 2px solid red; */
+    /* width: 100%; */
+    
+}
+.logo-menu{
+    display: flex;
+}
+.logo-image{
+    /* border: 2px solid red; */
+
+    width: 100px;
+    height: 30px;
+}
+
+.logo-image img{
+    width: 100%;
+}
+
+.menu i{
+    color: white;
+    font-size: 1.3rem;
+}
+.side-bar{
+    background-color: var(--white-color);
+    width: 250px;
+    height: 300vh;
+    position: absolute;
+    top: 0;
+    right: -250px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 100vh;
+    transition: right 0.5s ease; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    /* border: 2px solid red; */
+
+
+}
+.side-bar ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.side-bar li{
+    list-style-type: none;
+}
+
+.side-bar a{
+    text-decoration: none;
+    color: var(--black-color);
+    
+}
+
+.side-bar .text{
+    font-weight: 700;
+}
+
+.active{
+    top: 0;
+    right: 0;
+}
+.coming-soon{
+    font-weight: 700;
+}
+.light-dark{
+    display: flex;
+    position: relative;
+    left: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.light-dark i{
+    /* border: 2px solid red; */
+    color: white;
+    font-size: 1.5rem;
+
+
+
+}
+.light-dark .dark{
+    display: none;   
+}
+
+.light-dark .light{
+    
+}

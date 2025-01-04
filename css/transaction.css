@@ -1,0 +1,233 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--primary-color);
+}
+
+:root{
+    --primary-color: #34004d;
+    --secondary-color: #F3893F;
+    --black-color: black;
+    --white-color: white;
+    --very-bold: 700;
+}
+
+.darkMode{
+    --primary-color: white;
+    --secondary-color: #F3893F;
+    --black-color: white;
+    --white-color: #34004d;
+    --very-bold: 700;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    /* background-color: #F8E9FF; */
+    padding-bottom: 50px;
+}
+html{
+
+    contain: content;
+
+    }
+.transaction{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.transaction-panel{
+    /* border: 2px solid; */
+    width: 100%;
+    padding: 0px 20px;
+    /* border: 2px solid; */
+    background-color: var(--white-color);
+
+}
+.transaction-panel .head{
+    font-weight: 700;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    /* border: 2px solid; */
+}
+
+.transaction-container{
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--white-color);
+}
+
+.categories-status{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.categories-status select{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: var(--white-color);
+}
+.categories-status option{
+    font-size: .8rem;   
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.content .bold{
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+.transaction-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaction-details .details{
+    display: flex;
+    justify-content: space-between;
+}
+
+.details .info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* text-align: center; */
+}
+
+.success i{
+    background-color: rgba(0, 128, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: green;
+}
+.withdraw i{
+    background-color: rgba(0, 128, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: green;
+}
+.pending i{
+    background-color: rgba(255, 166, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: orange;
+}
+.fail i{
+    background-color: rgba(255, 0, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: red;
+}
+
+.info .name{
+    font-weight: 700;
+}
+.success .price{
+    color: green;
+    font-weight: 700;
+}
+
+.withdraw .price{
+    color: var(--black-color);
+    font-weight: 700;
+}
+.pending .price{
+    color: var(--black-color);
+    font-weight: 700;
+}
+.fail .price{
+    color: var(--black-color);
+    font-weight: 700;
+}
+.info .time{
+    font-size: .9rem;
+    color: #35004d8a;
+}
+
+.success .status{
+    font-size: .5rem;
+    background-color: rgba(0, 128, 0, 0.3);
+    padding: 2px 4px;
+    border-radius: 10px;
+    text-align: center;
+    color: green;
+}
+.withdraw .status{
+    font-size: .5rem;
+    background-color: rgba(0, 128, 0, 0.3);
+    padding: 2px 4px;
+    border-radius: 10px;
+    text-align: center;
+    color: green;
+}
+.fail .status{
+    font-size: .5rem;
+    background-color: rgba(255, 0, 0, 0.3);
+    padding: 2px 4px;
+    border-radius: 10px;
+    color: red;
+    text-align: center;
+
+}
+.pending .status{
+    font-size: .5rem;
+    background-color: rgba(255, 166, 0, 0.3);
+    padding: 2px 4px;
+    border-radius: 10px;
+    color: orange;
+    text-align: center;
+
+}
+
+.price-status{
+    text-align: end;
+}
+
+hr{
+    width: 90%;
+    margin: auto;
+    height: 1px;
+    border: none;
+    background-color: #ccc;
+}
