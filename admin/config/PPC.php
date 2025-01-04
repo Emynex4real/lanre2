@@ -126,9 +126,9 @@
         }
     
         // Update an existing ad
-        public function updateAd($ad_id, $ad_name, $ad_text, $ad_url, $status, $cost_per_click, $max_attempt, $start_date, $end_date) {
+        public function updateAd($ad_id, $ad_name, $ad_text, $ad_url, $status, $cost_per_click, $max_attempt) {
             $sql = "UPDATE `ads` SET ad_name = :ad_name, ad_text = :ad_text, status = :status, ad_url = :ad_url, 
-                    cost_per_click = :reward, max_attempt = :max_attempt, start_date = :start_date, end_date = :end_date
+                    cost_per_click = :reward, max_attempt = :max_attempt
                     WHERE ad_id = :ad_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
@@ -138,8 +138,6 @@
                 ':ad_url' => $ad_url,
                 ':max_attempt' => $max_attempt,
                 ':reward' => $cost_per_click,
-                ':start_date' => $start_date,
-                ':end_date' => $end_date,
                 ':ad_id' => $ad_id
             ]);
             return $stmt->rowCount();
@@ -227,14 +225,14 @@
 
             $sql = "UPDATE `subscriptions` SET `plan_name` = :name, `price` = :price, `duration_months` = :duration, `status` = :status WHERE `subscription_id` = :plan_id";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
+            if ($stmt->execute([
                 ':plan_id' => $this->subscription_id,
                 ':name' => $this->name,
                 ':price' => $this->price,
                 ':duration' => $this->duration,
                 ':status' => $this->status
-            ]);
-            return $this->db->lastInsertId();
+            ])) {
+            return $this->subscription_id; }
         }
 
         
@@ -243,7 +241,7 @@
             $sql = "SELECT * FROM `subscriptions` WHERE `subscription_id` = :plan_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':plan_id' => $plan_id]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
 

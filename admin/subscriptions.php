@@ -36,13 +36,15 @@
 				</nav>
 			</div><!-- End Page Title -->
 	
-			<?php if (isset($_GET["new"]) && ($_GET["new"] == true)) { ?>
+			<?php if (isset($_GET["new"]) && ($_GET["new"] == true)) {
+				$title = $_GET["title"] ?>
 				<div class="alert success mb-3">
-					<p class="alert"><?= $user ?>, Welcome to your dashboard</p>
+					<p class="alert"><?= $title ?>, created successfully</p>
 				</div>
-			<?php } elseif (isset($_GET["updated"]) && ($_GET["updated"] == true)) { ?>
+			<?php } elseif (isset($_GET["update"]) && ($_GET["update"] == true)) { 
+				$title = $_GET["title"] ?>
 				<div class="alert success mb-3">
-					<p class="alert"><?= $user ?>, Your account has been created successfully</p>
+					<p class="alert"><?= $title ?>, updated successfully</p>
 				</div>
 			<?php } ?>
 

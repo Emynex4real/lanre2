@@ -1,4 +1,4 @@
-function createRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
+function updateRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
     const form = document.getElementById(formId);
     const formData = new FormData(form);
     scrollToTop(); clearTextDanger();
@@ -11,16 +11,17 @@ function createRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
 
     xhr.onload = function () {
         try {
+            console.log(this.responseText);
             const response = JSON.parse(this.responseText);
 
             if (response.success) {
-                var valueName = document.getElementById("name").value;
+                var recordName = document.getElementById("name").value;
                 document.getElementById(successDiv).classList.remove("d-none");
                 form.reset(); 
 
                 if (successUrl) {
                     setTimeout(() => {
-                        window.location.replace(successUrl + "/new/" + valueName);
+                        window.location.replace(successUrl + "/update/" + recordName);
                     }, 3000);
                 }
 
@@ -59,14 +60,14 @@ function scrollToTop() {
 if (document.getElementById("subscriptionForm")) {
     document.getElementById("subscriptionForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        createRecord("subscriptionForm", "config/create_subscription.php", "subscriptionSuccess", "subscriptionFailed", "plans");
+        updateRecord("subscriptionForm", "config/update_subscription.php", "subscriptionSuccess", "subscriptionFailed", "plans");
     });
 }
 
 if (document.getElementById("adForm")) {
     document.getElementById("adForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        createRecord("adForm", "config/create_ad.php", "adSuccess", "adFailed", "ads");
+        updateRecord("adForm", "config/update_ad.php", "adSuccess", "adFailed", "ads");
     });
 }
 

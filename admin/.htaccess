@@ -6,11 +6,22 @@ Options -MultiViews
 
 RewriteRule ^curriculum/([^/]+)/?$  curriculum.php?course=$1 [QSA,NC,L]
 
-RewriteRule ^edit-product/([^/]+)/([^/]+)?$ edit-product.php?product=$1&status=$2 [QSA,NC,L]
 
-RewriteRule ^edit-product/([^/]+)/?$ edit-product.php?product=$1 [QSA,NC,L]
+RewriteRule ^edit-ad/([^/]+)/?$ edit-ad.php?ad_id=$1 [QSA,NC,L]
+
+RewriteRule ^edit-plan/([^/]+)/?$ edit-subscription.php?plan_id=$1 [QSA,NC,L]
+
+RewriteRule ^ads/update/([^/]+)/?$ ads.php?update=true&title=$1 [QSA,NC,L]
+
+RewriteRule ^plans/update/([^/]+)/?$ subscriptions.php?update=true&title=$1 [QSA,NC,L]
+
+RewriteRule ^ads/new/([^/]+)/?$ ads.php?new=true&title=$1 [QSA,NC,L]
+
+RewriteRule ^plans/new/([^/]+)/?$ subscriptions.php?new=true&title=$1 [QSA,NC,L]
 
 RewriteRule ^login  login.php [QSA,NC,L]
+
+RewriteRule ^plans   subscriptions.php [QSA,NC,L]
 
 RewriteRule ^give-access  access.php [QSA,NC,L]
 

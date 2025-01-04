@@ -40,7 +40,7 @@
 			</div>
 
 			<div class="mobile-mb-1 mobile-mt-m-1">
-				<a href="add-ads.php"><button class="editbtn2"><i class="fa-solid fa-plus fa-lg"></i> Add new Coupon</button></a>
+				<a href="create-new-ad.php"><button class="editbtn2"><i class="fa-solid fa-plus fa-lg"></i> Add new Coupon</button></a>
 			</div>
 		</div><!-- End Page Title -->
 
@@ -58,7 +58,16 @@
 						</section>
 					</section>
 				';
-			} 
+			} else if (isset($_GET["update"]) && $_GET["update"] == "true") {
+				$ads_title = $_GET["title"];
+				echo '
+					<section class="w-93 success flex-center ai-center no-break my-2 mb-3 new">
+						<section class="w-90 m-auto">
+							<p class="alert text-center">' . $ads_title . ' updated sucessfully.</p> 
+						</section>
+					</section>
+				';
+			}
 		?>
 
 		<section class="section dashboard mt-4">
@@ -91,8 +100,8 @@
                                     <button class="success-btn mb-1"><?= ucfirst($ad["status"]) ?></button>
 
 									<div class="mt-3 flex-between ai-center no-break">                                            
-										<a href="edit-coupon/<?= $ad["ad_id"] ?>" class="a"><button class="editbtn1">Edit Coupon</button></a>
-										<a href="delete-coupon/<?= $ad["ad_id"] ?>" class="a"><button class="delete-butn">Delete Coupon</button></a>
+										<a href="edit-ad/<?= $ad["ad_id"] ?>" class="a"><button class="editbtn1">Edit Ad</button></a>
+										<a href="delete-ad/<?= $ad["ad_id"] ?>" class="a"><button class="delete-butn">Delete Ad</button></a>
 									</div>
 								</div>
 							</div>
