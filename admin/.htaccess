@@ -1,0 +1,85 @@
+RewriteEngine On
+Options -MultiViews
+
+# RewriteCond %{SERVER_PORT} 80
+# RewriteRule ^(.*)$ https://techniquesconsult.top/admin/ [R,L] 
+
+RewriteRule ^curriculum/([^/]+)/?$  curriculum.php?course=$1 [QSA,NC,L]
+
+RewriteRule ^edit-product/([^/]+)/([^/]+)?$ edit-product.php?product=$1&status=$2 [QSA,NC,L]
+
+RewriteRule ^edit-product/([^/]+)/?$ edit-product.php?product=$1 [QSA,NC,L]
+
+RewriteRule ^login  login.php [QSA,NC,L]
+
+RewriteRule ^give-access  access.php [QSA,NC,L]
+
+RewriteRule ^successful-payment  paidout.php [QSA,NC,L]
+
+RewriteRule ^send-newsletter  newsletter.php [QSA,NC,L]
+
+RewriteRule ^admin-users  users.php [QSA,NC,L]
+
+RewriteRule ^complaints/([^/]+)/?$  tickets.php?complaint_id=$1 [QSA,NC,L]
+
+RewriteRule ^complaints  tickets.php [QSA,NC,L]
+
+RewriteRule ^pay-affiliates  payout.php [QSA,NC,L]
+
+RewriteRule ^affiliate-dashboard  affiliates.php [QSA,NC,L]
+
+RewriteRule ^log_out  login.php?logout=true [QSA,NC,L]
+
+RewriteRule ^logged_out  login.php?logout=true [QSA,NC,L]
+
+RewriteRule ^index/logged_in index.php?login=true [QSA,NC,L]
+
+RewriteRule ^index/registered index.php?register=true [QSA,NC,L]
+
+RewriteRule ^add-free-course add-free-course.php [QSA,NC,L]
+
+RewriteRule ^edit-free-course edit-free-course.php [QSA,NC,L]
+
+RewriteRule ^edit-course edit-course.php [QSA,NC,L]
+
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^index  index.php [QSA,NC,L]
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^courses  courses.php [QSA,NC,L]
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^users  users.php [QSA,NC,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^add-course  add-course.php [QSA,NC,L]
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^logout  logout.php [QSA,NC,L]
+
+ErrorDocument 404 /404.html
