@@ -60,42 +60,38 @@
 								<table class="table table-borderless" id="complaints">
 									<thead>
 										<tr>
+											<th scope="col" style="color: #000;">Username</th>
 											<th scope="col" style="color: #000;">Email</th>
 											<th scope="col" style="color: #000;">Deposit Balance</th>
+											<th scope="col" style="color: #000;">Current Subscription</th>
 											<th scope="col" style="color: #000;">Income Balance</th>
-											<th scope="col" style="color: #000;">User Investment</th>
-											<th scope="col" style="color: #000;">Team size</th>
-											<th scope="col" style="color: #000;">Valid Team size</th>
-											<th scope="col" style="color: #000;">Total Team Investment</th>
-											<th scope="col" style="color: #000;">Rank</th>
-											<th scope="col" style="color: #000;">Status</th>
-                                            <th scope="col" colspan="2" style="color: #000; text-align: center; font-size: 19px; min-width: 200px; margin-right: 20px;">Action</th>
+											<th scope="col" style="color: #000;">Ads Participation</th>
+											<th scope="col" style="color: #000;">Account Status</th>
+                                            <!-- <th scope="col" colspan="2" style="color: #000; text-align: center; font-size: 19px; min-width: 200px; margin-right: 20px;">Action</th> -->
 										</tr>
 									</thead>
 
 									<tbody id="users_data">
-										<?php
-											global $db;
-											$user_sql = "SELECT * FROM `users` ORDER BY USER_ID DESC";
-											$user_query = $db->query($user_sql);
-											$user_query->execute();
-											$number_of_users = $user_query->rowCount();
-											$user_details = $user_query->fetchAll(PDO::FETCH_ASSOC); 
-	
+										<?php	
 											try {
-												if ($number_of_users > 0) { 
-													foreach ($user_details as $user):  ?>
+												global $db;
+												require_once("config/PPC.php");
+												$PPC = new PPCUser();
+												$users = $PPC->getAllUsers();
 
+												if (count($users) > 0) { 
+													foreach ($users as $user):  ?>
 														<tr>
-															<td scope="row" style="color: #000;"><b><?= $user["email"] ?></b></td>
-															<td><b><?= "₦" . $deposit_balance ?></b></td>
-															<td><b><?= "₦" . $income_balance ?></b></td>
-															<td><b><?= "₦" . $total_user_investments ?></b></td>
-															<td><b><?= ucfirst($user["rank"]) ?></b></td>
+															<td scope="row" style="color: #000;"><b><?= ucfirst($user["username"]) ?></b></td>
+															<td scope="row" style="color: #000;"><b><?= ucfirst($user["email"]) ?></b></td>
+															<td><b><?= "₦" . number_format($user["deposit_balance"]) ?></b></td>
+															<td><b><?= ($user["subscription_status"] == 1) ? "Subscribed" : "Not Subscribed" ?></b></td>
+															<td><b><?= "₦" . number_format($user["income_balance"]) ?></b></td>
+															<td><b><?= "₦" . $user["ads_history"] ?></b></td>
 	
 															<td>
 																<?php 
-																	if ($user["verification"] == 1 || $user["verification"] == 0) {?>
+																	if ($user["verification"] == 1) {?>
 																		<button class="success-btn mobile-w-fit">
 																			<i class="fa-solid fa-mark fa-lg"></i>
 																			<span>Active</span> 
@@ -110,7 +106,7 @@
 																?>
 															</td>
 
-															<td style=" margin-right: 20px;">
+															<!-- <td style=" margin-right: 20px;">
 																<button class="editbtn1 mobile-w-100 funds-btn flex" data-user="<?= $user["id"] ?>" data-email="<?= $user["email"] ?>">
 																	<i class="fa-solid fa-plus fa-lg mr-1"></i>
 																	<span id="span<?= $user["id"] ?>" style="min-width: 100px">Add Funds</span> 
@@ -131,7 +127,7 @@
 																		<i class="fa-solid fa-user fa-lg"></i>
 																	</button>
 																<?php } ?>
-															</td>
+															</td> -->
 														</tr>
 													<?php endforeach;
 												}

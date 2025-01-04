@@ -79,29 +79,29 @@
 				</a>
 			</li><!-- End Dashboard Nav -->
 
-			<li class="nav-heading">Subscription Plans</li>
+			<li class="nav-heading">PPC Management</li>
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="Subscriptions.php">
 					<i class="bi bi-cart"></i>
 					<span>Plans</span>
 				</a>
-			</li><!-- End Profile Page Nav -->
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="ads.php">
+					<i class="bi bi-speaker"></i>
+					<span>All Ads</span>
+				</a>
+			</li>
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="coupons.php">
 					<i class="bi bi-gift"></i>
 					<span>Coupons</span>
 				</a>
-			</li><!-- End Contact Page Nav	 -->
+			</li>
 
-			
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="user-subscriptions.php">
-					<i class="bi bi-gift"></i>
-					<span>All Subscriptions</span>
-				</a>
-			</li><!-- End Contact Page Nav	 -->
 
 			<li class="nav-heading">Users</li>
 
@@ -113,18 +113,25 @@
 			</li><!-- End Contact Page Nav -->	
 
 			<li class="nav-item">
+				<a class="nav-link collapsed" href="user-subscriptions.php">
+					<i class="bi bi-gift"></i>
+					<span>User Subscriptions</span>
+				</a>
+			</li><!-- End Contact Page Nav	 -->
+
+			<li class="nav-item">
 				<a class="nav-link collapsed" href="complaints.php">
 					<i class="bi bi-dash-circle"></i>
 					<span>Customer Service</span>
 				</a>
-			</li><!-- End Error 404 Page Nav -->
+			</li>
 
 			<li class="nav-heading">Payment</li>
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="payment.php">
 					<i class="bi bi-coin"></i>
-					<span>Withdrawal Payment</span>
+					<span>Withdrawal Request</span>
 				</a>
 			</li><!-- End Error 404 Page Nav -->
 

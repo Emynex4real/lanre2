@@ -13,6 +13,7 @@
             $this->db = $db;
         }
 
+
         public function createUser($email, $username, $subscription_status, $password, $referral_code = null) {
             $this->email = $email;
             $this->username = $username;
@@ -44,6 +45,7 @@
             return $this->db->lastInsertId();
         }
 
+
         public function getUserById($user_id) {
             $sql = "SELECT * FROM users WHERE user_id = :user_id";
             $stmt = $this->db->prepare($sql);
@@ -51,14 +53,22 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
+
         public function updateUserSubscription($user_id, $subscription_status) {
-            $sql = "UPDATE `users` SET subscription_status = :subscription_status WHERE user_id = :user_id";
+            $sql = "UPDATE `users` SET `subscription_status` = :subscription_status WHERE user_id = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':subscription_status' => $subscription_status,
                 ':user_id' => $user_id
             ]);
             return $stmt->rowCount();
+        }
+
+
+        public function getAllUsers() {
+            $sql = "SELECT * FROM users ORDER BY USER_ID";
+            $stmt = $this->db->query($sql);query: 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
@@ -267,5 +277,53 @@
         }
     }
 
+
+
+    class PPCClick {
+        private $db;
+        private $click_id;
+        private $campaign_id;
+        private $user_id;
+        private $click_time;
+
+        public function __construct() {
+            global $db;
+            $this->db = $db;
+        }
+
+        
+        public function recordClick($ad_id, $user_id) {
+            $this->user_id = $user_id;
+            $this->click_time = date('Y-m-d H:i:s');
+
+            $sql = "INSERT INTO clicks (campaign_id, user_id, click_time) VALUES (:campaign_id, :user_id, :click_time)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':campaign_id' => $this->campaign_id,
+                ':user_id' => $this->user_id,
+                ':click_time' => $this->click_time
+            ]);
+            $this->updateUserAdsParticipationHistory();
+            return $this->db->lastInsertId();
+        }
+
+
+        public function getClicksByCampaign($campaign_id) {
+            $sql = "SELECT * FROM clicks WHERE campaign_id = :campaign_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':campaign_id' => $campaign_id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        public function updateUserAdsParticipationHistory() {
+            $sql = "UPDATE `users` SET `ads_history` = :ads_history + 1 WHERE `user_id` = :user_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':user_id' => $this->user_id
+            ]);
+            return $stmt->rowCount();
+        }
+    }
 
 

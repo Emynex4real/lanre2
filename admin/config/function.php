@@ -151,6 +151,10 @@
     }
 
 
+    function go_back() {
+        echo "<script>history.go(-1)</script>";
+    }
+
 
     // TEST INPUT
     function test_input($data) {

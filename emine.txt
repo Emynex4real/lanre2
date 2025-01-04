@@ -1,10 +1,12 @@
-<?php
-global $db;
-require_once("config/PPC.php");
-$PPC = new PPCAd();
-$ads = $PPC->getAds();
-
-foreach ($ads as $ad): ?>
-
+										<?php	
+											try {
+												global $db;
+												require_once("config/PPC.php");
+												$PPC = new PPCAd();
+												$ads = $PPC->getAds();
+	
+												foreach ($ads as $ad):
+													if ($number_of_users > 0) { 
+														foreach ($ads as $ad):  ?>
 							<?php endforeach 
 						?>
