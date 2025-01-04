@@ -8,7 +8,7 @@
 
     try {
         // Form Submit
-        if(isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) {
             require_once("config/function.php");
 
             $username    =  $_POST['username'];
@@ -38,7 +38,7 @@
 
                 } else {
                     global $db;
-                    $query = "SELECT * FROM admin WHERE username = :user AND email = :email";
+                    $query = "SELECT * FROM `admins` WHERE `username` = :user AND `email` = :email";
                     $stmt = $db->prepare($query);
                     $stmt->execute([
                         ':user'  => $username,
@@ -53,19 +53,19 @@
                     } else {
                         try {
                             $password = password_hash($password, PASSWORD_DEFAULT);
-                            $sql = "INSERT INTO admin (username, email, password, reg_date, position) VALUES (:username, :email, :password, :date, :position)";
+                            $sql = "INSERT INTO admins (username, email, password, position, status) VALUES (:username, :email, :password, :position, :status)";
                             $stmt = $db->prepare($sql);
                             if ($stmt->execute([
                                 ':username' => test_input($username),
                                 ':email'    => test_input($email),
                                 ':password' => test_input($password),
-                                ':date'     => test_input($date),
+                                ':status' => "active",
                                 ':position' => 1
                             ])) {
                                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 session_start();
-                                $_SESSION['role'] = 'admin';
-                                $_SESSION['user_id'] = $row['id'];
+                                $_SESSION['position'] = 'admin';
+                                $_SESSION['user_id'] = $row['admin_id'];
                                 $_SESSION['user'] = $row['username'];
                                 $_SESSION['last_login_timestamp'] = time();
                                 header('location: index/registered');
@@ -93,7 +93,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Create Admin Account - Techniques Consult</title>
+    <title>Create Admin Account - E-mine</title>
     <base href="http://localhost/php/E-mine/admin/" /> 
     <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo.jpg" />
 
@@ -188,7 +188,7 @@
 							</div>
 
 							<div class="credits white">
-                                Techniques Consult &copy 2023 All rights reserved
+                                E-mine &copy 2023 All rights reserved
 							</div>
 						</div>
 					</div>

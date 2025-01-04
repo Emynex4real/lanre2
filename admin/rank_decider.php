@@ -3,7 +3,7 @@
     require_once("config/function.php");
 	session_start(); 
 
-	if(isset($_SESSION['user'])  && isset($_SESSION['user_id']) && $_SESSION['role'] == "admin") {
+	if(isset($_SESSION['user'])  && isset($_SESSION['user_id']) && $_SESSION['position'] == "admin") {
 		$user = $_SESSION['user'];
 		$user_id = $_SESSION['user_id'];
 		$logged_time = $_SESSION['last_login_timestamp'];

@@ -56,9 +56,8 @@
     function get_admin_user_info($username) {
         // GET USER INFO BY EMAIL
         global $db; $data = "";
-        $sql = "SELECT * FROM `admin` WHERE `username` = '{$username}' or `email` = '{$username}'";
-        $query = $db->prepare($sql);
-        $query->execute();
+        $sql = "SELECT * FROM `admins` WHERE `username` = '{$username}' or `email` = '{$username}'";
+        $query = $db->query($sql);
         $email_count = $query->rowCount(); 
 
         // CHECK IF USER EXISTS
@@ -67,22 +66,6 @@
             return $data;
         }
         return $data;
-    }
-
-
-    function get_free_course() {
-        global $db;
-        try {
-            $sql = "SELECT * FROM `courses` WHERE `type` = :type";
-            $query = $db->prepare($sql);
-            $query->execute([
-                ':type'  => "free"
-            ]);
-            $course_data = $query->fetch(PDO::FETCH_ASSOC);
-            $course_data["course_count"]  = $query->rowCount();
-            return $course_data;
-
-        } catch (PDOException $e) {	};
     }
 
 

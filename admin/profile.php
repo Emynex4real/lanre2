@@ -4,13 +4,13 @@
 	session_start();
 	require_once("config/function.php"); 
 
-	if(isset($_SESSION['user'])  && isset($_SESSION['user_id']) && $_SESSION['role'] == "admin") {
+	if(isset($_SESSION['user'])  && isset($_SESSION['user_id']) && $_SESSION['position'] == "admin") {
 		$user = $_SESSION['user'];
 		$user_id = $_SESSION['user_id'];
 		$logged_time = $_SESSION['last_login_timestamp'];
 		$user_info = get_admin_user_info($user);
 		
-		if (empty($user_info) || ($user_info["id"]) != $user_id) {
+		if (empty($user_info) || ($user_info["admin_id"]) != $user_id) {
 			session_destroy();
 			header("Location: login?logged_out=tru");
 

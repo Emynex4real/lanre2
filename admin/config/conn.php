@@ -3,7 +3,7 @@
     // $dbname = "techniqu_techniquesconsult";
     // $username = "techniqu_techniquesconsult";
     // $password = "techniqu_techniquesconsult@2024";
-    $dbname = "techniques_consult";
+    $dbname = "emine";
     $username = "root";
     $password = "";
 

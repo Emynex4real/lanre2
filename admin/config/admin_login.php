@@ -7,7 +7,7 @@
         if(!empty($_POST['username'])) {
             // IF USERNAME IS REGISTERED
             $username = $_POST['username'];
-            $sql = "SELECT * FROM `admin` WHERE `username` = '{$username}' or `email` = '{$username}' LIMIT 1";
+            $sql = "SELECT * FROM `admins` WHERE `username` = '{$username}' or `email` = '{$username}' LIMIT 1";
             $query = $db->prepare($sql);
             $query->execute();
             $username_count = $query->rowCount(); 
@@ -56,11 +56,13 @@
         if($usernameOk == 1 && $passwordOk == 1) {
             $login = 1;
             $data = get_admin_user_info($username);
+
             session_start();
-            $_SESSION['role'] = 'admin';
+            $_SESSION['position'] = $data['position'];
             $_SESSION['user'] = $data['username'];
-            $_SESSION['user_id'] = $data['id'];
+            $_SESSION['user_id'] = $data['admin_id'];
             $_SESSION['last_login_timestamp'] = time();
+            print_r($_SESSION); 
             header("Location: index/logged_in");
  
         } else {

@@ -1,27 +1,24 @@
 <?php 
 	$page_title = "Admin Dashboard";
 
+	session_start();
 	require_once("config/function.php");
-	session_start(); 
 
-	if(isset($_SESSION['user'])  && isset($_SESSION['user_id']) && $_SESSION['role'] == "admin") {
+	if (isset($_SESSION['user'])  && isset($_SESSION['user_id']) && $_SESSION['position'] == "admin") {
 		$user = $_SESSION['user'];
 		$user_id = $_SESSION['user_id'];
 		$logged_time = $_SESSION['last_login_timestamp'];
 		$user_info = get_admin_user_info($user);
-		
-		if (empty($user_info) || ($user_info["id"] != $user_id)) {
+		if (empty($user_info) || ($user_info["admin_id"]) != $user_id) {
 			session_destroy();
-			header("Location: logged_out");
+			header("Location: login");
 
 		} elseif ((time() - $_SESSION['last_login_timestamp'] )> 10800) {
-			header("Location: logged_out");
+			header("Location: /logged_out");
 		} 
-
 	} else {
-		echo $_SESSION['user'];
-		// session_destroy();
-		header("Location: login");
+		session_destroy();
+		header("Location: /logged_out");
 	}
 
 	require_once("layout/admin-header.php");?>
@@ -80,14 +77,14 @@
 							<div class="info-card revenue-card">
 
 								<div class="card-body">
-								<h5 class="card-title">Investment <span>| All Time</span></h5>
+								<h5 class="card-title">Subscriptions <span>| All Time</span></h5>
 
 								<div class="d-flex align-items-center">
 									<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 										<i class="bi bi-safe2-fill"></i>
 									</div>
 									<div class="ps-3">
-									<h6 class="b-5"><?= empty(get_row_count("investments")) ? 0 : get_row_count("investments") ?></h6>
+									<h6 class="b-5"><?= empty(get_row_count("Subscriptions")) ? 0 : get_row_count("Subscriptions") ?></h6>
 									<span class="text-success small pt-1 fw-bold">100%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 									</div>
 								</div>
@@ -109,7 +106,7 @@
 											</div>
 
 											<div class="ps-3">
-												<h6 class="b-5">₦<?= number_format(get_total_deposit_amount()) ?></h6>
+												<h6 class="b-5">₦<?= "" ?></h6>
 												<span class="text-success small pt-1 fw-bold">100%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 											</div>
 										</div>

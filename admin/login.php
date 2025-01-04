@@ -19,9 +19,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <base href="http://localhost/php/admin/E-mine/admin/" /> 
+  <base href="http://localhost/php/E-mine/admin/" /> 
   <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo.jpg" />
-  <title>Admin Login - Techniques Consult</title>
+  <title>Admin Login - E-mine</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -135,7 +135,7 @@
 							</div>
 
 							<div class="credits white">
-								Techniques Consult &copy <?= date("Y") ?> All rights reserved
+								E-mine &copy <?= date("Y") ?> All rights reserved
 							</div>
 						</div>
 					</div>
