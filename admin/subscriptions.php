@@ -50,28 +50,43 @@
 				<!-- Left side columns -->
 				<div class="col-12">
 					<div class="row">
-						
-                            <div class="col-xxl-4 col-md-6">
-                                <div class="info-card sales-card">
+						<?php
+							global $db;
+							require_once("config/PPC.php");
+							$PPC = new PPCPlan();
+							$plans = $PPC->getSubscriptionPlans();
 
-                                    <div class="card-body">
-                                        <h5 class="card-title">Registeration <span>| All Time</span></h5>
+							foreach ($plans as $plan): ?>
+								<div class="col-xxl-4 col-md-6 mb-4">
+									<div class="info-card sales-card">
 
-                                        <div class="d-flex align-items-center">
-                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="bi bi-people-fill"></i>
-                                            </div>
+										<div class="card-body">
+											<div class="flex-between ai-center no-break">
+												<h5 class="card-title"><?= "₦" . number_format($plan["price"]) ?> <b class="xsm">| <?= $plan["duration_months"] ?> Month</b></h5>
+												<button class="success-btn"><?= ucfirst($plan["status"]) ?></button>
+											</div>
 
-                                            <div class="ps-3">
-                                                <h6 class="b-5"><?= empty(get_row_count("users")) ? 0 : get_row_count("users")?></h6>
-                                                <span class="text-success small pt-1 fw-bold">100%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-                                            </div>
-                                        </div>
-                                    </div>
+											<div class="d-flex align-items-center">
+												<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+													<i class="bi bi-menu-fill"></i>
+												</div>
 
-                                </div>
-                            </div><!-- End Sales Card -->
-                        
+												<div class="ps-3">
+													<h6 class="b-5"><?= ucfirst($plan["plan_name"]) ?></h6>
+													<span class="text-success small pt-1 fw-bold">Created on</span> <span class="text-muted small pt-2 ps-1"><?= format_Date($plan["created_at"]) ?></span>
+												</div>
+											</div>
+
+											<div class="mt-3 flex-between ai-center no-break">                                            
+												<a href="edit-plan/<?= $plan["subscription_id"] ?>" class="a"><button class="editbtn1">Edit plan</button></a>
+												<a href="delete-plan/<?= $plan["subscription_id"] ?>" class="a"><button class="delete-butn">Delete Plan</button></a>
+											</div>
+										</div>
+
+									</div>
+								</div><!-- End Sales Card -->
+							<?php endforeach 
+						?>
 					</div>
 				</div><!-- End Left side columns -->
 			</div>

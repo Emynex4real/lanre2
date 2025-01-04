@@ -236,12 +236,26 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        
+
         public function deleteAd($plan_id) {
             $sql = "DELETE FROM `subscriptions` WHERE `subscription_id` = :plan_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':plan_id' => $plan_id]);
             return $stmt->rowCount();
+        }
+
+
+        public function getSubscriptionPlans() {
+            $sql = "SELECT * FROM `subscriptions`";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        public function getAllUserSubscriptions() {
+            $sql = "SELECT * FROM `user_subscriptions` ORDER_BY USER_SUBSCRIPTION_ID";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 

@@ -19,11 +19,11 @@
             $response['errors']['price'] = "Plan price is required.";
         }
 
-        if (empty($status)) {
-            $response['errors']['status'] = "Plan monthly duration is required.";
+        if (empty($duration)) {
+            $response['errors']['duration'] = "Plan monthly duration is required.";
         }
 
-        if (empty($duration)) {
+        if (empty($status)) {
             $response['errors']['status'] = "Plan status is required.";
         }
 

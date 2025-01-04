@@ -79,12 +79,12 @@
 				</a>
 			</li><!-- End Dashboard Nav -->
 
-			<li class="nav-heading">Subscriptions</li>
+			<li class="nav-heading">Subscription Plans</li>
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="Subscriptions.php">
 					<i class="bi bi-cart"></i>
-					<span>Subscriptions</span>
+					<span>Plans</span>
 				</a>
 			</li><!-- End Profile Page Nav -->
 
@@ -95,6 +95,16 @@
 				</a>
 			</li><!-- End Contact Page Nav	 -->
 
+			
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="user-subscriptions.php">
+					<i class="bi bi-gift"></i>
+					<span>All Subscriptions</span>
+				</a>
+			</li><!-- End Contact Page Nav	 -->
+
+			<li class="nav-heading">Users</li>
+
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="users.php">
 					<i class="bi bi-people-fill"></i>
@@ -103,11 +113,11 @@
 			</li><!-- End Contact Page Nav -->	
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="rank_decider.php">
-					<i class="bi bi-people-fill"></i>
-					<span>Rank Qualification</span>
+				<a class="nav-link collapsed" href="complaints.php">
+					<i class="bi bi-dash-circle"></i>
+					<span>Customer Service</span>
 				</a>
-			</li><!-- End Contact Page Nav -->
+			</li><!-- End Error 404 Page Nav -->
 
 			<li class="nav-heading">Payment</li>
 
@@ -124,24 +134,9 @@
 					<span>Payment History</span>
 				</a>
 			</li><!-- End Error 404 Page Nav -->
-			
-			
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="salary.php">
-					<i class="bi bi-coin"></i>
-					<span>Weekly Salary</span>
-				</a>
-			</li><!-- End Error 404 Page Nav -->
 
 
 			<li class="nav-heading">Others</li>
-
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="complaints.php">
-					<i class="bi bi-dash-circle"></i>
-					<span>Customer Service</span>
-				</a>
-			</li><!-- End Error 404 Page Nav -->
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="transactions.php">

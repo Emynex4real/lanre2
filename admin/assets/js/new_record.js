@@ -57,17 +57,17 @@ function scrollToTop() {
 
 
 // Example Usage: Attach it to your form submissions
-if (document.getElementById("campaignForm")) {
-    document.getElementById("campaignForm").addEventListener("submit", function (e) {
+if (document.getElementById("subscriptionForm")) {
+    document.getElementById("subscriptionForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        createRecord("campaignForm", "create_campaign.php", "campaignResult");
+        createRecord("subscriptionForm", "config/create_subscription.php", "subscriptionSuccess", "subscriptionFailed", "subscriptions.php?new=true");
     });
 }
 
 if (document.getElementById("adForm")) {
     document.getElementById("adForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        createRecord("adForm", "config/create_ad.php", "adSuccess", "adFailed", "ads/new");
+        createRecord("adForm", "config/create_ad.php", "adSuccess", "adFailed", "ads.php?new=true");
     });
 }
 

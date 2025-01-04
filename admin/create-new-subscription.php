@@ -28,11 +28,11 @@
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Create new Subscription</h1>
+			<h1>Create Subscription Plan</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-					<li class="breadcrumb-item active">Create Subscription</li>
+					<li class="breadcrumb-item active"> Create subscription plans</li>
 				</ol>
 			</nav>
 		</div><!-- End Page Title -->
@@ -40,7 +40,7 @@
 		<section class="section dashboard form">
 			<div class="card p-3 mobile-p-1 mobile-mt-m-1">
 				<div class="card-body">
-					<h5 class="card-title">Create Subscription</h5>
+					<h5 class="card-title">Create Subscription Plan</h5>
 
 					<div class="alert success mb-3 d-none" id="subscriptionSuccess">
 						<p class="alert pl-2">Subscription has been created successfully</p>
@@ -51,7 +51,7 @@
 					</div>
 
 					<!-- Vertical Form -->
-					<form class="row g-3 m-h-100" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="SubscriptionForm">
+					<form class="row g-3 m-h-100" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="subscriptionForm">
 						<div class="col-12">
 							<input type="text" class="form-control shadow-none none" placeholder="Enter Plan Name e.g Welcome Bonus" id="name" name="name">
 							<p class="error" id="nameErr"></p>
@@ -63,7 +63,7 @@
 						</div>
 
 						<div class="col-12">
-							<input type="number" class="form-control shadow-none" placeholder="Enter Monthly Duration eg 1" id="duration" name="duration">
+							<input type="number" class="form-control shadow-none" placeholder="Enter Monthly Duration e.g 1" id="duration" name="duration">
 							<p id="durationErr" class="error"></p>
 						</div>
 
