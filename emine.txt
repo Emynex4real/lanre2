@@ -1,0 +1,8 @@
+global $db;
+require_once("config/PPC.php");
+$PPC = new PPCAd();
+$ads = $PPC->getAds();
+
+<?php foreach ($ads as $ad): ?>
+
+<?php endforeach ?>

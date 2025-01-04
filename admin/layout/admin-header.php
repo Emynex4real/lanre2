@@ -79,12 +79,12 @@
 				</a>
 			</li><!-- End Dashboard Nav -->
 
-			<li class="nav-heading">Products</li>
+			<li class="nav-heading">Subscriptions</li>
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="products.php">
+				<a class="nav-link collapsed" href="Subscriptions.php">
 					<i class="bi bi-cart"></i>
-					<span> All Mercahndise</span>
+					<span>Subscriptions</span>
 				</a>
 			</li><!-- End Profile Page Nav -->
 

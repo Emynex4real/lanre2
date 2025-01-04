@@ -37,19 +37,23 @@
 			</nav>
 		</div><!-- End Page Title -->
 
-		<section class="section dashboard form h-5">
+		<section class="section dashboard form">
 			<div class="card p-3 mobile-p-1 mobile-mt-m-1">
 				<div class="card-body">
 					<h5 class="card-title">Create Ads</h5>
 
-					<div class="alert success mb-3 none" id="adResult">
-						<p class="alert">Ad has been created successfully</p>
+					<div class="alert success mb-3 d-none" id="adSuccess">
+						<p class="alert pl-2">Ad has been created successfully</p>
+					</div>
+
+					<div class="alert danger mb-3 d-none" id="adFailed">
+						<p class="alert pl-2">Please check all inputs</p>
 					</div>
 
 					<!-- Vertical Form -->
-					<form class="row g-3 mh-" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="adForm">
+					<form class="row g-3 m-h-100" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="adForm">
 						<div class="col-12">
-							<input type="text" class="form-control shadow-none none" placeholder="Enter Ad name e.g Welcome Bonus" id="name" name="name">
+							<input type="text" class="form-control shadow-none none" placeholder="Enter Ad title e.g Welcome Bonus" id="name" name="name">
 							<p class="error" id="nameErr"></p>
 						</div>
 		
@@ -59,8 +63,8 @@
 						</div>
 
 						<div class="col-12">
-							<input type="number" class="form-control shadow-none" placeholder="Enter Maximum Ads view" id="view" name="view">
-							<p id="viewErr" class="error"></p>
+							<input type="number" class="form-control shadow-none" placeholder="Enter Maximum Ads view" id="max" name="max">
+							<p id="maxErr" class="error"></p>
 						</div>
 
 						<div class="col-12">
@@ -69,8 +73,8 @@
 						</div>
 
 						<div class="col-12">
-							<textarea class="form-control shadow-none none" placeholder="Enter a description of the Ads" id="decription" name="decription"></textarea>
-							<p class="error" id="decriptionErr"></p>
+							<textarea class="form-control shadow-none none" placeholder="Enter a description of the Ads" id="description" name="description"></textarea>
+							<p class="error" id="descriptionErr"></p>
 						</div>
 
 						<div class="col-12">
@@ -80,11 +84,23 @@
 								<option value="paused">Paused</option>
 								<option value="ended">Ended</option>
 							</select>
-							<p class="error" id="decriptionErr"></p>
+							<p class="error" id="statusErr"></p>
+						</div>
+
+						<div class="col-12">
+							<label for="start">Start Date</label>
+							<input type="date" class="form-control shadow-none none" placeholder="Start date" id="start" name="start">
+							<p class="error" id="startErr"></p>
+						</div>
+
+						<div class="col-12">
+							<label for="end">End Date</label>
+							<input type="date" class="form-control shadow-none none" placeholder="End date" id="end" name="end">
+							<p class="error" id="endErr"></p>
 						</div>
 
 						<div class="mt-0 mt-3 mb-2">
-							<button type="submit" class="btn1" id="add-coupon" name="add_coupon">Create coupon code</button>
+							<button type="submit" class="btn1" id="add-coupon" name="add_coupon">Create new ad</button>
 						</div>
 					</form><!-- Vertical Form -->
 				</div>

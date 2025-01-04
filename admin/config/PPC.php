@@ -8,7 +8,8 @@
         private $username;
         private $subscription_status;
 
-        public function __construct($db) {
+        public function __construct() {
+            global $db;
             $this->db = $db;
         }
 
@@ -74,7 +75,8 @@
         private $start_date;
         private $end_date;
     
-        public function __construct($db) {
+        public function __construct() {
+            global $db;
             $this->db = $db;
         }
     
@@ -89,7 +91,7 @@
             $this->start_date = $start_date;
             $this->end_date = $end_date;
     
-            $sql = "INSERT INTO `ads` (ad_name, ad_text, status, :ad_url, max_attempt, cost_per_click, start_date, end_date) 
+            $sql = "INSERT INTO `ads` (ad_name, ad_text, status, ad_url, max_attempt, cost_per_click, start_date, end_date) 
                     VALUES (:ad_name, :ad_text, :status, :ad_url, :max_attempt, :reward, :start_date, :end_date)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
@@ -175,54 +177,73 @@
     }
 
 
-    class PPCClick {
+    class PPCPlan {
         private $db;
-        private $click_id;
-        private $ad_id;
-        private $user_id;
+        private $name;
+        private $price;
+        private $duration;
+        private $status;
+        private $subscription_id;
 
-        public function __construct($db) {
+        public function __construct() {
+            global $db;
             $this->db = $db;
         }
 
-        public function recordClick($ad_id, $user_id) {
-            $this->ad_id = $ad_id;
-            $this->user_id = $user_id;
+        public function createSubscriptionPlan($name, $price, $status, $duration) {
+            $this->name = $name;
+            $this->price = $price;
+            $this->status = $status;
+            $this->duration = $duration;
 
-            $sql = "INSERT INTO `clicks` (ad_id, user_id, ip_address) VALUES (:ad_id, :user_id, :ip_address)";
+            $sql = "INSERT INTO `subscriptions` (plan_name, price, duration_months, status) VALUES (:name, :price, :duration, :status)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':ad_id' => $this->ad_id,
-                ':user_id' => $this->user_id,
-                ':ip_address' => getUserIP()
+                ':name' => $this->name,
+                ':price' => $this->price,
+                ':duration' => $this->duration,
+                ':status' => $this->status
             ]);
-            $this->incrementAdClicks($ad_id);
             return $this->db->lastInsertId();
         }
 
-        private function incrementAdClicks($adId) {
-            try {
-                $sql = "UPDATE `ads` SET `clicks` = clicks + 1 WHERE `ad_id` = :ad_id";
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute([':ad_id' => $adId]);
-        
-                if ($stmt->rowCount() > 0) {
-                    return true; // 
-                } else {
-                    return false; //
-                }
-            } catch (PDOException $e) {
-                // Log the error (optional) and return false
-                error_log("Error incrementing ad clicks: " . $e->getMessage());
-                return false;
-            }
+
+        public function updateSubscriptionPlan($name, $price, $status, $duration, $plan_id) {
+            $this->name = $name;
+            $this->price = $price;
+            $this->status = $status;
+            $this->duration = $duration;
+            $this->subscription_id = $plan_id;
+
+            $sql = "UPDATE `subscriptions` SET `plan_name` = :name, `price` = :price, `duration_months` = :duration, `status` = :status WHERE `subscription_id` = :plan_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':plan_id' => $this->subscription_id,
+                ':name' => $this->name,
+                ':price' => $this->price,
+                ':duration' => $this->duration,
+                ':status' => $this->status
+            ]);
+            return $this->db->lastInsertId();
         }
+
         
 
-        public function getClicksByAds($ad_id) {
-            $sql = "SELECT * FROM clicks WHERE ad_id = :ad_id";
+        public function getSubscriptionPlanById($plan_id) {
+            $sql = "SELECT * FROM `subscriptions` WHERE `subscription_id` = :plan_id";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':ad_id' => $ad_id]);
+            $stmt->execute([':plan_id' => $plan_id]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        
+        public function deleteAd($plan_id) {
+            $sql = "DELETE FROM `subscriptions` WHERE `subscription_id` = :plan_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':plan_id' => $plan_id]);
+            return $stmt->rowCount();
+        }
     }
+
+
+
