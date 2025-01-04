@@ -39,7 +39,7 @@
 
     function get_user_info_by_id($id) {
         global $db;
-        $sql = "SELECT * FROM `users` WHERE `id` = '{$id}' LIMIT 1";
+        $sql = "SELECT * FROM `users` WHERE `user_id` = '{$id}' LIMIT 1";
         $query = $db->prepare($sql);
         $query->execute();
         $email_count = $query->rowCount(); 
@@ -146,7 +146,7 @@
         $monthName = $monthName->format('F');
 
         // COUPLE DATE AND SEND
-        $date =  $date[2] . " of " . $monthName . ", ". $date[0] . " by " . substr($time, 1);
+        $date =  $date[2] . " of " . $monthName . ", " . $date[0];
         return $date;
     }
 

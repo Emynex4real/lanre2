@@ -29,7 +29,7 @@
 	<main id="main" class="main">	
 		<section class="section dashboard">
 			<div class="pagetitle">
-				<h1>Manage Subscriptions</h1>
+				<h1>All Subscriptions</h1>
 				<nav>
 				  <ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -63,7 +63,7 @@
                                                 <th scope="col" style="color: #000;">S/N</th>
                                                 <th scope="col" style="color: #000;">Username</th>
                                                 <th scope="col" style="color: #000;">Plan Name</th>
-                                                <th scope="col" style="color: #000;">Plan ID</th>
+                                                <th scope="col" style="color: #000;">Payment</th>
                                                 <th scope="col" style="color: #000;">Start Date</th>
                                                 <th scope="col" style="color: #000;">End Date</th>
                                                 <th scope="col" style="color: #000;">Status</th>
@@ -80,17 +80,17 @@
                                                     $subscriptions = $PPC->getAllUserSubscriptions();
 
                                                     if (count($subscriptions)) { 
-                                                        foreach ($subscriptions as $subscription): ?>
+                                                        foreach ($subscriptions as $subscription): $sn = 1; ?>
                                                             <tr>
-                                                                <td scope="row" style="color: #000;"><b><?= $user["email"] ?></b></td>
-                                                                <td><b><?= "₦" . $deposit_balance ?></b></td>
-                                                                <td><b><?= "₦" . $income_balance ?></b></td>
-                                                                <td><b><?= "₦" . $total_user_investments ?></b></td>
-                                                                <td><b><?= ucfirst($user["rank"]) ?></b></td>
-        
+                                                                <td><?= $sn ?></td>
+                                                                <td scope="row" style="color: #000;"><b><?= ucfirst(get_user_info_by_id($subscription["user_id"])["username"]) ?></b></td>
+                                                                <td><b><?= ucfirst($PPC->getPlanName($subscription["subscription_id"])) ?></b></td>
+                                                                <td><b>Paid</b></td>
+                                                                <td><b><?= format_Date($subscription["start_date"]) ?></b></td>
+                                                                <td><b><?= format_Date($subscription["end_date"]) ?></td>
                                                                 <td>
                                                                     <?php 
-                                                                        if ($user["verification"] == 1 || $user["verification"] == 0) {?>
+                                                                        if ($subscription["status"] == "active") {?>
                                                                             <button class="success-btn mobile-w-fit">
                                                                                 <i class="fa-solid fa-mark fa-lg"></i>
                                                                                 <span>Active</span> 
@@ -99,20 +99,15 @@
                                                                         <?php } else { ?>
                                                                             <button class="danger-btn mobile-w-fit">
                                                                                 <i class="fa-solid fa-xmark fa-lg"></i>
-                                                                                <span>Inactive</span> 
+                                                                                <span><?= $subscription["status"] ?></span> 
                                                                             </button>
                                                                         <?php } 
                                                                     ?>
                                                                 </td>
-
-                                                                <td style=" margin-right: 20px;">
-                                                                    <button class="editbtn1 mobile-w-100 funds-btn flex" data-user="<?= $user["id"] ?>" data-email="<?= $user["email"] ?>">
-                                                                        <i class="fa-solid fa-plus fa-lg mr-1"></i>
-                                                                        <span id="span<?= $user["id"] ?>" style="min-width: 100px">Add Funds</span> 
-                                                                    </button>
-                                                                </td>
         
-                                                                <td style="padding-left: 40px;">
+        
+                                                                <!-- Actions -->
+                                                                <!-- <td style="padding-left: 40px;">
                                                                     <?php if ($user["verification"] == 1 || $user["verification"] == 0) { ?>
                                                                         <button class="editbtn1 ban mobile-w-100 action-btn flex" data-user="<?= $user["id"] ?>" data-action="ban" data-email="<?= $user["email"] ?>">
                                                                             <i class="fa-solid fa-xmark fa-lg mr-1"></i>
@@ -126,9 +121,9 @@
                                                                             <i class="fa-solid fa-user fa-lg"></i>
                                                                         </button>
                                                                     <?php } ?>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
-                                                        <?php endforeach;
+                                                        <?php $sn++; endforeach;
                                                     }
                                                 } catch (PDOException $e) { echo $e; }
                                             ?>
