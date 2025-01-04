@@ -101,8 +101,7 @@
         }
     }
 
-    
-    // Update campaign details for a specific user
+    // Function to update campaign details for a specific user
     function updateCampaign($db, $user_id, $campaign_id, $name, $description, $status) {
         try {
             $sql = "UPDATE `campaigns` SET `name` = :name, `description` = :description, `status` = :status
@@ -120,8 +119,8 @@
             return ['error' => 'Error updating campaign: ' . $e->getMessage()];
         }
     }
-    
-    // Delete a campaign for a specific user
+
+    // Function to delete a campaign for a specific user
     function deleteCampaign($db, $user_id, $campaign_id) {
         try {
             $sql = "DELETE FROM `campaigns` WHERE `user_id` = :user_id AND `campaign_id` = :campaign_id";
@@ -132,8 +131,8 @@
             return ['error' => 'Error deleting campaign: ' . $e->getMessage()];
         }
     }
-    
-    // Update ad details for a specific user and campaign
+
+    // Function to update ad details for a specific user and campaign
     function updateAd($db, $user_id, $ad_id, $title, $description, $status) {
         try {
             $sql = "UPDATE `ads` SET `title` = :title, `description` = :description, `status` = :status
@@ -151,8 +150,8 @@
             return ['error' => 'Error updating ad: ' . $e->getMessage()];
         }
     }
-    
-    // Delete an ad for a specific user and campaign
+
+    // Function to delete an ad for a specific user and campaign
     function deleteAd($db, $user_id, $ad_id) {
         try {
             $sql = "DELETE FROM `ads` WHERE `user_id` = :user_id AND `ad_id` = :ad_id";
@@ -163,8 +162,8 @@
             return ['error' => 'Error deleting ad: ' . $e->getMessage()];
         }
     }
-    
-    // Update click details for a specific user and ad
+
+    // Function to update click details for a specific user and ad
     function updateClick($db, $user_id, $click_id, $click_date) {
         try {
             $sql = "UPDATE `clicks` SET `click_date` = :click_date WHERE `user_id` = :user_id AND `click_id` = :click_id";
@@ -179,8 +178,8 @@
             return ['error' => 'Error updating click: ' . $e->getMessage()];
         }
     }
-    
-    // Delete a click for a specific user and ad
+
+    // Function to delete a click for a specific user and ad
     function deleteClick($db, $user_id, $click_id) {
         try {
             $sql = "DELETE FROM `clicks` WHERE `user_id` = :user_id AND `click_id` = :click_id";
@@ -191,12 +190,11 @@
             return ['error' => 'Error deleting click: ' . $e->getMessage()];
         }
     }
-    
-    // Update withdrawal details for a specific user
+
+    // Function to update withdrawal details for a specific user
     function updateWithdrawal($db, $user_id, $withdrawal_id, $amount, $status) {
         try {
-            $sql = "UPDATE `withdrawals` SET `amount` = :amount, `status` = :status
-                    WHERE `user_id` = :user_id AND `withdrawal_id` = :withdrawal_id";
+            $sql = "UPDATE `withdrawals` SET `amount` = :amount, `status` = :status WHERE `user_id` = :user_id AND `withdrawal_id` = :withdrawal_id";
             $stmt = $db->prepare($sql);
             $stmt->execute([
                 ":amount" => $amount,
@@ -209,8 +207,8 @@
             return ['error' => 'Error updating withdrawal: ' . $e->getMessage()];
         }
     }
-    
-    // Delete a withdrawal for a specific user
+
+    // Function to delete a withdrawal for a specific user
     function deleteWithdrawal($db, $user_id, $withdrawal_id) {
         try {
             $sql = "DELETE FROM `withdrawals` WHERE `user_id` = :user_id AND `withdrawal_id` = :withdrawal_id";
@@ -221,64 +219,16 @@
             return ['error' => 'Error deleting withdrawal: ' . $e->getMessage()];
         }
     }
-    
-    // Update payment details for a specific user
-    function updatePayment($db, $user_id, $payment_id, $amount, $status) {
+
+    // Function to fetch earnings for a specific user
+    function getEarningsByUser($db, $user_id) {
         try {
-            $sql = "UPDATE `payments` SET `amount` = :amount, `status` = :status
-                    WHERE `user_id` = :user_id AND `payment_id` = :payment_id";
+            $sql = "SELECT SUM(e.amount) AS total_earnings FROM earnings e WHERE e.user_id = :user_id";
             $stmt = $db->prepare($sql);
-            $stmt->execute([
-                ":amount" => $amount,
-                ":status" => $status,
-                ":user_id" => $user_id,
-                ":payment_id" => $payment_id
-            ]);
-            return ['success' => 'Payment updated successfully'];
+            $stmt->execute([":user_id" => $user_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return ['error' => 'Error updating payment: ' . $e->getMessage()];
+            return ['error' => 'Error fetching earnings for the user: ' . $e->getMessage()];
         }
     }
-    
-    // Delete a payment for a specific user
-    function deletePayment($db, $user_id, $payment_id) {
-        try {
-            $sql = "DELETE FROM `payments` WHERE `user_id` = :user_id AND `payment_id` = :payment_id";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([":user_id" => $user_id, ":payment_id" => $payment_id]);
-            return ['success' => 'Payment deleted successfully'];
-        } catch (PDOException $e) {
-            return ['error' => 'Error deleting payment: ' . $e->getMessage()];
-        }
-    }
-    
-    // Update subscription details for a specific user
-    function updateSubscription($db, $user_id, $subscription_id, $type, $status) {
-        try {
-            $sql = "UPDATE `subscriptions` SET `type` = :type, `status` = :status
-                    WHERE `user_id` = :user_id AND `subscription_id` = :subscription_id";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([
-                ":type" => $type,
-                ":status" => $status,
-                ":user_id" => $user_id,
-                ":subscription_id" => $subscription_id
-            ]);
-            return ['success' => 'Subscription updated successfully'];
-        } catch (PDOException $e) {
-            return ['error' => 'Error updating subscription: ' . $e->getMessage()];
-        }
-    }
-    
-    // Delete a subscription for a specific user
-    function deleteSubscription($db, $user_id, $subscription_id) {
-        try {
-            $sql = "DELETE FROM `subscriptions` WHERE `user_id` = :user_id AND `subscription_id` = :subscription_id";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([":user_id" => $user_id, ":subscription_id" => $subscription_id]);
-            return ['success' => 'Subscription deleted successfully'];
-        } catch (PDOException $e) {
-            return ['error' => 'Error deleting subscription: ' . $e->getMessage()];
-        }
-    }
-        
+
