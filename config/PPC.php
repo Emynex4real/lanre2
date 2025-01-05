@@ -16,15 +16,6 @@
         }
 
 
-        private function couponCodeCheceker($coupon = null) {
-            if ($coupon) { $this->coupon_code = $coupon; }
-            $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([':code' => $this->coupon_code]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-
-
         public function createUser($email, $username, $coupon_code, $password, $referral_code = null) {
             $this->email = $email;
             $this->username = $username;
@@ -57,6 +48,14 @@
                     ':subscription_status' => 1
                 ]);
                 $this->user_id = $this->db->lastInsertId();
+
+                $transaction = new PPCTransaction();
+                $transaction->newTransaction("Daily Login", 50.00, "success", "login");
+
+                session_start();
+                $_SESSION['user'] = $this->username;
+                $_SESSION['user_id'] = $this->user_id;
+                $_SESSION['last_login_timestamp'] = time();
 
                 if ($referred_by) {
                     $this->handleReferralsBonuses( $referred_by, $this->user_id);
@@ -106,6 +105,8 @@
                     $_SESSION['user'] = $data['username'];
                     $_SESSION['user_id'] = $data['user_id'];
                     $_SESSION['last_login_timestamp'] = time();
+
+                    $this->grantDailyLoginBonus($data['user_id']);
                     return true;
                 }
 
@@ -147,6 +148,25 @@
             ])) {
             return true; }
         }
+
+
+        private function couponCodeCheceker($coupon = null) {
+            if ($coupon) { $this->coupon_code = $coupon; }
+            $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':code' => $this->coupon_code]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        public function grantDailyLoginBonus($user_id) {
+            $sql = "UPDATE `users` SET `deposit_balance` = deposit_balance + :bonus WHERE `user_id` = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':id' => $user_id,
+                ':bonus' => 50.00
+            ]);
+        }
         
 
         public function updateUserSubscription($user_id, $subscription_status) {
@@ -158,6 +178,7 @@
             ]);
             return $stmt->rowCount();
         }
+
 
         public function getUserDetails() {
             $sql = "SELECT * FROM users WHERE user_id = :user_id";
@@ -213,7 +234,6 @@
                 }
             }
         }
-
 
 
         public function getUserReferralDetails() {
