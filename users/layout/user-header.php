@@ -47,7 +47,7 @@
                             <li><a href="tasks.php">Tasks</a></li>
                             <li><a href="transaction.php">Wallet History</a></li>
                             <li><a href="referral.php">Referrals</a></li>
-                            <li><a href="withdrawals.php">Cashouts</a></li>
+                            <li><a href="javascript:void(0)">Cashouts</a></li>
                             <li><a href="javascript:void(0)">Games</a></li>
                         </ul>
 

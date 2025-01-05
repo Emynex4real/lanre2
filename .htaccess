@@ -1,0 +1,42 @@
+RewriteEngine On
+Options -MultiViews
+
+# RewriteCond %{SERVER_PORT} 80
+# RewriteRule ^(.*)$ https://emine.com.ng/ [R,L] 
+
+
+RewriteRule ^users/plans   users/subscriptions.php [QSA,NC,L]
+
+RewriteRule ^users/transactions   users/transaction.php [QSA,NC,L]
+
+RewriteRule ^users/refrerral   users/refrerral.php [QSA,NC,L]
+
+RewriteRule ^users/profile   users/profile.php [QSA,NC,L]
+
+RewriteRule ^users/tasks   users/tasks.php [QSA,NC,L]
+
+RewriteRule ^users/task/([^/]+)/?$   users/participate.php?ad_id=$1 [QSA,NC,L]
+
+RewriteRule ^users/buy-plan/([^/]+)/?$    users/buy-subscription.php?plan_id=$1 [QSA,NC,L]
+
+RewriteRule ^users/withdrawals   users/withdrawal.php [QSA,NC,L]
+
+RewriteRule ^users/login  login.php [QSA,NC,L]
+
+RewriteRule ^users/register  register.php [QSA,NC,L]
+
+RewriteRule ^users/index/registered   users/index.php?register=true [QSA,NC,L]
+
+RewriteRule ^index/logged_in   users/index.php?login=true [QSA,NC,L]
+
+RewriteRule ^users/logout  users/logout.php [QSA,NC,L]
+
+RewriteRule ^users/login  login.php [QSA,NC,L]
+
+RewriteRule ^users/register  register.php [QSA,NC,L]
+
+RewriteRule ^users/   users/index.php [QSA,NC,L]
+
+
+
+ErrorDocument 404 /404.html

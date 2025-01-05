@@ -161,63 +161,6 @@ main{
     background-color: #F3893F;
   }
 
-  main {
+  #profile-form {
     min-height: 100vh;
   }
-
-  
-
-#referral_box {
-  color: #fff;
-  padding: 30px 50px;
-  border-radius: 7px;
-  font-size: 19px;
-  width: 90%;
-  margin-top: 50px;
-  position: relative;
-  background: rgb(2,0,36);
-  background: linear-gradient(120deg,#F3893F 0%, #34004d 35%, rgba(2,0,36,1) 100%);
-}
-
-#referral_box h4 {
-  color: #fff;
-  font-weight: 600;
-}
-
-#referral_box p {
-  color: #fff;
-  font-weight: 600;
-}
-
-#referral_box img {
-  right: 100px;
-  bottom: 0px;
-  width: 35%;
-  position: absolute;
-  max-height: 250px;
-  height: auto;
-  /* max-height: 200px; */
-}
-
-.md {
-  font-size: 23px;
-  font-weight: 800;
-}
-
-
-@media (max-width: 575px) {
-  #referral_box {
-    padding-bottom: 200px;
-    width: 90%;
-    margin-top: 0px;
-  }
-
-  #referral_box img {
-    right: 0px;
-    bottom: 0px;
-    width: 85%;
-    position: absolute;
-    max-height: 230px;
-    height: auto;
-  }
-}
