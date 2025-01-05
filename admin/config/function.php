@@ -151,6 +151,43 @@
     }
 
 
+
+    function format_date_into_and_time() {
+        $date = explode(" ", $date);
+        $time  = explode(":", $date[1]);
+
+        // Format Time
+        if ($time[0] < 12) {
+            $hour = $time[0] - 12;
+            $time = $hour . ":" . $time[1] . "pm";
+        } else {
+            $time = $time[0] . ":" . $time[1] . "am";
+        }
+
+
+        $date = explode("-", $date[0]);
+
+        // Format Date Day
+        if (($date[2] == 1) || ($date[2] == 11) || ($date[2] == 21) || ($date[2] == 31)) {
+            $date[2] =  (int) $date[2] . "st";
+        } elseif (($date[2] == 2) || ($date[2] == 22)) {
+            $date[2] =  (int) $date[2] . "nd";
+        } elseif (($date[2] == 3) || $date[2] == 23) {
+            $date[2] = (int) $date[2] . "rd";
+        }  else {
+            $date[2] = (int) $date[2] . "th";
+        }
+
+        // Format Month Name
+        $monthName   = DateTime::createFromFormat('!m', $date[1]);
+        $monthName = $monthName->format('F');
+
+        // COUPLE DATE AND SEND
+        $date =  $date[2] . " of " . $monthName . ", " . $date[0];
+        return $date;
+    }
+
+
     function go_back() {
         echo "<script>history.go(-1)</script>";
     }

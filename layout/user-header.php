@@ -43,7 +43,7 @@
                         <ul>
                             <li><a href="index.php">Dashboard</a></li>
                             <li><a href="profile.php">Profile</a></li>
-                            <li><a href="subscription.php">My Subscriptions</a></li>
+                            <!-- <li><a href="subscription.php">My Subscriptions</a></li> -->
                             <li><a href="task.php">Tasks</a></li>
                             <li><a href="transaction.php">Wallet History</a></li>
                             <li><a href="referral.php">Referrals</a></li>
