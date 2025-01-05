@@ -38,3 +38,8 @@
         $date = $date[2] . " of " . $monthName . ", " . $date[0];
         return $date;
     }
+
+    
+    function go_back() {
+        echo "<script>history.go(-1)</script>";
+    }

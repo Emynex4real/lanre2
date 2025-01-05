@@ -136,61 +136,13 @@
             $stmt->execute([':ad_id' => $ad_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
     
-        // Update an existing ad
-        public function updateAd($ad_id, $ad_name, $ad_text, $ad_url, $status, $cost_per_click, $max_attempt) {
-            $sql = "UPDATE `ads` SET ad_name = :ad_name, ad_text = :ad_text, status = :status, ad_url = :ad_url, 
-                    cost_per_click = :reward, max_attempt = :max_attempt
-                    WHERE ad_id = :ad_id";
+        // Get all ads 
+        public function getAds() {
+            $sql = "SELECT * FROM ads WHERE status = :status";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':ad_name' => $ad_name,
-                ':ad_text' => $ad_text,
-                ':status' => $status,
-                ':ad_url' => $ad_url,
-                ':max_attempt' => $max_attempt,
-                ':reward' => $cost_per_click,
-                ':ad_id' => $ad_id
-            ]);
-            return $stmt->rowCount();
-        }
-    
-        // Delete an ad
-        public function deleteAd($ad_id) {
-            $sql = "DELETE FROM ads WHERE ad_id = :ad_id";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([':ad_id' => $ad_id]);
-            return $stmt->rowCount();
-        }
-    
-        // Get all ads (could be filtered by status, date, etc.)
-        public function getAds($filter = []) {
-            $sql = "SELECT * FROM ads WHERE 1";
-            
-            // Apply any filters if provided
-            if (isset($filter['status'])) {
-                $sql .= " AND status = :status";
-            }
-            if (isset($filter['start_date'])) {
-                $sql .= " AND start_date >= :start_date";
-            }
-            if (isset($filter['end_date'])) {
-                $sql .= " AND end_date <= :end_date";
-            }
-            
-            $stmt = $this->db->prepare($sql);
-    
-            // Bind filter values
-            if (isset($filter['status'])) {
-                $stmt->bindParam(':status', $filter['status']);
-            }
-            if (isset($filter['start_date'])) {
-                $stmt->bindParam(':start_date', $filter['start_date']);
-            }
-            if (isset($filter['end_date'])) {
-                $stmt->bindParam(':end_date', $filter['end_date']);
-            }
-    
+            $stmt->bindParam(':status', "active");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -412,10 +364,21 @@
         }
 
 
-        public function getClicksByCampaign($campaign_id) {
-            $sql = "SELECT * FROM clicks WHERE campaign_id = :campaign_id";
+        public function checkUserClickRecordByAd($ad_id, $user_id) {
+            $sql = "SELECT * FROM `clicks` WHERE `ad_id` = :ad_id AND `user_id` = :user";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':campaign_id' => $campaign_id]);
+            $stmt->execute([
+                ':ad_id' => $ad_id,
+                ':user' => $user_id
+            ]);
+            return $stmt->rowCount();
+        }
+
+
+        public function getClicksByAd($ad_id) {
+            $sql = "SELECT * FROM clicks WHERE ad_id = :ad_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':ad_id' => $ad_id]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 

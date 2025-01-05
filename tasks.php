@@ -22,7 +22,6 @@ require_once("layout/user-header.php"); ?>
 
 					if (count($ads) > 0) { 
 						foreach ($ads as $ad): ?>
-
 							<div class="task-container">
 								<div class="header">
 									<p class="head"><?= ucfirst($ad["ad_name"]) ?></p>
@@ -30,11 +29,25 @@ require_once("layout/user-header.php"); ?>
 									
 									<div class="participate-active">
 										<button class="participate mr-3">
-											<a href="participate.php?ad_id=<?= $ad["ad_id"] ?>">Participate</a>
+											<?php if ($ad["status"] == "active") { 
+												$PPC = new PPCClick();
+												$user_has_participation_count = $PPC->checkUserClickRecordByAd($ad_id, $user_id); 
+
+												if ($user_has_participation_count > 0) { ?>
+													<a>Participated</a>
+												<?php } elseif ($ad["clicks"] >= $ad["max_attempt"]) { ?>
+													<a>Ended</a>
+												<?php } else { ?>
+													<a href="participate.php?ad_id=<?= $ad["ad_id"] ?>">Participate</a>
+												<?php } ?>
+
+											<?php } else { ?>
+												<a>Inactive</a>
+											<?php } ?>
 										</button>
 										
 										<button class="active">
-											<a>Active</a>
+											<a><?= ucfirst($ad["status"] )?></a>
 										</button>
 									</div>
 								</div>
