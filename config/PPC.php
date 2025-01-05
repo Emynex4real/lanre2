@@ -50,7 +50,7 @@
                 $this->user_id = $this->db->lastInsertId();
 
                 $transaction = new PPCTransaction();
-                $transaction->newTransaction("Daily Login", 50.00, "success", "login");
+                $transaction->newTransaction("Welcome Bonus", 200.00, "success", "income");
 
                 session_start();
                 $_SESSION['user'] = $this->username;
@@ -107,6 +107,8 @@
                     $_SESSION['last_login_timestamp'] = time();
 
                     $this->grantDailyLoginBonus($data['user_id']);
+                    $transaction = new PPCTransaction();
+                    $transaction->newTransaction("Daily Login", 50.00, "success", "login");    
                     return true;
                 }
 
