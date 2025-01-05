@@ -254,6 +254,12 @@
             $referral_details["referrals"] = $referrals;
             return $referral_details;
         }
+
+
+        public function logout() {
+            session_start();
+            session_destroy();
+        }
     }
     
 
