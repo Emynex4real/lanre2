@@ -97,10 +97,12 @@
         private $start_date;
         private $end_date;
     
+
         public function __construct() {
             global $db;
             $this->db = $db;
         }
+
     
         // Create a new ad
         public function createAd($ad_name, $ad_text, $ad_url, $status, $cost_per_click, $max_attempt, $start_date, $end_date) {
@@ -128,6 +130,7 @@
             ]);
             return $this->db->lastInsertId();
         }
+
     
         // Get an ad by ID
         public function getAdById($ad_id) {
@@ -380,7 +383,7 @@
             ]);
             
             $transaction = new PPCTransaction();
-            $transaction->newTransaction("Task completed", $this->cost_per_click, 1, "income");
+            $transaction->newTransaction("Task completed", $this->cost_per_click, "success", "income");
         }
 
 
@@ -460,7 +463,7 @@
             $sql = "SELECT * FROM `transactions` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':user_id' => $this->user_id
+                ':user_id' => 3 //$this->user_id
             ]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }

@@ -52,36 +52,36 @@
                             // Fetch and loop through the results
                             foreach ($transactions  as $transaction) {
                                 // Extract the date part from created_on (Y-m-d format)
-                                $transactionDate = date('Y-m-d', strtotime($row['created_on']));
+                                $transactionDate = date('Y-m-d', strtotime($transaction['created_on']));
                         
                                 // Group the withdrawals by date and append each row under the date key
-                                $transactionPerDay[$transactionDate][] = $row;
+                                $transactionPerDay[$transactionDate][] = $transaction;
                             }
                         
                             foreach ($transactionPerDay as $date => $all_transaction_this_date): ?>
                                 <div class="transaction-container content">
                                     <div class="date">
-                                        <p class="bold"><?= format_Date($date )?></p>
+                                        <p class="bold"><?= format_timestamp_Date($date )?></p>
                                     </div>
 
-                                    <?php foreach ($all_transaction_this_date as $transaction): ?>
+                                    <?php foreach ($all_transaction_this_date as $transaction):?>
                                         <div class="transaction-details">
-                                            <div class="details success">
+                                            <div class="details <?= $transaction["status"] ?>">
                                                 <div class="info">
                                                     <i class="fas fa-arrow-down-long"></i>
                                                     <div class="name-time">
-                                                        <p class="name"><?= $transaction["desription"] ?></p>
+                                                        <p class="name"><?= ucfirst($transaction["description"]) ?></p>
                                                         <p class="time"><?= get_transaction_time($transaction["created_on"]) ?></p>
                                                     </div>
                                                 </div>
 
                                                 <div class="price-status">
                                                     <p class="price">
-                                                        +₦<?= $transaction["amount"] ?>
+                                                        +₦<?= number_format($transaction["amount"]) ?>
                                                     </p>
 
                                                     <p class="status" style="font-size: 14px;">
-                                                        Success
+                                                        <?= ucfirst($transaction["status"]) ?>
                                                     </p>
                                                 </div>
                                             </div>

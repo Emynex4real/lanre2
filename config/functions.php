@@ -47,10 +47,6 @@
     
 
     function get_transaction_time($date) {
-        $date = explode(" ", $date);
-        $date = explode("-", $date[0]);
-
-        // COUPLE DATE AND SEND
-        $date =  $date[0];
-        return $date;
+        $time = date("H:i A", strtotime($date));
+        return $time;
     }
