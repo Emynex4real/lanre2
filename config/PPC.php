@@ -190,6 +190,33 @@
         }
 
 
+        public function checkBalanceSufficiencyForWithdrawal($amount) {
+            $user_details = $this->getUserDetails();
+
+            if ($user_details["deposit_balance"] >= $amount) {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public function createWithdrawalRequest($amount, $account_number, $bank_name, $acount_name) {
+            if ($amount) {
+                $sql = "UPDATE `users` SET `income_balance` = income_balance - :amount WHERE `user_id` = :id";
+                $stmt = $this->db->prepare($sql);
+                if ($stmt->execute([
+                    ':id' => $this->user_id,
+                    ':amount' => $amount
+                ])) {
+                    return true;
+                }   
+            }
+            
+            return false;
+        }
+
+
         public function getAllUsers() {
             $sql = "SELECT * FROM users ORDER BY USER_ID";
             $stmt = $this->db->query($sql);query: 
