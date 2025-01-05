@@ -64,11 +64,24 @@
                                         <p class="bold"><?= format_timestamp_Date($date )?></p>
                                     </div>
 
-                                    <?php foreach ($all_transaction_this_date as $transaction):?>
+                                    <?php foreach ($all_transaction_this_date as $transaction): ?>
                                         <div class="transaction-details">
                                             <div class="details <?= $transaction["status"] ?>">
                                                 <div class="info">
-                                                    <i class="fas fa-arrow-down-long"></i>
+                                                    <?php if ($transaction["status"] != "failed") { ?>
+                                                        <?php if ($transaction["transaction_type"] == "income") { ?>
+                                                            <i class="fas fa-arrow-down-long"></i>
+                                                        <?php } elseif ($transaction["transaction_type"] == "withdrawal") { ?>
+                                                            <i class="fas fa-arrow-up-long"></i>
+                                                        <?php } elseif ($transaction["transaction_type"] == "referrals") { ?>
+                                                            <i class="fas fa-share"></i>
+                                                        <?php } else { ?>
+                                                            <i class="fas fa-hourglass"></i>
+                                                        <?php } 
+                                                    } else { ?>
+                                                        <i class="fas fa-exclamation"></i>
+                                                    <?php } ?>
+                                                        
                                                     <div class="name-time">
                                                         <p class="name"><?= ucfirst($transaction["description"]) ?></p>
                                                         <p class="time"><?= get_transaction_time($transaction["created_on"]) ?></p>

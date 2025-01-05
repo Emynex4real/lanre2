@@ -14,3 +14,7 @@
 	?>
 
 projectemine@gmail.com
+
+
+fas fa-hourglass
+fas fa-exclamation
