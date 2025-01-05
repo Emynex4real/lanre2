@@ -46,96 +46,53 @@
                         $transactions = $PPC->getUserTransactionHistory();
 
                         if (count($transactions) > 0) { 
-                            foreach ($transactions as $transaction):  ?>
+                            // Initialize a multidimensional array to hold results grouped by date
+                            $transactionsPerDay = [];
+                        
+                            // Fetch and loop through the results
+                            foreach ($transactions  as $transaction) {
+                                // Extract the date part from created_on (Y-m-d format)
+                                $transactionDate = date('Y-m-d', strtotime($row['created_on']));
+                        
+                                // Group the withdrawals by date and append each row under the date key
+                                $transactionPerDay[$transactionDate][] = $row;
+                            }
+                        
+                            foreach ($transactionPerDay as $date => $all_transaction_this_date): ?>
+                                <div class="transaction-container content">
+                                    <div class="date">
+                                        <p class="bold"><?= format_Date($date )?></p>
+                                    </div>
 
+                                    <?php foreach ($all_transaction_this_date as $transaction): ?>
+                                        <div class="transaction-details">
+                                            <div class="details success">
+                                                <div class="info">
+                                                    <i class="fas fa-arrow-down-long"></i>
+                                                    <div class="name-time">
+                                                        <p class="name"><?= $transaction["desription"] ?></p>
+                                                        <p class="time"><?= get_transaction_time($transaction["created_on"]) ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="price-status">
+                                                    <p class="price">
+                                                        +₦<?= $transaction["amount"] ?>
+                                                    </p>
+
+                                                    <p class="status" style="font-size: 14px;">
+                                                        Success
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             <?php endforeach;
                         }
                     } catch (PDOException $e) {}
                 ?>
-
-                <div class="transaction-container content mb-3">
-                    <div class="date">
-                        <p class="bold">13 December, 2024</p>
-                    </div>
-
-                    <div class="transaction-details">
-                        <div class="details success">
-                            <div class="info">
-                                <i class="fas fa-arrow-down-long"></i>
-                                <div class="name-time">
-                                    <p class="name">Task Income</p>
-                                    <p class="time">5.05 AM</p>
-                                </div>
-                            </div>
-
-                            <div class="price-status">
-                                <p class="price">
-                                    +$350
-                                </p>
-
-                                <p class="status" style="font-size: 14px;">
-                                    Success
-                                </p>
-                            </div>
-                        </div>
-
-                        <hr>
-                        <div class="details withdraw">
-                            <div class="info">
-                                <i class="fas fa-arrow-up-long"></i>
-                                <div class="name-time">
-                                    <p class="name">Income Withdraw</p>
-                                    <p class="time">5.05 AM</p>
-                                </div>
-                            </div>
-                            <div class="price-status">
-                                <p class="price">
-                                    -$250
-                                </p>
-                                <p class="status">
-                                    Success
-                                </p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="details pending">
-                            <div class="info">
-                                <i class="fas fa-hourglass"></i>
-                                <div class="name-time">
-                                    <p class="name">Task Income</p>
-                                    <p class="time">5.05 AM</p>
-                                </div>
-                            </div>
-                            <div class="price-status">
-                                <p class="price">
-                                    +$50
-                                </p>
-                                <p class="status">
-                                    Pending
-                                </p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="details fail">
-                            <div class="info">
-                                <i class="fas fa-exclamation"></i>
-                                <div class="name-time">
-                                    <p class="name">VIP 3 Subscription</p>
-                                    <p class="time">5.05 AM</p>
-                                </div>
-                            </div>
-                            <div class="price-status">
-                                <p class="price">
-                                    $100
-                                </p>
-                                <p class="status">
-                                    Fail
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </section>

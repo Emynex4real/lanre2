@@ -380,7 +380,7 @@
             ]);
             
             $transaction = new PPCTransaction();
-            $transaction->newTransaction("+ ₦$this->cost_per_click - Task completed", $this->cost_per_click, 1, "income");
+            $transaction->newTransaction("Task completed", $this->cost_per_click, 1, "income");
         }
 
 
@@ -422,8 +422,9 @@
    
 
         public function __construct() {
-            global $db;
+            global $db, $user_id;
             $this->db = $db;
+            $this->user_id = $user_id;
         }
 
         

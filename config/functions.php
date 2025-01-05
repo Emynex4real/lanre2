@@ -43,3 +43,14 @@
     function go_back() {
         echo "<script>history.go(-1)</script>";
     }
+
+    
+
+    function get_transaction_time($date) {
+        $date = explode(" ", $date);
+        $date = explode("-", $date[0]);
+
+        // COUPLE DATE AND SEND
+        $date =  $date[0];
+        return $date;
+    }
