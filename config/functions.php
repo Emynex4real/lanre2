@@ -50,3 +50,11 @@
         $time = date("H:i A", strtotime($date));
         return $time;
     }
+
+
+    function getTrx() {
+        $timestamp = time(); // Current UNIX timestamp
+        $randomNum = mt_rand(1000, 9999); // Random 4-digit number
+        $trxId = "TRX" . $timestamp . $randomNum;
+        return $trxId;
+    }

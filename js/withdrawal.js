@@ -1,5 +1,5 @@
 function createRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
-    const form = document.querySelector(formId);
+    const form = document.getElementById(formId);
     const formData = new FormData(form);
 
     document.getElementById(successDiv).classList.add("d-none");
@@ -34,7 +34,7 @@ function createRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
 
 
 function clearTextDanger() {
-    const errorElements = document.querySelectorAll('p.error');
+    const errorElements = document.querySelectorAll('.danger-text');
     errorElements.forEach(element => {
         element.innerHTML = ''; // Clear the inner HTML
     });
@@ -48,12 +48,12 @@ function scrollToTop() {
     });
 }
 
-console.log(document.getElementById("profile-form"));
+
 // Example Usage: Attach it to your form submissions
-if (document.querySelector(".withdrawal-form")) {
-    document.querySelector(".withdrawal-form").addEventListener("submit", function (e) {
+if (document.getElementById("withdrawal-form")) {
+    document.getElementById("withdrawal-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        createRecord(".withdrawal-form", "config/request_withdrawal.php", "withdrawalSuccess", "profileFailed");
+        createRecord("withdrawal-form", "config/request_withdrawal.php", "withdrawalSuccess", "withdrawalFailed");
     });
 }
 

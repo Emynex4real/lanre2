@@ -8,6 +8,7 @@
         $bankName = trim($_POST['bankName'] ?? '');
         $acctNumber = trim($_POST['acctNumber'] ?? '');
         $acctName = trim($_POST['acctName'] ?? '');
+        $amount = trim($_POST['amount'] ?? '');
 
         // Validate inputs
         if (empty($bankName)) {
@@ -16,6 +17,8 @@
 
         if (empty($acctNumber)) {
             $response['errors']['acctNumber'] = "Account number is required.";
+        } elseif (strlen((string) $acctNumber) < 10) {
+            $response['errors']['acctNumber'] = "Account number is too short.";
         }
 
         if (empty($acctName)) {
@@ -39,7 +42,7 @@
 
         // If validation passes
         if (empty($response['errors'])) {
-            $result = $user->createWithdrawalRequest($email,  $acctNumber, $bankName, $acctName);
+            $result = $user->createWithdrawalRequest($amount,  $acctNumber, $bankName, $acctName);
 
             if ($result) {
                 $response['success'] = true;

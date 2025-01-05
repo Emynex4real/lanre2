@@ -193,7 +193,7 @@
         public function checkBalanceSufficiencyForWithdrawal($amount) {
             $user_details = $this->getUserDetails();
 
-            if ($user_details["deposit_balance"] >= $amount) {
+            if ($user_details["income_balance"] >= $amount) {
                 return true;
             }
 
@@ -202,13 +202,23 @@
 
 
         public function createWithdrawalRequest($amount, $account_number, $bank_name, $acount_name) {
-            if ($amount) {
+            $stmt = $this->db->prepare("INSERT INTO `withdrawals` (`user_id`, `transaction_id`, `bank_name`, `account_number`, `account_name`, `amount`) VALUES (:id, :transaction_id, :bank_name, :account_number, :account_name, :amount)");
+            if ($stmt->execute(array(
+                ":id"               =>   $this->user_id,
+                ":transaction_id"   =>   getTrx(),
+                ":account_number"   =>   $account_number,
+                ":bank_name"        =>   $bank_name, 
+                ":account_name"     =>   $acount_name, 
+                ":amount"           =>   $amount
+            ))) {
                 $sql = "UPDATE `users` SET `income_balance` = income_balance - :amount WHERE `user_id` = :id";
                 $stmt = $this->db->prepare($sql);
                 if ($stmt->execute([
                     ':id' => $this->user_id,
                     ':amount' => $amount
                 ])) {
+                    $transaction = new PPCTransaction();
+                    $transaction->newTransaction("Withdrawal", $amount, "success", "withdraw");    
                     return true;
                 }   
             }
@@ -633,7 +643,7 @@
         public function __construct() {
             global $db, $user_id;
             $this->db = $db;
-            $this->user_id = $user_id;
+            $this->user_id = 1;
         }
 
         
@@ -644,11 +654,11 @@
             $transaction_id .= $transaction_code;
 
             try {
-                $stmt = $db->prepare("INSERT INTO `transactions` (user_id, description, amount, status, transaction_id, transaction_type) VALUES (:id, :type, :amount, :status, :transaction_id, :trans_type)");
+                $stmt = $db->prepare("INSERT INTO `transactions` (user_id, description, amount, status, transaction_id, transaction_type) VALUES (:id, :description, :amount, :status, :transaction_id, :trans_type)");
                 $stmt->execute([
-                    ':id'             =>  $user_id,
+                    ':id'             =>  $this->user_id,
                     ':trans_type'     =>  $type,
-                    ':type'           =>  $description,
+                    ':description'    =>  $description,
                     ':amount'         =>  $amount,
                     ':status'         =>  $status,
                     ':transaction_id' =>  $transaction_id
