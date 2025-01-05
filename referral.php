@@ -11,7 +11,6 @@
 		$user = new PPCUser(1);
 		$user_details = $user->getUserById();
 		$referral_details = $user->getUserReferralDetails();
-		print_r($referral_details);
 
 	} catch (PDOException $e) {}
 
@@ -45,15 +44,16 @@
 
 				<div class="referral-link">
 					<div class="details">
-						<p class="text">Referral Link:</p>
+						<p class="text" style="font-size: 19px;">Referral Link:</p>
 
 						<div class="link">
-							<p class="text">
-								https://emine.com.ng/reg/<?= $user_details["referral_code"] ?> <i class="fas fa-copy"></i>
+							<p class="text relative">
+								<span id="referral_code">https://emine.com.ng/reg/<?= $user_details["referral_code"] ?></span> <i class="fas fa-copy ml-2 fa-xl copy"  style="fot-size: 15px;"></i>
 							</p>
+							<input type="hidden" name="username" id="username" value="<?= $user_details["username"] ?>">
 						</div>
 
-						<a href=""><button class="share">SHARE</button></a>
+						<a><button class="share">SHARE</button></a>
 					</div>
 					<p class="texts">Get 10% for each invited user</p>
 				</div>
@@ -92,5 +92,6 @@
 	</main>
 
 	<script src="js/navbar.js"></script>
+	<script src="js/referral.js"></script>
 </body>
 </html>
