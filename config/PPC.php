@@ -50,11 +50,11 @@
                 $stmt->execute([
                     ':email' => $this->email,
                     ':name' => $this->username,
-                    ':balance' =>   200.00, // Give each user  abonus of 200 naira
+                    ':balance' => 200.00, // Give each user  abonus of 200 naira
                     ':password' => password_hash($password, PASSWORD_DEFAULT),
                     ':referral_code' => strtoupper(uniqid()),
                     ':referred_by' => $referred_by,
-                    ':subscription_status' => "active"
+                    ':subscription_status' => 1
                 ]);
                 $this->user_id = $this->db->lastInsertId();
 
