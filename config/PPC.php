@@ -15,38 +15,6 @@
         }
 
 
-        public function createUser($email, $username, $subscription_status, $password, $referral_code = null) {
-            $this->email = $email;
-            $this->username = $username;
-            $this->subscription_status = $subscription_status;
-
-            $referred_by = null;
-
-            // Check if referral code is provided and valid
-            if ($referral_code) {
-                $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute([':referral_code' => $referral_code]);
-    
-                if ($stmt->rowCount() > 0) {
-                    $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
-                }
-            }
-
-            $sql = "INSERT INTO `users` (email, username, subscription_status, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :referral_code, :referred_by, :password)";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':email' => $this->email,
-                ':name' => $this->username,
-                ':password' => password_hash($password, PASSWORD_DEFAULT),
-                ':referral_code' => strtoupper(uniqid()),
-                ':referred_by' => $referred_by,
-                ':subscription_status' => $this->subscription_status
-            ]);
-            return $this->db->lastInsertId();
-        }
-
-
         public function getUserById() {
             $sql = "SELECT * FROM `users` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
@@ -80,6 +48,19 @@
             $sql = "SELECT * FROM users ORDER BY USER_ID";
             $stmt = $this->db->query($sql);query: 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        public function giveUserReferralBonus($userID, $bonus) {
+            $sql = "UPDATE `users` SET `income_balance` = income_balance + :bonus WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($sql);
+            if ($stmt->execute([
+                ':bonus' => $bonus,
+                ':user_id' => $userID
+            ])) {
+                $Transaction = new PPCTransaction();
+                $Transaction->anotherUserTransaction($userID ,"Referral Bonus", $bonus, "success", "referral");
+            }
         }
     }
     
@@ -441,6 +422,26 @@
                 $stmt = $db->prepare("INSERT INTO `transactions` (user_id, description, amount, status, transaction_id, transaction_type) VALUES (:id, :type, :amount, :status, :transaction_id, :trans_type)");
                 $stmt->execute([
                     ':id'             =>  $user_id,
+                    ':trans_type'     =>  $type,
+                    ':type'           =>  $description,
+                    ':amount'         =>  $amount,
+                    ':status'         =>  $status,
+                    ':transaction_id' =>  $transaction_id
+                ]);
+            } catch (PDOException $e) { echo $e; }
+        }
+
+
+        public function anotherUsertransaction($userID, $description, $amount, $status, $type) {
+            global $db; global $user_id;
+            $transaction_id = substr(md5(rand()),0,5);
+			$transaction_code = str_pad(rand(0, pow(10, 3)-1), 3, '0', STR_PAD_LEFT);
+            $transaction_id .= $transaction_code;
+
+            try {
+                $stmt = $db->prepare("INSERT INTO `transactions` (user_id, description, amount, status, transaction_id, transaction_type) VALUES (:id, :type, :amount, :status, :transaction_id, :trans_type)");
+                $stmt->execute([
+                    ':id'             =>  $userID,
                     ':trans_type'     =>  $type,
                     ':type'           =>  $description,
                     ':amount'         =>  $amount,
