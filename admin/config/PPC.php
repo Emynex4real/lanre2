@@ -46,10 +46,18 @@
         }
 
 
-        public function getUserById($user_id) {
+        public function getUserById($userId) {
             $sql = "SELECT * FROM users WHERE user_id = :user_id";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':user_id' => $user_id]);
+            $stmt->execute([':user_id' => $userId]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        public function getUserDetails() {
+            $sql = "SELECT * FROM users WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':user_id' => $this->user_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
@@ -245,7 +253,7 @@
                 ':status' => $this->status,
                 ':daily' => $this->daily_income,
                 ':total' => $this->total_income,
-                ':limit' => $this->purchase_limit
+                ':limit' => $this->purchase_limit,
             ])) {
             return $this->subscription_id; }
         }

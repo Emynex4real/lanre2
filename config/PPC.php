@@ -142,6 +142,25 @@
                 }
             }
         }
+
+
+
+        public function getUserReferralDetails() {
+            $sql = "SELECT * FROM `referrals` WHERE `user_id` = :user_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':user_id' => $this->user_id]);
+            $referrals =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Sum the 'amount_earned' values
+            $totalEarned = array_sum(array_map(function($referral) {
+                return $referral['amount_earned'];
+            }, $referrals));
+
+            $referral_details["referral_count"] = $stmt->rowCount();
+            $referral_details["totalEarned"] = $totalEarned;
+            $referral_details["referrals"] = $referrals;
+            return $referral_details;
+        }
     }
     
 
@@ -275,7 +294,7 @@
 
         public function getSubscriptionFeeAndPay() {
             $PPC = new PPCUser($this->user_id);
-            $user = $PPC->getUserById();
+            $user = $PPC->getUserDetails();
             $user_balance = $user["deposit_balance"];
 
             if (($user_balance - $this->price) >= 0) {
