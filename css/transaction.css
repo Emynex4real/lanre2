@@ -83,13 +83,14 @@ html{
 
 .categories-status select{
     width: 100%;
-    height: 30px;
+    height: 40px;
+    padding: 5px;
     border-radius: 5px;
     padding-left: 10px;
     background-color: var(--white-color);
 }
 .categories-status option{
-    font-size: .8rem;   
+    font-size: 1.3rem;   
 }
 
 .content{

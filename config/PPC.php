@@ -140,10 +140,9 @@
     
         // Get all ads 
         public function getAds() {
-            $sql = "SELECT * FROM ads WHERE status = :status";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':status', "active");
-            $stmt->execute();
+            $sql = "SELECT * FROM `ads` WHERE `status` = :status";
+            $stmt = $this->db->prepare(query: $sql);
+            $stmt->execute([":status" => "active"]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
@@ -338,8 +337,10 @@
     class PPCClick {
         private $db;
         private $click_id;
-        private $campaign_id;
+        private $ad_id;
         private $user_id;
+
+        private $cost_per_click;
         private $click_time;
 
         public function __construct() {
@@ -348,19 +349,38 @@
         }
 
         
-        public function recordClick($ad_id, $user_id) {
+        public function recordClick($ad_id, $user_id, $cost_per_click) {
             $this->user_id = $user_id;
+            $this->ad_id = $ad_id;
+            $this->cost_per_click = $cost_per_click;
             $this->click_time = date('Y-m-d H:i:s');
 
-            $sql = "INSERT INTO clicks (campaign_id, user_id, click_time) VALUES (:campaign_id, :user_id, :click_time)";
+            $sql = "INSERT INTO clicks (ad_id, user_id, click_time, ip_address) VALUES (:ad_id, :user_id, :click_time, :ip_address)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':campaign_id' => $this->campaign_id,
+                ':ad_id' => $this->ad_id,
+                ':ip_address' => getUserIP(),
                 ':user_id' => $this->user_id,
                 ':click_time' => $this->click_time
             ]);
+            $this->click_id = $this->db->lastInsertId();
+
             $this->updateUserAdsParticipationHistory();
-            return $this->db->lastInsertId();
+            $this->addPPCtoUserBalance();
+            return  $this->click_id;
+        }
+
+
+        public function addPPCtoUserBalance() {
+            $sql = "UPDATE `users` SET `income_balance` = income_balance + :ppc WHERE `user_id` = :user_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':ppc' => $this->cost_per_click,
+                ':user_id' => $this->user_id
+            ]);
+            
+            $transaction = new PPCTransaction();
+            $transaction->newTransaction("+ ₦$this->cost_per_click - Task completed", $this->cost_per_click, 1, "income");
         }
 
 
@@ -376,7 +396,7 @@
 
 
         public function getClicksByAd($ad_id) {
-            $sql = "SELECT * FROM clicks WHERE ad_id = :ad_id";
+            $sql = "SELECT * FROM `clicks` WHERE ad_id = :ad_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':ad_id' => $ad_id]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -384,7 +404,7 @@
 
 
         public function updateUserAdsParticipationHistory() {
-            $sql = "UPDATE `users` SET `ads_history` = :ads_history + 1 WHERE `user_id` = :user_id";
+            $sql = "UPDATE `users` SET `ads_history` = ads_history + 1 WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':user_id' => $this->user_id
@@ -398,7 +418,7 @@
     
     class PPCTransaction {
         private $db;
-        private $user_id;
+        public $user_id;
    
 
         public function __construct() {
@@ -407,7 +427,7 @@
         }
 
         
-        private function newTransaction($description, $amount, $status, $type) {
+        public function newTransaction($description, $amount, $status, $type) {
             global $db; global $user_id;
             $transaction_id = substr(md5(rand()),0,5);
 			$transaction_code = str_pad(rand(0, pow(10, 3)-1), 3, '0', STR_PAD_LEFT);

@@ -24,9 +24,13 @@
         <section class="participate-task">
             <div class="participate-container">
                 <div class="participate-text">
+                    <input type="hidden" value="<?= $ad["ad_id"] ?>" id="ad_idValue" name="ad_id">
+                    <input type="hidden" value="<?= $ad["ad_url"] ?>" id="ad_url" name="ad_url">
+                    <input type="hidden" value="<?= $ad["cost_per_click"] ?>" id="cppValue" name="cpp">
+
                     <div class="name">
                         <p class="head">Name</p>
-                        <div class="text"><?= ucfirst($ad["ad_name"]) ?></div>
+                        <div class="text ad_text"><?= ucfirst($ad["ad_name"]) ?></div>
                     </div>
 
                     <div class="name">
@@ -38,6 +42,7 @@
                         <p class="head">Allowed Attempts</p>
                         <div class="text"><?= $ad["max_attempt"] ?></div>
                     </div>
+
                     <div class="name">
                         <p class="head">Already Attempted</p>
                         <div class="text"><?= $ad["clicks"] ?></div>
@@ -51,14 +56,14 @@
                     <?php if ($ad["status"] == "active") { 
                         $PPC = new PPCClick();
 
-                        $user_has_participation_count = $PPC->checkUserClickRecordByAd($ad_id, 3); 
+                        $user_has_participation_count = $PPC->checkUserClickRecordByAd($ad_id, $user_id); 
 
                         if ($user_has_participation_count > 0) { ?>
                             <button class="start-task">Participated</button>
                         <?php } elseif ($ad["clicks"] >= $ad["max_attempt"]) { ?>
                             <button class="start-task">Ended</button>
                         <?php } else { ?>
-                            <button class="start-task" id="view-advert">Start Task</button>
+                            <button class="start-task" id="play-ad">Start Task</button>
                         <?php } ?>
 
                     <?php } else { ?>
@@ -90,22 +95,53 @@
                    
                 </div>
             </div>
-
         </section>
     </main>
 
-    <div id="advertIframe">
+
+    <div id="ad-center" class="w-100 h-100 hidden">
         <div class="navigation-links underline flex-between">
             <div class="logo-image">
-                <img src="images/logo.png" alt="" />
+                <img src="images/logo.png" alt="Logo" />
             </div>
-
-            <h4 id="ad-name">Watching First Ad</h4>
+            <p id="ad-name" class="md b-3">Watching First Ad</p>
         </div>
 
-        <iframe src="" frameborder="0" class="w-100 h-100"></iframe>
+        <!-- Preloader -->
+        <div id="preloader" class="preloader">
+            <div class="spinner"></div>
+            <p>Loading Ad...</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <!-- Ad Iframe -->
+        <iframe 
+            id="advertIframe" 
+            class="w-100" 
+            src="about:blank" 
+            frameborder="0">
+        </iframe>
+
+        <!-- Controls -->
+        <div class="controls hidden">
+            <button id="playPauseBtn" class="play-pause-btn">Play</button>
+            <span id="timeIndicator" style="color: #fff;">0:00 / 0:30</span>
+        </div>
     </div>
 
-    <script src="navbar.js"></script>
+    <div id="adCompleteModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Ad Completed!</h2>
+            <p>Thank you for watching the ad. You may now proceed.</p>
+            <button id="closeModalBtn">Close</button>
+        </div>
+    </div>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/participate.js"></script>
 </body>
 </html>

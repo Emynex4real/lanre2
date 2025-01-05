@@ -79,6 +79,6 @@
       </section>
     </main>
 
-    <script src="navbar.js"></script>
+    <script src="js/navbar.js"></script>
   </body>
 </html>

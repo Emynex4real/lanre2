@@ -31,7 +31,7 @@ require_once("layout/user-header.php"); ?>
 										<button class="participate mr-3">
 											<?php if ($ad["status"] == "active") { 
 												$PPC = new PPCClick();
-												$user_has_participation_count = $PPC->checkUserClickRecordByAd($ad_id, $user_id); 
+												$user_has_participation_count = $PPC->checkUserClickRecordByAd($ad["ad_id"], 3); 
 
 												if ($user_has_participation_count > 0) { ?>
 													<a>Participated</a>
@@ -76,6 +76,6 @@ require_once("layout/user-header.php"); ?>
 		</section>
 	</main>
 
-	<script src="navbar.js"></script>
+	<script src="js/navbar.js"></script>
 </body>
 </html>
