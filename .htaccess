@@ -39,4 +39,20 @@ RewriteRule ^users/   users/index.php [QSA,NC,L]
 
 
 
+RewriteRule ^/    [QSA,NC,L]
+
+RewriteRule ^vendors   about [QSA,NC,L]
+
+RewriteRule ^terms-and-conditions   terms-and-conditions.html [QSA,NC,L]
+
+RewriteRule ^privacy-policy   privacy-policy [QSA,NC,L]
+
+RewriteRule ^contact   contact [QSA,NC,L]
+
+RewriteRule ^about   about [QSA,NC,L]
+
+RewriteRule ^login   login.php [QSA,NC,L]
+
+RewriteRule ^register   register.php [QSA,NC,L]
+
 ErrorDocument 404 /404.html

@@ -17,14 +17,14 @@
                 <div class="button-otr">
                     <a href="#" class="member body-sb">Already a member?</a>
                     <div class="action-otr">
-                    <a class='btn-fill-white btn-signup' href='login.html'>Login</a>
+                    <a class='btn-fill-white btn-signup' href='login'>Login</a>
                     </div>
                 </div>
                 <div class="sign-up">
                     <div class="row row-login">
                         <div class="container">
                             <div class="content">
-                                <a class='logo-inr' href='index.html'>
+                                <a class='logo-inr' href=''>
                                 <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
                                 </a>
 
@@ -56,7 +56,7 @@
 
                                     <label>
 
-                                        <a href='vendor.html' class="coupon">Buy coupon</a>
+                                        <a href='vendors' class="coupon">Buy coupon</a>
                                     </label>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="back-to-menu">
-                        <a href="index.html">Click here to the homepage</a>
+                        <a href="">Click here to the homepage</a>
                     </div>
 
             </div>
