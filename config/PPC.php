@@ -15,12 +15,64 @@
         }
 
 
+        public function createUser($email, $username, $subscription_status, $password, $referral_code = null) {
+            $this->email = $email;
+            $this->username = $username;
+            $this->subscription_status = $subscription_status;
+
+            $referred_by = null;
+
+            // Check if referral code is provided and valid
+            if ($referral_code) {
+                $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([':referral_code' => $referral_code]);
+    
+                if ($stmt->rowCount() > 0) {
+                    $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
+                }
+            }
+
+            $sql = "INSERT INTO `users` (email, username, subscription_status, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :referral_code, :referred_by, :password)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':email' => $this->email,
+                ':name' => $this->username,
+                ':password' => password_hash($password, PASSWORD_DEFAULT),
+                ':referral_code' => strtoupper(uniqid()),
+                ':referred_by' => $referred_by,
+                ':subscription_status' => $this->subscription_status
+            ]);
+            $this->user_id = $this->db->lastInsertId();
+
+            if ($referred_by) {
+                require_once("referralHandler.php");
+                $this->handleReferralsBonuses($this->user_id, $referred_by);
+            }
+            return $this->user_id;
+        }
+
+
         public function getUserById() {
             $sql = "SELECT * FROM `users` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':user_id' => $this->user_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
+
+        public function createReferralRelations($userID, $referrerID, $level, $bonus) {
+            $stmt = $this->db->prepare("INSERT INTO `referrals` (`user_id`, `referred_by`, `level`, `amount_earned`) VALUES (:id, :referred_by, :level, :amount)");
+            if ($stmt->execute(array(
+                ":id"            =>   $userID,
+                ":referred_by"   =>   $referrerID, 
+                ":level"         =>   $level, 
+                ":amount"        =>   $bonus
+            ))) {
+                $this->giveUserReferralBonus($referrerID, $bonus);
+            } 
+        }
+
 
         public function payForSubscription($price) {
             $sql = "UPDATE `users` SET `deposit_balance` = deposit_balance - :price WHERE `user_id` = :user_id";
@@ -51,15 +103,43 @@
         }
 
 
-        public function giveUserReferralBonus($userID, $bonus) {
-            $sql = "UPDATE `users` SET `income_balance` = income_balance + :bonus WHERE user_id = :user_id";
+        public function giveUserReferralBonus($referrerID, $bonus) {
+            $sql = "UPDATE `users` SET `income_balance` = income_balance + :bonus WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
                 ':bonus' => $bonus,
-                ':user_id' => $userID
+                ':user_id' => $referrerID
             ])) {
                 $Transaction = new PPCTransaction();
-                $Transaction->anotherUserTransaction($userID ,"Referral Bonus", $bonus, "success", "referral");
+                $Transaction->anotherUserTransaction($referrerID ,"Referral Bonus", $bonus, "success", "referral");
+            }
+        }
+
+
+        private function handleReferralsBonuses($referred_by, $userId) {
+            // Define referral percentages for each level
+            $level1Bonus = 500;
+            $level2Bonus = 50;
+    
+            if ($referred_by) {
+                $user = new PPCUser($referred_by);
+                $user->createReferralRelations($userId, $referred_by, 1,$level1Bonus);
+                    
+                if ($referred_by) {
+                    // Get the referrer of the Direct referral
+                    $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `user_id` = :id");
+                    $stmt->execute(array(
+                        ":id"   =>   $referred_by,
+                    ));
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $level2Referrer = $result ? $result["user_id"] : null;
+    
+                    if ($level2Referrer) {
+                        $level2referrerID = $result["user_id"];
+                        $user = new PPCUser($level2referrerID);
+                        $user->createReferralRelations($userId, $level2referrerID , 2, $level2Bonus);
+                    }
+                }
             }
         }
     }
