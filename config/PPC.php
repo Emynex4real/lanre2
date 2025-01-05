@@ -29,9 +29,9 @@
             $this->email = $email;
             $this->username = $username;
             $this->coupon_code = $coupon_code;
-            $registeration = $this->couponCodeCheceker();
+            $registeration_code = $this->couponCodeCheceker();
 
-            if ($registeration) {
+            if ($registeration_code) {
                 $referred_by = null;
 
                 // Check if referral code is provided and valid
@@ -45,21 +45,21 @@
                     }
                 }
 
-                $sql = "INSERT INTO `users` (email, username, subscription_status, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :referral_code, :referred_by, :password)";
+                $sql = "INSERT INTO `users` (email, username, subscription_status, deposit_balance, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([
                     ':email' => $this->email,
                     ':name' => $this->username,
+                    ':balance' =>   200.00, // Give each user  abonus of 200 naira
                     ':password' => password_hash($password, PASSWORD_DEFAULT),
                     ':referral_code' => strtoupper(uniqid()),
                     ':referred_by' => $referred_by,
-                    ':subscription_status' => $this->subscription_status
+                    ':subscription_status' => "active"
                 ]);
                 $this->user_id = $this->db->lastInsertId();
 
                 if ($referred_by) {
-                    require_once("referralHandler.php");
-                    $this->handleReferralsBonuses($this->user_id, $referred_by);
+                    $this->handleReferralsBonuses( $referred_by, $this->user_id);
                 }
                 return $this->user_id;
             } return false;
