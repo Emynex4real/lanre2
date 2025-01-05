@@ -55,12 +55,12 @@
                         <div>
                             <p class="coming-soon">COMING SOON</p>
                             <ul>
-                                <li><a href="">Contest</a></li>
-                                <li><a href="">VTU Services</a></li>
-                                <li><a href="">Bank Settings</a></li>
-                                <li><a href="">Bank Settings</a></li>
-                                <li><a href="">Market Place</a></li>
-                                <li><a href="">Blog</a></li>
+                                <li><a href="javascript:void(0)">Contest</a></li>
+                                <li><a href="javascript:void(0)">VTU Services</a></li>
+                                <li><a href="javascript:void(0)">Bank Settings</a></li>
+                                <li><a href="javascript:void(0)">Bank Settings</a></li>
+                                <li><a href="javascript:void(0)">Market Place</a></li>
+                                <li><a href="javascript:void(0)">Blog</a></li>
                             </ul>
                         </div>
                     </div>

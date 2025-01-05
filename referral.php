@@ -3,13 +3,12 @@
 		<link rel="stylesheet" href="css/referral.css" />
 		<link rel="stylesheet" href="css/navbar.css" />
 	'; 
-
 	
 	try {
 		global $db;
 		require_once("config/PPC.php");
-		$user = new PPCUser(1);
-		$user_details = $user->getUserById();
+		$user = new PPCUser($user);
+		$user_details = $user->getUserDetails();
 		$referral_details = $user->getUserReferralDetails();
 
 	} catch (PDOException $e) {}

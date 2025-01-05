@@ -462,3 +462,54 @@ html{
         margin-left: 10px;
     }
 }
+
+
+.danger,
+.danger-btn {
+    all: unset;
+    font-size: 14px;
+    padding: 12px 0px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #a90303;
+    display: flex;
+    font-weight: 800;
+    width: 90%;
+    text-align: center;
+    align-items: center;
+    background-color: #ec9797;
+}
+
+.danger-text {
+    color: red;
+}
+
+.pl-2 {
+    padding-left: 15px;
+}
+
+.success,
+.success-btn,
+.success-box {
+    all: unset;
+    font-size: 14px;
+    padding: 12px 20px;
+    color: #02a702;
+    cursor: pointer;
+    display: flex;    
+    width: 80%;
+    font-weight: 800;
+    border-radius: 5px;
+    background-color: #9bf99b;
+}
+
+.danger-btn,
+.success-btn,
+.warning-btn,
+.info-btn {
+    padding: 5px 7px;
+}
+
+.d-none {
+    display: none;
+}

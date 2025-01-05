@@ -6,7 +6,8 @@
         private $user_id;
         private $email;
         private $username;
-        private $subscription_status;
+        private $password;
+        private $coupon_code;
 
         public function __construct($user_id) {
             global $db;
@@ -15,48 +16,60 @@
         }
 
 
-        public function createUser($email, $username, $subscription_status, $password, $referral_code = null) {
-            $this->email = $email;
-            $this->username = $username;
-            $this->subscription_status = $subscription_status;
-
-            $referred_by = null;
-
-            // Check if referral code is provided and valid
-            if ($referral_code) {
-                $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute([':referral_code' => $referral_code]);
-    
-                if ($stmt->rowCount() > 0) {
-                    $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
-                }
-            }
-
-            $sql = "INSERT INTO `users` (email, username, subscription_status, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :referral_code, :referred_by, :password)";
+        private function couponCodeCheceker($coupon = null) {
+            if ($coupon) { $this->coupon_code = $coupon; }
+            $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':email' => $this->email,
-                ':name' => $this->username,
-                ':password' => password_hash($password, PASSWORD_DEFAULT),
-                ':referral_code' => strtoupper(uniqid()),
-                ':referred_by' => $referred_by,
-                ':subscription_status' => $this->subscription_status
-            ]);
-            $this->user_id = $this->db->lastInsertId();
-
-            if ($referred_by) {
-                require_once("referralHandler.php");
-                $this->handleReferralsBonuses($this->user_id, $referred_by);
-            }
-            return $this->user_id;
+            $stmt->execute([':code' => $this->coupon_code]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
 
-        public function getUserById() {
+        public function createUser($email, $username, $coupon_code, $password, $referral_code = null) {
+            $this->email = $email;
+            $this->username = $username;
+            $this->coupon_code = $coupon_code;
+            $registeration = $this->couponCodeCheceker();
+
+            if ($registeration) {
+                $referred_by = null;
+
+                // Check if referral code is provided and valid
+                if ($referral_code) {
+                    $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute([':referral_code' => $referral_code]);
+        
+                    if ($stmt->rowCount() > 0) {
+                        $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
+                    }
+                }
+
+                $sql = "INSERT INTO `users` (email, username, subscription_status, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :referral_code, :referred_by, :password)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([
+                    ':email' => $this->email,
+                    ':name' => $this->username,
+                    ':password' => password_hash($password, PASSWORD_DEFAULT),
+                    ':referral_code' => strtoupper(uniqid()),
+                    ':referred_by' => $referred_by,
+                    ':subscription_status' => $this->subscription_status
+                ]);
+                $this->user_id = $this->db->lastInsertId();
+
+                if ($referred_by) {
+                    require_once("referralHandler.php");
+                    $this->handleReferralsBonuses($this->user_id, $referred_by);
+                }
+                return $this->user_id;
+            } return false;
+        }
+
+
+        public function getUserById($user_id) {
             $sql = "SELECT * FROM `users` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':user_id' => $this->user_id]);
+            $stmt->execute([':user_id' => $user_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
@@ -71,6 +84,32 @@
             ))) {
                 $this->giveUserReferralBonus($referrerID, $bonus);
             } 
+        }
+
+
+
+        public function updateUserDetails($email, $username, $password) {
+            $this->email = $email;
+            $this->username = $username;
+
+            if ($password) {
+                $this->password = password_hash($password, PASSWORD_DEFAULT);
+            } else {
+                $user_details = $this->getUserDetails();
+                $this->password = $user_details["password"];
+            }
+
+
+            $sql = "UPDATE `users` SET email = :email, username = :name, password = :password WHERE `user_id` = :id";
+            $stmt = $this->db->prepare($sql);
+            if ($stmt->execute([
+                ':id' => $this->user_id,
+                ':email' => $this->email,
+                ':name' => $this->username,
+                ':password' => $this->password,
+            ])) {
+                return true;
+            }
         }
 
 
@@ -93,6 +132,13 @@
                 ':user_id' => $user_id
             ]);
             return $stmt->rowCount();
+        }
+
+        public function getUserDetails() {
+            $sql = "SELECT * FROM users WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':user_id' => $this->user_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
 
