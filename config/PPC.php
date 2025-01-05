@@ -88,6 +88,31 @@
 
 
 
+        public function userLogin($username, $password) {
+            $this->username = $username;
+            $this->password = $password;
+
+            $sql = "SELECT * FROM `users` WHERE `username` = :detail OR email = :detail LIMIT 1";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':detail' => $username,
+                ':password' => password_verify($password, PASSWORD_DEFAULT),
+            ]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($data->rowCount() == 1) { 
+                if (password_verify( $password, $data["password"])) {
+                    session_start();
+                    $_SESSION['user'] = $data['username'];
+                    $_SESSION['user_id'] = $data['user_id'];
+                    $_SESSION['last_login_timestamp'] = time();
+                    return true;
+                }
+
+            } return false;
+        }
+
+
         public function updateUserDetails($email, $username, $password) {
             $this->email = $email;
             $this->username = $username;
