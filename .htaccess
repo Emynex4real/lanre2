@@ -5,54 +5,53 @@ Options -MultiViews
 # RewriteRule ^(.*)$ https://emine.com.ng/ [R,L] 
 
 
-RewriteRule ^users/plans   users/subscriptions.php [QSA,NC,L]
+# Users Website
+RewriteRule ^account/plans   users/subscriptions.php [QSA,NC,L]
 
-RewriteRule ^users/transactions   users/transaction.php [QSA,NC,L]
+RewriteRule ^account/transactions   users/transaction.php [QSA,NC,L]
 
-RewriteRule ^users/refrerral   users/refrerral.php [QSA,NC,L]
+RewriteRule ^account/refrerral   users/refrerral.php [QSA,NC,L]
 
-RewriteRule ^users/profile   users/profile.php [QSA,NC,L]
+RewriteRule ^account/profile   users/profile.php [QSA,NC,L]
 
-RewriteRule ^users/tasks   users/tasks.php [QSA,NC,L]
+RewriteRule ^account/tasks   users/tasks.php [QSA,NC,L]
 
-RewriteRule ^users/task/([^/]+)/?$   users/participate.php?ad_id=$1 [QSA,NC,L]
+RewriteRule ^account/task/([^/]+)/?$   users/participate.php?ad_id=$1 [QSA,NC,L]
 
-RewriteRule ^users/buy-plan/([^/]+)/?$    users/buy-subscription.php?plan_id=$1 [QSA,NC,L]
+RewriteRule ^account/buy-plan/([^/]+)/?$    users/buy-subscription.php?plan_id=$1 [QSA,NC,L]
 
-RewriteRule ^users/withdrawals   users/withdrawal.php [QSA,NC,L]
+RewriteRule ^account/withdrawals   users/withdrawal.php [QSA,NC,L]
 
-RewriteRule ^users/login  login.php [QSA,NC,L]
+RewriteRule ^account/login  login.php [QSA,NC,L]
 
-RewriteRule ^users/register  register.php [QSA,NC,L]
+RewriteRule ^account/register  register.php [QSA,NC,L]
 
-RewriteRule ^users/index/registered   users/index.php?register=true [QSA,NC,L]
+RewriteRule ^account/index/registered   users/index.php?register=true [QSA,NC,L]
 
-RewriteRule ^index/logged_in   users/index.php?login=true [QSA,NC,L]
+RewriteRule ^account/index/logged_in   users/index.php?login=true [QSA,NC,L]
 
-RewriteRule ^users/logout  users/logout.php [QSA,NC,L]
+RewriteRule ^account/logout  users/logout.php [QSA,NC,L]
 
-RewriteRule ^users/login  login.php [QSA,NC,L]
+RewriteRule ^account/login  login.php [QSA,NC,L]
 
-RewriteRule ^users/register  register.php [QSA,NC,L]
+RewriteRule ^account/register  register.php [QSA,NC,L]
 
-RewriteRule ^users/   users/index.php [QSA,NC,L]
+RewriteRule ^account/   users/index.php [QSA,NC,L]
 
 
-
-RewriteRule ^/    [QSA,NC,L]
-
-RewriteRule ^vendors   about [QSA,NC,L]
+# Main Website
+RewriteRule ^vendors   vendors.html [QSA,NC,L]
 
 RewriteRule ^terms-and-conditions   terms-and-conditions.html [QSA,NC,L]
 
-RewriteRule ^privacy-policy   privacy-policy [QSA,NC,L]
+RewriteRule ^privacy-policy   privacy-policy.html [QSA,NC,L]
 
-RewriteRule ^contact   contact [QSA,NC,L]
+RewriteRule ^contact   contact.html [QSA,NC,L]
 
-RewriteRule ^about   about [QSA,NC,L]
+RewriteRule ^about   about.html [QSA,NC,L]
 
 RewriteRule ^login   login.php [QSA,NC,L]
 
-RewriteRule ^register   register.php [QSA,NC,L]
+RewriteRule ^signup   signup.php [QSA,NC,L]
 
 ErrorDocument 404 /404.html

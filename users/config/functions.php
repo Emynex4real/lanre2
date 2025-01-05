@@ -50,3 +50,4 @@
         $time = date("H:i A", strtotime($date));
         return $time;
     }
+

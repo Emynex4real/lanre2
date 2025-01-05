@@ -1,7 +1,7 @@
 <?php 
 	$page__css = '
-	<link rel="stylesheet" href="css/buy-subscription.css" />
-	<link rel="stylesheet" href="css/navbar.css" />
+		<link rel="stylesheet" href="css/buy-subscription.css" />
+		<link rel="stylesheet" href="css/navbar.css" />
 	'; 
 
 	require_once("layout/user-header.php");
