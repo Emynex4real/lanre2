@@ -51,3 +51,9 @@
         return $time;
     }
 
+
+    function getTrx() {
+        $timestamp = time(); // Current UNIX timestamp
+        $randomNum = mt_rand(1000, 9999); // Random 4-digit number
+        return "TRX" . $timestamp . $randomNum;
+    }

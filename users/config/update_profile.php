@@ -30,7 +30,7 @@
         // If validation passes
         if (empty($response['errors'])) {
             require_once("PPC.php");
-            $user = new PPCUser(1);
+            $user = new PPCUser($user);
             $result = $user->updateUserDetails($email, $username,  $password);
 
             if ($result) {

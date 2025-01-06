@@ -154,3 +154,100 @@ main{
 }
 
 
+
+/* MESSAGES */
+.warning, .info, .success, .danger { 
+    list-style-type: none;
+    padding: 10px 15px;
+    width: 90% !important;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 3px;
+}
+/* .warning,*/ .info p, .success p, .danger p { 
+    padding: 0;
+    margin: 0;
+}
+
+.danger,
+.danger-btn {
+    all: unset;
+    font-size: 14px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #a90303 !important;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background-color: #ec9797;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+}
+.success,
+.success-btn,
+.success-box {
+    all: unset;
+    font-size: 14px;
+    padding: 12px 20px;
+    color: #02a702;
+    cursor: pointer;
+    display: flex;
+    border-radius: 5px;
+    background-color: #9bf99b;
+}
+
+.success-box {
+    border-radius: 50%;
+}
+
+.success p {
+    font-size: 16px;
+    font-weight: 800;
+    color: #02a702;
+}
+
+.danger p {
+    font-size: 16px;
+    font-weight: 800;
+    color: rgb(137, 2, 2);
+}
+.warning,
+.warning-btn {
+    all: unset;
+    font-size: 14px;
+    padding: 12px 0px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #929201;
+    display: flex;
+    background-color: #f9f98b;
+}
+.info,
+.info-btn {
+    all: unset;
+    font-size: 14px;
+    padding: 12px 0px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #0000a7;
+    display: flex;
+    background-color: #097bed;
+}
+
+.danger-btn,
+.success-btn,
+.warning-btn,
+.info-btn {
+    padding: 5px 7px;
+}
+.d-none {
+    display: none;
+}
+
+
+.danger-text {
+    color: red !important;
+}

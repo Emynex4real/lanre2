@@ -6,45 +6,14 @@
         private $user_id;
         private $email;
         private $username;
-        private $subscription_status;
 
-        public function __construct() {
+        public function __construct($userID = null) {
             global $db;
+            if ($userID) { $user_id = $userID; } else { global $user_id; }
+
             $this->db = $db;
+            $this->user_id = $user_id;
         }
-
-
-        public function createUser($email, $username, $subscription_status, $password, $referral_code = null) {
-            $this->email = $email;
-            $this->username = $username;
-            $this->subscription_status = $subscription_status;
-
-            $referred_by = null;
-
-            // Check if referral code is provided and valid
-            if ($referral_code) {
-                $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute([':referral_code' => $referral_code]);
-    
-                if ($stmt->rowCount() > 0) {
-                    $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
-                }
-            }
-
-            $sql = "INSERT INTO `users` (email, username, subscription_status, referral_code, referred_by, password) VALUES (:email, :name, :subscription_status, :referral_code, :referred_by, :password)";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':email' => $this->email,
-                ':name' => $this->username,
-                ':password' => password_hash($password, PASSWORD_DEFAULT),
-                ':referral_code' => strtoupper(uniqid()),
-                ':referred_by' => $referred_by,
-                ':subscription_status' => $this->subscription_status
-            ]);
-            return $this->db->lastInsertId();
-        }
-
 
         public function getUserById($userId) {
             $sql = "SELECT * FROM users WHERE user_id = :user_id";

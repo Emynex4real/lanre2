@@ -7,8 +7,6 @@
         private $email;
         private $username;
         private $password;
-
-        private $all_time_earnings;
         private $coupon_code;
 
         public function __construct($user_id) {
@@ -22,34 +20,31 @@
             $this->email = $email;
             $this->username = $username;
             $this->coupon_code = $coupon_code;
-            $registeration_code = $this->couponCodeCheceker();
+            $referred_by = null;
 
-            if ($registeration_code) {
-                $referred_by = null;
-
-                // Check if referral code is provided and valid
-                if ($referral_code) {
-                    $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->execute([':referral_code' => $referral_code]);
-        
-                    if ($stmt->rowCount() > 0) {
-                        $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
-                    }
-                }
-
-                $sql = "INSERT INTO `users` (email, username, subscription_status, deposit_balance, referral_code, referred_by, password, all_time_earnings) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password, :all_time_earnings)";
+            // Check if referral code is provided and valid
+            if ($referral_code) {
+                $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
                 $stmt = $this->db->prepare($sql);
-                $stmt->execute([
-                    ':email' => $this->email,
-                    ':name' => $this->username,
-                    ':balance' => 200.00, // Give each user  abonus of 200 naira
-                    ':all_time_earnings' => 200.00, // 
-                    ':password' => password_hash($password, PASSWORD_DEFAULT),
-                    ':referral_code' => strtoupper(uniqid()),
-                    ':referred_by' => $referred_by,
-                    ':subscription_status' => 1
-                ]);
+                $stmt->execute([':referral_code' => $referral_code]);
+    
+                if ($stmt->rowCount() > 0) {
+                    $referred_by = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
+                }
+            }
+
+            $sql = "INSERT INTO `users` (email, username, subscription_status, deposit_balance, referral_code, referred_by, password, all_time_earnings) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password, :all_time_earnings)";
+            $stmt = $this->db->prepare($sql);
+            if ($stmt->execute([
+                ':email' => $this->email,
+                ':name' => $this->username,
+                ':balance' => 200.00, // Give each user  abonus of 200 naira
+                ':all_time_earnings' => 200.00, //
+                ':password' => password_hash($password, PASSWORD_DEFAULT),
+                ':referral_code' => strtoupper(uniqid()),
+                ':referred_by' => $referred_by,
+                ':subscription_status' => 1
+            ])) {
                 $this->user_id = $this->db->lastInsertId();
 
                 $transaction = new PPCTransaction();
@@ -63,6 +58,7 @@
                 if ($referred_by) {
                     $this->handleReferralsBonuses( $referred_by, $this->user_id);
                 }
+
                 return $this->user_id;
             } return false;
         }
@@ -155,7 +151,7 @@
         }
 
 
-        private function couponCodeCheceker($coupon = null) {
+        public function couponCodeChecker($coupon = null) {
             if ($coupon) { $this->coupon_code = $coupon; }
             $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
             $stmt = $this->db->prepare($sql);
@@ -165,7 +161,7 @@
 
 
         public function grantDailyLoginBonus($user_id) {
-            $sql = "UPDATE `users` SET `deposit_balance` = deposit_balance + :bonus, `all_time_earnings` = all_time_earnings + :bonus WHERE `user_id` = :id";
+            $sql = "UPDATE `users` SET `income_balance` = income_balance + :bonus, `all_time_earnings` = all_time_earnings + :bonus WHERE `user_id` = :id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':id' => $user_id,
@@ -256,6 +252,39 @@
             $referral_details["totalEarned"] = $totalEarned;
             $referral_details["referrals"] = $referrals;
             return $referral_details;
+        }
+
+
+        public function checkBalanceSufficiencyForWithdrawal($amount) {
+            $user_details = $this->getUserDetails();
+            
+            if ($user_details["income_balance"] >= $amount) {
+                return true;
+            } return false;
+        }
+
+
+        public function createWithdrawalRequest($amount,  $acctNumber, $bankName, $acctName) {
+            $sql = "UPDATE `users` SET `income_balance` = income_balance - :amount WHERE `user_id` = :user_id";
+            $stmt = $this->db->prepare($sql);
+            if ($stmt->execute([
+                ':amount' => $amount,
+                ':user_id' => $this->user_id
+            ])) {
+                $stmt = $this->db->prepare("INSERT INTO `withdrawals` (`user_id`, `account_name`, `account_number`, `transaction_id`, `bank_name`) VALUES (:id, :account_name, :account_number, :transaction_id, :amount)");
+                if ($stmt->execute(array(
+                    ":id"            =>   $this->user_id,
+                    ":transaction_id"   =>   getTrx(),
+                    ":amount"            =>   $amount,
+                    ":account_number"   =>   $acctNumber, 
+                    ":account_name"         =>   $acctName, 
+                    ":bank_name"        =>   $bankName
+                ))) {
+                    $Transaction = new PPCTransaction();
+                    $Transaction->newTransaction("Withdrawal", $amount, "success", "referral");
+                    return true;
+                }  
+            }   return false;
         }
 
 
@@ -557,7 +586,7 @@
 
 
         public function addPPCtoUserBalance() {
-            $sql = "UPDATE `users` SET `income_balance` = income_balance + :ppc, `all_time_earnings` = all_time_earnings + :ppc WHERE `user_id` = :user_id";
+            $sql = "UPDATE `users` SET `income_balance` = income_balance + :ppc WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':ppc' => $this->cost_per_click,

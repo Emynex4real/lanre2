@@ -16,72 +16,79 @@
             <div class="container-fluid">
                 <div class="button-otr">
                     <a href="#" class="member body-sb">Already a member?</a>
-                    <div class="action-otr">
-                    <a class='btn-fill-white btn-signup' href='login'>Login</a>
-                    </div>
+
+                    <a class='btn-fill-white btn-signup' href='login'>
+                        <div class="action-otr b-3" style="font-weight: 800;">
+                            Login
+                        </div>
+                    </a>
                 </div>
+
                 <div class="sign-up">
                     <div class="row row-login">
                         <div class="container">
                             <div class="content">
                                 <a class='logo-inr' href=''>
-                                <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
+                                    <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
                                 </a>
 
-
-                                <form class="form-main" method="post">
-                                <div class="input-otr">
-                                    <input class="input" type="text" name="username" value="" placeholder="Enter Username" required="">
-                                </div>
-                                <div class="input-otr ">
-                                    <input class="input" type="text" name="fullname" value="" placeholder="Enter Fullname" required="">
-                                </div>
-                                <div class="input-otr ">
-                                    <input class="input" type="email" name="email" value="" placeholder="Enter email" required="">
-                                </div>
-                                <div class="input-otr ">
-                                    <input class="input" type="number" name="phoneNumber" value="" placeholder="Enter Phone number" required="">
-                                </div>
-                                <div class="input-otr ">
-                                    <input class="input" type="text" name="refUsername" value="" placeholder="You dont have an upline" readonly>
+                                <div class="alert success mb-3 d-none" id="registerationSuccess">
+                                    <p class="alert pl-2">Profile updated successfully</p>
                                 </div>
 
+                                <div class="alert danger mb-3 d-none" id="registerationFailed">
+                                    <p class="alert pl-2">Please check all inputs</p>
+                                </div>
 
-
-                                <input type="hidden" name="couponType" value="jumbo">
-
-                                <div class="check-main">
-
-                                    <div class="check">
-
-                                    <label>
-
-                                        <a href='vendors' class="coupon">Buy coupon</a>
-                                    </label>
+                                <form class="form-main" id="register-form" method="post">
+                                    <div class="input-otr">
+                                        <input class="input" type="text" name="username" placeholder="Enter Username">
+                                        <p class="danger-text" id="usernameErr"></p>
                                     </div>
-                                </div>
-                                <div class="input-otr ">
-                                    <input class="input" type="text" placeholder="Paste Coupon" name="coupon" value="" required="">
-                                </div>
-                                <div class="input-otr">
-                                    <input class="input" type="text" name="password" value="" placeholder="Your password" required="">
-                                </div>
 
-                                <div class="action-otrs">
-                                    <input class="button body-sb" name="signup" type="submit" value="Register">
-                                </div>
+                                    <div class="input-otr ">
+                                        <input class="input" type="email" name="email" placeholder="Enter  your email">
+                                        <p class="danger-text" id="emailErr"></p>
+                                    </div>
+
+                                    <div class="input-otr ">
+                                        <input class="input" type="text" value="<?php if(isset($_GET["referral_code"])): echo $_GET["referral_code"]; endif; ?>" name="refUsername" placeholder="You dont have an upline" readonly>
+                                    </div>
+
+                                    <div class="check-main">
+                                        <div class="check">
+                                            <label>
+                                                <a href='vendors' class="coupon">Buy coupon</a>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-otr">
+                                        <input class="input" type="text" placeholder="Paste Coupon" name="coupon">
+                                        <p class="danger-text" id="couponErr"></p>
+                                    </div>
+
+                                    <div class="input-otr">
+                                        <input class="input" type="text" name="password" value="" placeholder="Your password">
+                                        <p class="danger-text" id="passwordErr"></p>
+                                    </div>
+
+                                    <div class="action-otrs">
+                                        <input class="button body-sb" name="signup" type="submit" value="Register">
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="back-to-menu">
-                        <a href="">Click here to the homepage</a>
-                    </div>
 
-            </div>
+                    <div class="back-to-menu">
+                        <a href="/">Click here to the homepage</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-    <script src="project.js"></script>
-    </body>
-    </html>
+
+    <script src="js/account.js"></script>
+</body>
+</html>

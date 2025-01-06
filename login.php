@@ -64,6 +64,6 @@
             </div>
         </div>
     </main>
-    <script src="project.js"></script>
+    <script src="js/project.js"></script>
     </body>
     </html>
