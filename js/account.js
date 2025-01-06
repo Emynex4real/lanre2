@@ -72,6 +72,13 @@ if (document.getElementById("login-form")) {
 if (document.getElementById("forgot-password-form")) {
     document.getElementById("forgot-password-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        accountRecord("forgot-password-form", "users/config/forgot_password.php", "lforgotSuccess", "forgotFailed");
+        accountRecord("forgot-password-form", "users/config/forgot_password.php", "forgotSuccess", "forgotFailed");
+    });
+}
+
+if (document.getElementById("reset-password-form")) {
+    document.getElementById("reset-password-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        accountRecord("reset-password-form", "users/config/forgot_password.php", "resetSuccess", "resetFailed");
     });
 }

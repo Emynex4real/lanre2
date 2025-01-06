@@ -12,6 +12,8 @@ RewriteRule ^reset-password/([^/]+)([^/]+)/?$   forgot-password.php?user_id=$1&c
 
 RewriteRule ^terms /terms-and-condition.html [L]
 
+RewriteRule ^forgot-password   forgot-password.html [QSA,NC,L]
+
 RewriteRule ^privacy-policy privacy.html [L]
 
 RewriteRule ^account/registered   users/index.php?register=true [QSA,NC,L]

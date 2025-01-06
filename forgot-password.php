@@ -25,7 +25,7 @@
                 <div class="sign-up">
                     <div class="row row-login">
                         <div class="container">
-                            <?php if (isset($_GET["$user_id"]) && isset($_GET["$passkey"])) { ?>
+                            <?php if (isset($_GET["user_id"]) && isset($_GET["passkey"])) { ?>
                                 <div class="content">
                                     <a class='logo-inr' href=''>
                                         <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
@@ -41,19 +41,23 @@
 
                                     <form class="form-main" id="reset-password-form" method="post">
                                         <div class="input-otr ">
-                                            <input class="input" type="password" name="password" placeholder="Enter new Password">
+                                            <div class="password-area">
+                                                <input class="input" type="password" name="password" placeholder="Enter new Password">
+                                                <i class="far fa-eye password-eye"></i>
+                                            </div>
                                             <p class="danger-text" id="passwordErr"></p>
-                                            <i class="far fa-eye password-eye"></i>
                                         </div>
 
                                         <div class="input-otr ">
-                                            <input class="input" type="password" name="cpassword" placeholder="Confirm Password">
+                                            <div class="password-area">
+                                                <input class="input" type="password" name="cpassword" placeholder="Confirm Password">
+                                                <i class="far fa-eye password-eye"></i>
+                                            </div>
                                             <p class="danger-text" id="cpasswordErr"></p>
-                                            <i class="far fa-eye password-eye"></i>
                                         </div>
 
                                         <div class="action-otrs">
-                                            <input class="button body-sb" name="signup" type="submit" value="Reset password">
+                                            <input class="button body-sb" name="reset_password" type="submit" value="Reset password">
                                         </div>
                                     </form>
                                 </div>
@@ -86,7 +90,7 @@
                                         </div>
 
                                         <div class="action-otrs">
-                                            <input class="button body-sb" id="reset-button" type="submit" value="Request Reset link">
+                                            <input class="button body-sb" name="send_link" id="reset-button" type="submit" value="Request Reset link">
                                         </div>
                                     </form>
                                 </div>
