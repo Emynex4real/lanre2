@@ -42,7 +42,7 @@
                     try {
                         global $db;
                         require_once("config/PPC.php");
-                        $PPC = new PPCTransaction();
+                        $PPC = new PPCTransaction($user_id);
                         $transactions = $PPC->getUserTransactionHistory();
 
                         if (count($transactions) > 0) { 

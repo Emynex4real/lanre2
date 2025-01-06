@@ -16,54 +16,63 @@
             <div class="container-fluid">
                 <div class="button-otr">
                     <a href="#" class="member body-sb">Not a member?</a>
+                    
                     <div class="action-otr">
                         <a class='btn-fill-white btn-signup' href='signup'>Sign Up</a>
-                        </div>
-            
-                </div>
-                <div class="sign-up">
-                <div class="row row-login">
-                <div class="container">
-                    <div class="content">
-                        <a class='logo-inr' href=''>
-                        <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
-                        </a>
-
-
-                        <form class="form-main" method="post">
-                        <div class="input-otr">
-                            <input class="input" type="text" name="username" value="" placeholder="Enter Username" required="">
-                        </div>
-                        <div class="input-otr ">
-                            <input class="input" type="text" name="fullname" value="" placeholder="Enter Fullname" required="">
-                        </div>
-                        
-
-                        <div class="check-main">
-
-                            <div class="check">
-
-                            <label>
-
-                                <a href='password.html' class="forgot">Forgot Password?</a>
-                            </label>
-                            </div>
-                        </div>
-                        <div class="action-otrs">
-                            <input class="button body-sb" name="signup" type="submit" value="Login">
-                        </div>
-                        </form>
                     </div>
                 </div>
-                </div>
-                <div class="back-to-menu">
-                    <a href="">Click here to the homepage</a>
-                </div>
 
-            </div>
+                <div class="sign-up">
+                    <div class="row row-login">
+                        <div class="container">
+                            <div class="content">
+                                <a class='logo-inr' href=''>
+                                    <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
+                                </a>
+
+                                <div class="alert success mb-3 d-none" id="loginSuccess">
+                                    <p class="alert pl-2">Login request successfully</p>
+                                </div>
+
+                                <div class="alert danger mb-3 d-none" id="loginFailed">
+                                    <p class="alert pl-2">Please check all inputs</p>
+                                </div>
+
+                                <form class="form-main" id="login-form" method="post">
+                                    <div class="input-otr">
+                                        <input class="input" type="text" name="username" placeholder="Enter Username">
+                                        <p class="danger-text" id="usernameErr"></p>
+                                    </div>
+
+                                    <div class="input-otr ">
+                                        <input class="input" type="password" name="password" placeholder="Enter Password">
+                                        <p class="danger-text" id="passwordErr"></p>
+                                    </div>
+                                    
+                                    <div class="check-main">
+                                        <div class="check">
+                                            <label>
+                                                <a href='forgot-password' class="forgot">Forgot Password?</a>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="action-otrs">
+                                        <input class="button body-sb" name="signup" type="submit" value="Login">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="back-to-menu">
+                        <a href="">Click here to the homepage</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-    <script src="js/project.js"></script>
-    </body>
-    </html>
+
+    <script src="js/account.js"></script>
+</body>
+</html>

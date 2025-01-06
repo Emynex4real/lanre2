@@ -33,7 +33,7 @@
                                 </a>
 
                                 <div class="alert success mb-3 d-none" id="registerationSuccess">
-                                    <p class="alert pl-2">Profile updated successfully</p>
+                                    <p class="alert pl-2">Account created successfully</p>
                                 </div>
 
                                 <div class="alert danger mb-3 d-none" id="registerationFailed">

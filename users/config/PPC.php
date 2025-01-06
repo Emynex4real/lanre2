@@ -10,6 +10,7 @@
         private $password;
         private $coupon_code;
 
+
         public function __construct($user_id = null) {
             global $db;
             $this->db = $db;
@@ -98,8 +99,7 @@
             $sql = "SELECT * FROM `users` WHERE `username` = :detail OR email = :detail LIMIT 1";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':detail' => $username,
-                ':password' => password_verify($password, PASSWORD_DEFAULT),
+                ':detail' => $username
             ]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -111,7 +111,7 @@
                     $_SESSION['last_login_timestamp'] = time();
 
                     $this->grantDailyLoginBonus($data['user_id']);
-                    $transaction = new PPCTransaction();
+                    $transaction = new PPCTransaction($data['user_id']);
                     $transaction->newTransaction("Daily Login", 50.00, "success", "login");    
                     return true;
                 }
@@ -216,7 +216,7 @@
                 ':bonus' => $bonus,
                 ':user_id' => $referrerID
             ])) {
-                $Transaction = new PPCTransaction();
+                $Transaction = new PPCTransaction($$referrerID);
                 $Transaction->anotherUserTransaction($referrerID ,"Referral Bonus", $bonus, "success", "referral");
             }
         }
@@ -293,7 +293,7 @@
                     ":account_name"         =>   $acctName, 
                     ":bank_name"        =>   $bankName
                 ))) {
-                    $Transaction = new PPCTransaction();
+                    $Transaction = new PPCTransaction($this->user_id);
                     $Transaction->newTransaction("Withdrawal", $amount, "success", "referral");
                     return true;
                 }  
@@ -600,14 +600,14 @@
 
 
         public function addPPCtoUserBalance() {
-            $sql = "UPDATE `users` SET `income_balance` = income_balance + :ppc WHERE `user_id` = :user_id";
+            $sql = "UPDATE `users` SET `income_balance` = income_balance + :ppc, `all_time_earnings` = all_time_earnings + :ppc WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':ppc' => $this->cost_per_click,
                 ':user_id' => $this->user_id
             ]);
             
-            $transaction = new PPCTransaction();
+            $transaction = new PPCTransaction($this->user_id);
             $transaction->newTransaction("Task completed", $this->cost_per_click, "success", "income");
         }
 
