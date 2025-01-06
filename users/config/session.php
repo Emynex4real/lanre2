@@ -3,10 +3,10 @@
 	require_once("functions.php"); 
 
 	if (isset($_SESSION['user'])  && isset($_SESSION['user_id'])) {
-		$user = $_SESSION['user'];
+		$username = $_SESSION['user'];
 		$user_id = $_SESSION['user_id'];
 		$logged_time = $_SESSION['last_login_timestamp'];
-		$user_info = get_user_info($user);
+		$user_info = get_user_info($username);
 		
 		if (empty($user_info) || ($user_info["user_id"]) != $user_id) {
 			session_destroy();

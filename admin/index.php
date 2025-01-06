@@ -18,7 +18,7 @@
 		} 
 	} else {
 		session_destroy();
-		header("Location: /logged_out");
+		header("Location: /login");
 	}
 
 	require_once("layout/admin-header.php");?>

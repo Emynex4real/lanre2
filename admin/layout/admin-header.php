@@ -8,7 +8,7 @@
   <title>Admin Dashboard - E-mine</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <base href="https://e-mine.com.ng/admin/" />
+  <base href="https://admin.emine.com.ng/" />
   <!-- Favicons -->
   <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo.jpg" />
 

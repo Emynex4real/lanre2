@@ -1,8 +1,5 @@
 <?php
     $host = "localhost";
-    // $dbname = "techniqu_techniquesconsult";
-    // $username = "techniqu_techniquesconsult";
-    // $password = "techniqu_techniquesconsult@2024";
     $dbname = "emine";
     $username = "root";
     $password = "";

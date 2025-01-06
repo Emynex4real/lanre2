@@ -20,6 +20,7 @@
 
 
         if (empty($response["errors"])) {
+            require_once("functions.php");
             require_once("PPC.php");
             $user = new PPCUser();
             $userAccount = $user->userLogin($username, $password);

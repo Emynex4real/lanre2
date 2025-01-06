@@ -155,6 +155,7 @@
 
 
         public function couponCodeChecker($coupon = null) {
+            print_r($this->db);
             if ($coupon) { $this->coupon_code = $coupon; }
             $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
             $stmt = $this->db->prepare($sql);
@@ -167,7 +168,7 @@
             $sql = "SELECT * FROM `users` WHERE `$column` = :data";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':data' => $data]);
-            return $stmt->rowCount();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
 

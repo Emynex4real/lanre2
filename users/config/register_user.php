@@ -9,6 +9,7 @@
         $password = trim($_POST['password'] ?? '');
         $referral_code = trim($_POST['refUsername'] ?? '');
 
+        require_once("functions.php");
         require_once("PPC.php");
         $user = new PPCUser();
 

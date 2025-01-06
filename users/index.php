@@ -25,11 +25,11 @@
 
 			<?php if (isset($_GET["register"]) && $_GET["register"] == true) { ?>
 				<div class="alert success mb-3">
-					<p class="alert pl-2"><?= ucfirst($user) ?> your account has been created successfully</p>
+					<p class="alert pl-2"><?= ucfirst($username) ?> your account has been created successfully</p>
 				</div>
 			<?php } elseif (isset($_GET["login"]) && $_GET["login"] == true) { ?>
 				<div class="alert success mb-3">
-					<p class="alert pl-2">Welcome <?= ucfirst($user) ?></p>
+					<p class="alert pl-2">Welcome <?= ucfirst($username) ?>, login successful</p>
 				</div>
 			<?php }  ?>
 
