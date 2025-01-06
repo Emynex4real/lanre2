@@ -1,6 +1,4 @@
 <?php
-    require_once("functions.php");
-    $user_id = null;
 
     class PPCUser {
         private $db;
@@ -725,7 +723,7 @@
             $sql = "SELECT * FROM `transactions` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':user_id' => 3 //$this->user_id
+                ':user_id' => $this->user_id
             ]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }

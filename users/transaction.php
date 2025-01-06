@@ -3,7 +3,7 @@
 		<link rel="stylesheet" href="css/transaction.css" />
         <link rel="stylesheet" href="css/navbar.css" />
 	'; 	
-    $page__title = "Transactions";
+    $page__title = "My  Transactions";
 
 	require_once("config/session.php");
     require_once("layout/user-header.php"); ?>
@@ -67,8 +67,8 @@
                                     </div>
 
                                     <?php foreach ($all_transaction_this_date as $transaction): ?>
-                                        <div class="transaction-details">
-                                            <div class="details <?= $transaction["status"] ?>">
+                                        <div class="transaction-details w-100">
+                                            <div class="details w-100 <?= $transaction["status"] ?>">
                                                 <div class="info">
                                                     <?php if ($transaction["status"] != "failed") { ?>
                                                         <?php if ($transaction["transaction_type"] == "income") { ?>

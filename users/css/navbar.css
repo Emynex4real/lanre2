@@ -449,6 +449,48 @@ html{
 
 
 
+#referral_box {
+    color: #fff;
+    padding: 30px 50px;
+    border-radius: 7px;
+    font-size: 19px;
+    width: 90%;
+    margin-top: 50px;
+    position: relative;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg,#34004d 0%, #F3893F 35%, rgba(2,0,36,1) 100%);
+}
+
+#referral_box h4 {
+    color: #fff;
+    font-weight: 600;
+}
+
+#referral_box p {
+    color: #fff;
+    font-weight: 600;
+}
+
+#referral_box img {
+	right: 100px;
+	bottom: 0px;
+	width: auto;
+	max-height: 250px;
+	height: auto;
+    position: absolute;
+	/* max-height: 200px; */
+}
+
+.md {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+#referral_box img.home-img {
+    max-height: 350px;
+    margin-right: -100px;
+}
+
 @media (max-width: 575px) {
     .mr-3 {
         margin-right: 15px;
@@ -461,6 +503,27 @@ html{
     .ml-2 {
         margin-left: 10px;
     }
+
+    #referral_box {
+        padding-bottom: 250px;
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    #referral_box img {
+        right: 0px;
+        margin-right: 0 !important;
+        max-height: 290px;
+        position: absolute;
+        width: 100%;
+    }
+}
+
+
+
+.w-100 {
+    box-sizing: border-box !important;
+    width: 100% !important;
 }
 
 
@@ -513,3 +576,4 @@ html{
 .d-none {
     display: none;
 }
+

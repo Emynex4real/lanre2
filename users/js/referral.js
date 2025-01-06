@@ -43,7 +43,7 @@ var the_title = "Hi, " + username + "is inviting you to earn with them on E-mine
 var shareButton = document.querySelector(".share");
 console.log(shareButton)
 
-if(shareButton) {
+if (shareButton) {
     var url = referral_code.innerHTML;
 
     shareButton.addEventListener("click", () => {

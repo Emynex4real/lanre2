@@ -23,6 +23,35 @@
 				<p class="head">Dashboard</p>
 			</div>
 
+			<?php if (isset($_GET["register"]) && $_GET["register"] == true) { ?>
+				<div class="alert success mb-3">
+					<p class="alert pl-2"><?= ucfirst($user) ?> your account has been created successfully</p>
+				</div>
+			<?php } elseif (isset($_GET["login"]) && $_GET["login"] == true) { ?>
+				<div class="alert success mb-3">
+					<p class="alert pl-2">Welcome <?= ucfirst($user) ?></p>
+				</div>
+			<?php }  ?>
+
+			<div id="referral_box" class="flex-between mobile-mt-0 mobile-mb-0 ai-center no-break mb-5 mt-3 mobile-p-1 relative">
+				<div class="w-60 mobile-w-100">
+					<h3 class="mb-1 m-0 b-3 md white mobile-xsm" style="color: #fff;">Earn Daily with E-Mine!</h3>
+					<ul>
+						<p>At E-Mine, your daily login earns you real money—no tasks, no hassles, just rewards for showing up.</p> <br>
+						<p>How it works:</p> 
+
+						<ul>
+							<li>Log in to your E-Mine account every day.</li>
+							<li>Earn instant daily rewards credited to your wallet.</li>
+							<li>Withdraw once your earnings reach the minimum balance of ₦5000.</li>
+							<li>Start your journey to effortless income today. 💎</li>
+						</ul>
+					</ul>
+				</div>
+
+				<img src="images/withdrawal.png" class="home-img" alt="">
+			</div>
+
 			<section class="dashboard">
 				<div class="dashboard-container">
 					<div class="referral-link">
@@ -78,5 +107,6 @@
 		</main>
 
 		<script src="js/navbar.js"></script>
+		<script src="js/referral.js"></script>
 	</body>
 	</html>
