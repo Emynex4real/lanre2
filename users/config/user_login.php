@@ -1,6 +1,9 @@
 <?php 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $response = [];
+        $response = ["errors" => [], "success" => false];
+        require_once("functions.php");
+        require_once("PPC.php");
+        $user = new PPCUser();
 
         // Fetch form data
         $username = trim($_POST['username'] ?? '');
@@ -10,6 +13,12 @@
         // Validate inputs
         if (empty($username)) {
             $response['errors']['username'] = "Username is required.";
+        } else {
+            $result = $user->checkUserName($username);
+            
+            if (!$result) {
+                $response['errors']['username'] = "There is no account with this username.";
+            }
         }
 
         if (empty($password)) {
@@ -20,14 +29,14 @@
 
 
         if (empty($response["errors"])) {
-            require_once("functions.php");
-            require_once("PPC.php");
-            $user = new PPCUser();
-            $userAccount = $user->userLogin($username, $password);
-
-            if ($userAccount ) {
+            try {
+                $userAccount = $user->userLogin( $username, $password);
+            } catch (PDOException $e) { echo $e; }
+     
+            if ($userAccount) {
                 $response['success'] = true;
             } else {
+                $response['errors']['password'] = "Incorrect password for this account.";
                 $response['success'] = false;
             }
 

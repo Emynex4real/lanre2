@@ -6,6 +6,8 @@ Options -MultiViews
 
 
 # Main Website
+RewriteRule ^reg/([^/]+)/?$   signup.php?referral_code=$1 [QSA,NC,L]
+
 RewriteRule ^terms /terms-and-condition.html [L]
 
 RewriteRule ^privacy-policy privacy.html [L]
@@ -21,6 +23,8 @@ RewriteRule ^about   about.html [QSA,NC,L]
 RewriteRule ^login   login.php [QSA,NC,L]
 
 RewriteRule ^signup   signup.php [QSA,NC,L]
+
+
 
 # Users Website
 RewriteRule ^account/plans   users/subscriptions.php [QSA,NC,L]

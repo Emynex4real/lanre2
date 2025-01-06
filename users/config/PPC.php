@@ -37,6 +37,7 @@
             $referral_code_username = substr($username, 0, 6);
 			$referral_code_added_number = str_pad(rand(0, pow(10, 3)-1), 3, '0', STR_PAD_LEFT);
 			$referral_code = $referral_code_username . $referral_code_added_number;
+            $password = password_hash($password, PASSWORD_DEFAULT);
 
             $sql = "INSERT INTO `users` (email, username, subscription_status, deposit_balance, referral_code, referred_by, password, all_time_earnings) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password, :all_time_earnings)";
             $stmt = $this->db->prepare($sql);
@@ -45,7 +46,7 @@
                 ':name' => $this->username,
                 ':balance' => 200.00, // Give each user  abonus of 200 naira
                 ':all_time_earnings' => 200.00, //
-                ':password' => password_hash($password, PASSWORD_DEFAULT),
+                ':password' => $password,
                 ':referral_code' => $referral_code,
                 ':referred_by' => $referred_by,
                 ':subscription_status' => 1
@@ -100,17 +101,30 @@
                 ':detail' => $username
             ]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
-     
+            
             if ($data) { 
-                if (password_verify( $password, $data["password"])) {
+                $hashed_password = $data["password"];
+
+                if (password_verify( $password, $hashed_password)) {
                     session_start();
                     $_SESSION['user'] = $data['username'];
                     $_SESSION['user_id'] = $data['user_id'];
                     $_SESSION['last_login_timestamp'] = time();
+  
+                    $currentDate = date('Y-m-d'); 
+                    if ($data['last_bonus_date'] !== $currentDate) {
+                        $sql = "UPDATE `users` SET `last_bonus_date` = :currentDate WHERE `user_id` = :userId";
+                        $stmt = $this->db->prepare($sql);
+                        $stmt->execute([
+                            ':currentDate' => $currentDate,
+                            ':userId' => $data['user_id']
+                        ]);
+                        
+                        $this->grantDailyLoginBonus($data['user_id']);
+                        $transaction = new PPCTransaction($data['user_id']);
+                        $transaction->newTransaction("Daily Login", 50.00, "success", "login"); 
+                    }
 
-                    $this->grantDailyLoginBonus($data['user_id']);
-                    $transaction = new PPCTransaction($data['user_id']);
-                    $transaction->newTransaction("Daily Login", 50.00, "success", "login");    
                     return true;
                 }
 
@@ -155,7 +169,6 @@
 
 
         public function couponCodeChecker($coupon = null) {
-            print_r($this->db);
             if ($coupon) { $this->coupon_code = $coupon; }
             $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
             $stmt = $this->db->prepare($sql);
@@ -211,6 +224,14 @@
             $sql = "SELECT * FROM users WHERE user_id = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':user_id' => $this->user_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        public function checkUserName($username) {
+            $sql = "SELECT * FROM `users` WHERE `username` = :user OR `email` = :user";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':user' => $username]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
