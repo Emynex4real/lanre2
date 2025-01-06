@@ -26,9 +26,9 @@ RewriteRule ^account/login  login.php [QSA,NC,L]
 
 RewriteRule ^account/register  register.php [QSA,NC,L]
 
-RewriteRule ^account/index/registered   users/index.php?register=true [QSA,NC,L]
+RewriteRule ^account/registered   users/index.php?register=true [QSA,NC,L]
 
-RewriteRule ^account/index/logged_in   users/index.php?login=true [QSA,NC,L]
+RewriteRule ^account/logged_in   users/index.php?login=true [QSA,NC,L]
 
 RewriteRule ^account/logout  users/logout.php [QSA,NC,L]
 

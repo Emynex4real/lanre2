@@ -1,5 +1,6 @@
 <?php
     require_once("functions.php");
+    $user_id = null;
 
     class PPCUser {
         private $db;
@@ -9,7 +10,7 @@
         private $password;
         private $coupon_code;
 
-        public function __construct($user_id) {
+        public function __construct($user_id = null) {
             global $db;
             $this->db = $db;
             $this->user_id = $user_id;
@@ -33,6 +34,11 @@
                 }
             }
 
+            // Generate Referral Code
+            $referral_code_username = substr($username, 0, 6);
+			$referral_code_added_number = str_pad(rand(0, pow(10, 3)-1), 3, '0', STR_PAD_LEFT);
+			$referral_code = $referral_code_username . $referral_code_added_number;
+
             $sql = "INSERT INTO `users` (email, username, subscription_status, deposit_balance, referral_code, referred_by, password, all_time_earnings) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password, :all_time_earnings)";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
@@ -41,14 +47,14 @@
                 ':balance' => 200.00, // Give each user  abonus of 200 naira
                 ':all_time_earnings' => 200.00, //
                 ':password' => password_hash($password, PASSWORD_DEFAULT),
-                ':referral_code' => strtoupper(uniqid()),
+                ':referral_code' => $referral_code,
                 ':referred_by' => $referred_by,
                 ':subscription_status' => 1
             ])) {
                 $this->user_id = $this->db->lastInsertId();
 
-                $transaction = new PPCTransaction();
-                $transaction->newTransaction("Welcome Bonus", 200.00, "success", "income");
+                $transaction = new PPCTransaction($this->user_id);
+                $transaction->newTransaction( "Welcome Bonus", 200.00, "success", "income");
 
                 session_start();
                 $_SESSION['user'] = $this->username;
@@ -83,7 +89,6 @@
                 $this->giveUserReferralBonus($referrerID, $bonus);
             } 
         }
-
 
 
         public function userLogin($username, $password) {
@@ -157,6 +162,14 @@
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':code' => $this->coupon_code]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        public function checkDataUniqueness($column, $data) {
+            $sql = "SELECT * FROM `users` WHERE `$column` = :data";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':data' => $data]);
+            return $stmt->rowCount();
         }
 
 
@@ -372,6 +385,7 @@
 
         public function __construct() {
             global $db;
+            
             $this->db = $db;
         }
 
@@ -635,9 +649,12 @@
         public $user_id;
    
 
-        public function __construct() {
-            global $db, $user_id;
+        public function __construct($user_id = null) {
+            global $db;
             $this->db = $db;
+
+            if (empty($user_id)) { global $user_id; }
+
             $this->user_id = $user_id;
         }
 
@@ -651,7 +668,7 @@
             try {
                 $stmt = $db->prepare("INSERT INTO `transactions` (user_id, description, amount, status, transaction_id, transaction_type) VALUES (:id, :type, :amount, :status, :transaction_id, :trans_type)");
                 $stmt->execute([
-                    ':id'             =>  $user_id,
+                    ':id'             =>  $this->user_id,
                     ':trans_type'     =>  $type,
                     ':type'           =>  $description,
                     ':amount'         =>  $amount,

@@ -1,6 +1,4 @@
 <?php 
-    session_start();
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response = [];
 
@@ -11,14 +9,29 @@
         $password = trim($_POST['password'] ?? '');
         $referral_code = trim($_POST['refUsername'] ?? '');
 
+        require_once("PPC.php");
+        $user = new PPCUser();
+
         // Validate inputs
         if (empty($username)) {
             $response['errors']['username'] = "Username is required.";
+        } else {
+            $usernameUniqueness = $user->checkDataUniqueness("username", $username);
+   
+            if ($usernameUniqueness > 0) {
+                $response['errors']['username'] = "This username has been taken.";
+            }
         }
 
         if (empty($email)) {
             $response['errors']['email'] = "Email is required.";
-        }
+        } else {
+            $emailUniqueness = $user->checkDataUniqueness("email", $email);
+
+            if ($emailUniqueness > 0) {
+                $response['errors']['email'] = "There is an account with this email.";
+            }
+        } 
 
         if (empty($password)) {
             $response['errors']['password'] = "Password is required.";
@@ -29,12 +42,10 @@
         if (empty($coupon)) {
             $response['errors']['coupon'] = "Coupon is required.";
         } else {
-            require_once("PPC.php");
-            $user = new PPCUser();
             $result = $user->couponCodeChecker($coupon);
 
             if (!$result) {
-                $response['errors']['coupon'] = "Incorrect Coupon codea";
+                $response['errors']['coupon'] = "Incorrect Coupon code";
             } 
         }
 
@@ -42,7 +53,13 @@
         if (empty($response["errors"])) {
             require_once("PPC.php");
             $user = new PPCUser();
-            $user->createUser($email, $username, $password, $referral_code);
+            $new_user = $user->createUser($email, $username, $password, $referral_code);
+
+            if ($new_user) {
+                $response['success'] = true;
+            } else {
+                $response['success'] = false;
+            }
 
         } else {
             $response['success'] = false;

@@ -1,4 +1,4 @@
-function createRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
+function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
     const form = document.getElementById(formId);
     const formData = new FormData(form);
     scrollToTop(); clearTextDanger();
@@ -55,12 +55,16 @@ function scrollToTop() {
 }
 
 
-// Example Usage: Attach it to your form submissions
 if (document.getElementById("register-form")) {
     document.getElementById("register-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        createRecord("register-form", "users/config/register_user.php", "registerationSuccess", "registerationFailed", "/account/registered");
+        accountRecord("register-form", "users/config/register_user.php", "registerationSuccess", "registerationFailed", "/account/registered");
     });
 }
 
-
+if (document.getElementById("login-form")) {
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        accountRecord("login-form", "users/config/user_login.php", "loginSuccess", "loginFailed", "/account/registered");
+    });
+}
