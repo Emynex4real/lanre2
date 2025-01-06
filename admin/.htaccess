@@ -2,7 +2,7 @@ RewriteEngine On
 Options -MultiViews
 
 # RewriteCond %{SERVER_PORT} 80
-# RewriteRule ^(.*)$ https://techniquesconsult.top/admin/ [R,L] 
+RewriteRule ^(.*)$ https://https://emine.com.ng/admin/ [R,L] 
 
 RewriteRule ^curriculum/([^/]+)/?$  curriculum.php?course=$1 [QSA,NC,L]
 

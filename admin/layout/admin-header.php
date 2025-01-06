@@ -8,7 +8,7 @@
   <title>Admin Dashboard - E-mine</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <base href="http://localhost/php/E-mine/admin/" />
+  <base href="https://e-mine.com.ng/admin/" />
   <!-- Favicons -->
   <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo.jpg" />
 
@@ -42,7 +42,7 @@
 			<ul class="d-flex align-items-center">
 				<li class="nav-item dropdown pe-3">
 					<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-						<img src="https://techniquesconsult.top/admin/uploads/users/<?php if (!empty($user_info["image"])) { echo $user_info["image"]; } else { echo "user.png"; }; ?>" alt="<?= $user ?>" class="rounded-circle">
+						<img src="https://https://emine.com.ng/admin/uploads/users/<?php if (!empty($user_info["image"])) { echo $user_info["image"]; } else { echo "user.png"; }; ?>" alt="<?= $user ?>" class="rounded-circle">
 						<span class="d-none d-md-block dropdown-toggle ps-2"><?= $user; ?></span>
 					</a><!-- End Profile Iamge Icon -->
 

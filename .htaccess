@@ -2,7 +2,7 @@ RewriteEngine On
 Options -MultiViews
 
 # RewriteCond %{SERVER_PORT} 80
-# RewriteRule ^(.*)$ https://emine.com.ng/ [R,L] 
+RewriteRule ^(.*)$ https://emine.com.ng/ [R,L] 
 
 
 # Users Website
