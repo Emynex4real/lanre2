@@ -3,6 +3,8 @@
 		<link rel="stylesheet" href="css/buy-subscription.css" />
 		<link rel="stylesheet" href="css/navbar.css" />
 	'; 
+	require_once("config/session.php");
+	$page__title = "Buy Subscription";
 
 	require_once("layout/user-header.php");
 	

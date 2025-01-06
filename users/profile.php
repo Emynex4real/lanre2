@@ -3,8 +3,9 @@
     	<link rel="stylesheet" href="css/profile.css" />
 	    <link rel="stylesheet" href="css/navbar.css" />
 	'; 
+    require_once("config/session.php");
+    $page__title = "Edit Profile";
 
-    	
 	try {
 		global $db;
 		require_once("config/PPC.php");

@@ -57,3 +57,21 @@
         $randomNum = mt_rand(1000, 9999); // Random 4-digit number
         return "TRX" . $timestamp . $randomNum;
     }
+
+    function get_user_info($username) {
+        global $db;
+        $sql = "SELECT * FROM `users` WHERE `username` = '{$username}' LIMIT 1";
+        $query = $db->prepare($sql);
+        $query->execute();
+        $email_count = $query->rowCount(); 
+
+        // CHECK IF USER EXISTS
+        if($email_count == 1) {
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+            return $data;
+        }
+    }
+
+    function extend_session_validity() {
+        $_SESSION['last_login_timestamp'] = time();
+    }

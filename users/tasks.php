@@ -3,8 +3,10 @@
 		<link rel="stylesheet" href="css/task.css" />
 	<link rel="stylesheet" href="css/navbar.css" />
 	'; 
+	$page__title = "Tasks";
 
-require_once("layout/user-header.php"); ?>
+	require_once("config/session.php");
+	require_once("layout/user-header.php"); ?>
 
 
 	<main>

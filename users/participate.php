@@ -3,6 +3,8 @@
 		<link rel="stylesheet" href="css/participate.css" />
 		<link rel="stylesheet" href="css/navbar.css" />
 	';
+    require_once("config/session.php");
+    $page__title = "Task Participation";
 
     if ($_GET["ad_id"]) {
         $ad_id = $_GET["ad_id"];

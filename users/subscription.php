@@ -3,7 +3,9 @@
 		<link rel="stylesheet" href="css/navbar.css" />
 		<link rel="stylesheet" href="css/subscription.css" />
 	'; 
+	$page__title = "Subscription Plans";
 
+	require_once("config/session.php");
 	require_once("layout/user-header.php"); ?>
 
 	<main>

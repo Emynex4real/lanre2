@@ -3,7 +3,8 @@
     	<link rel="stylesheet" href="css/profile.css" />
 	    <link rel="stylesheet" href="css/navbar.css" />
 	'; 
-
+	$page__title = "Withdrawal Earnings";
+	require_once("config/session.php");
     	
 	try {
 		global $db;

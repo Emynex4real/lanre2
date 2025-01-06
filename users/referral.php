@@ -3,7 +3,9 @@
 		<link rel="stylesheet" href="css/referral.css" />
 		<link rel="stylesheet" href="css/navbar.css" />
 	'; 
-	
+	require_once("config/session.php");
+	$page__title = "My Referrals";
+
 	try {
 		global $db;
 		require_once("config/PPC.php");

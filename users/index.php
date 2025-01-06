@@ -3,11 +3,13 @@
 		<link rel="stylesheet" href="css/project.css" />
 		<link rel="stylesheet" href="css/navbar.css" />
 	';
+	require_once("config/session.php");
+	$page__title = "Welcome";
 
 	try {
 		global $db;
+		require_once("config/session.php");
 		require_once("config/PPC.php");
-		echo $user;
 		$user = new PPCUser($user_id);
 		$user_details = $user->getUserDetails();
 		$referral_details = $user->getUserReferralDetails();

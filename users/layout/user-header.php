@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-mine</title>
+    <title>E-mine <?= ($page__title) ? "-" . $page__title : "" ?></title>
     <base href="http://localhost/php/e-mine/users/" />
 
     <?php if ($page__css) { echo $page__css;  } ?>
@@ -42,13 +42,13 @@
                     <div class="side-bar">
                         <p class="text underline pb-2">NAVIGATION</p>
                         <ul>
-                            <li><a href="index.php">Dashboard</a></li>
-                            <li><a href="profile.php">Profile</a></li>
+                            <li><a href="">Dashboard</a></li>
+                            <li><a href="profile">Profile</a></li>
                             <!-- <li><a href="subscription.php">My Subscriptions</a></li> -->
-                            <li><a href="tasks.php">Tasks</a></li>
-                            <li><a href="transaction.php">Wallet History</a></li>
-                            <li><a href="referral.php">Referrals</a></li>
-                            <li><a href="javascript:void(0)">Cashouts</a></li>
+                            <li><a href="tasks">Tasks</a></li>
+                            <li><a href="transaction">Wallet History</a></li>
+                            <li><a href="referral">Referrals</a></li>
+                            <li><a href="withdrawals">Cashouts</a></li>
                             <li><a href="javascript:void(0)">Games</a></li>
                         </ul>
 
