@@ -75,3 +75,9 @@
     function extend_session_validity() {
         $_SESSION['last_login_timestamp'] = time();
     }
+
+    function generateResetToken() {
+        // Generate a secure random token
+        return bin2hex(random_bytes(32)); // Creates a 64-character hexadecimal token
+    }
+    

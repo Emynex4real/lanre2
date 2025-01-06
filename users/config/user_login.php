@@ -14,7 +14,7 @@
         if (empty($username)) {
             $response['errors']['username'] = "Username is required.";
         } else {
-            $result = $user->checkUserName($username);
+            $result = $user->checkUserDetail($username);
             
             if (!$result) {
                 $response['errors']['username'] = "There is no account with this username.";

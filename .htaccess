@@ -8,6 +8,8 @@ Options -MultiViews
 # Main Website
 RewriteRule ^reg/([^/]+)/?$   signup.php?referral_code=$1 [QSA,NC,L]
 
+RewriteRule ^reset-password/([^/]+)([^/]+)/?$   forgot-password.php?user_id=$1&code=$2  [QSA,NC,L]
+
 RewriteRule ^terms /terms-and-condition.html [L]
 
 RewriteRule ^privacy-policy privacy.html [L]

@@ -228,11 +228,29 @@
         }
 
 
-        public function checkUserName($username) {
+        public function checkUserDetail($detial) {
             $sql = "SELECT * FROM `users` WHERE `username` = :user OR `email` = :user";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':user' => $username]);
+            $stmt->execute([':user' => $detial]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
+        public function sendResetLink($email) {
+            $code = generateResetToken();
+
+            $sql = "UPDATE `users` SET `reset_link` = :code WHERE `email` = :email";
+            $query = $this->db->prepare($sql);
+            if ($query->execute(array (
+                ':code'  =>  $code,
+                ':email'  =>  $email
+            ))) {
+                $userDetails = $this->getUserDetails();
+                $reset_links = "Htpps://emine.com.ng/reset-password/" . $this->user_id . "/" . $code;
+                $username = ucfirst($userDetails["username"]);
+                require_once("../phpmailer/forgot_password_email.php");
+                return true;
+            }
         }
 
 

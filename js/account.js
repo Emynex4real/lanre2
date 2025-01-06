@@ -68,3 +68,10 @@ if (document.getElementById("login-form")) {
         accountRecord("login-form", "users/config/user_login.php", "loginSuccess", "loginFailed", "/account/logged_in");
     });
 }
+
+if (document.getElementById("forgot-password-form")) {
+    document.getElementById("forgot-password-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        accountRecord("forgot-password-form", "users/config/forgot_password.php", "lforgotSuccess", "forgotFailed");
+    });
+}
