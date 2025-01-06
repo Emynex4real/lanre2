@@ -1,0 +1,43 @@
+TECHNIQUESCONSULT.TOP @ 2024
+
+
+CLIENT NAME: Tecniques Consult
+admin.techniquesconsult.top
+ADMIN PASSKEY: TechniquesAdmin4572
+ADMIN USERNAME: TechniquesAdmin
+ADMIN PASSWORD: TechniquesCon@2024
+
+DATABASE DETAILS
+DATABASE NAME: techniqu_techniquesconsult
+ADMIN USERNAME: techniqu_techniquesconsult
+DATATBASE PASSWORD: techniqu_techniquesconsult@2024
+
+
+DOMAIN DETAILS
+Website: https://my.da-manager.com/
+Email: tecconsult333@gmail.com
+Username: 
+Password: TecoInternational@2024
+HOSTING: Hosting with Olanrewaju
+
+
+PAYMENT METHOD DETAILS
+https://app.flutterwave.com/
+Email: 
+
+
+
+WEBINTOAPP ACCOUNT DETAILS
+https://www.webintoapp.com/login
+Email: tecconsult333@gmail.com
+Password: TechniquesCon@2024
+
+
+
+API KEYS
+public_key: "FLWPUBK-57537e4d8c91379901e42276a1c033c9-X",
+Secret Key: FLWSECK-50d372cf19b35a394128c6618cfa0058-19219ff7cb3vt-X,
+Encryption Key: 50d372cf19b3b7d1ec0e5d33
+
+
+
