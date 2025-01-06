@@ -8,6 +8,7 @@
         $coupon = trim($_POST['coupon'] ?? '');
         $password = trim($_POST['password'] ?? '');
         $referral_code = trim($_POST['refUsername'] ?? '');
+        echo $password;
 
         require_once("functions.php");
         require_once("PPC.php");
@@ -52,7 +53,7 @@
 
 
         if (empty($response["errors"])) {
-            $new_user = $user->createUser($email, $username, $password, $referral_code);
+            $new_user = $user->createUser($email, $username, $coupon, $password, $referral_code);
 
             if ($new_user) {
                 $response['success'] = true;
