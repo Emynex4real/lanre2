@@ -22,9 +22,9 @@
         if (empty($response["errors"])) {
             require_once("PPC.php");
             $user = new PPCUser();
-            $new_user = $user->createUser($email, $username, $password, $referral_code);
+            $userAccount = $user->userLogin($username, $password);
 
-            if ($new_user) {
+            if ($userAccount ) {
                 $response['success'] = true;
             } else {
                 $response['success'] = false;

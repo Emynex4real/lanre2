@@ -7,7 +7,7 @@
 	try {
 		global $db;
 		require_once("config/PPC.php");
-		$user = new PPCUser($user);
+		$user = new PPCUser($user_id);
 		$user_details = $user->getUserDetails();
 		$referral_details = $user->getUserReferralDetails();
 

@@ -65,6 +65,6 @@ if (document.getElementById("register-form")) {
 if (document.getElementById("login-form")) {
     document.getElementById("login-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        accountRecord("login-form", "users/config/user_login.php", "loginSuccess", "loginFailed", "/account/registered");
+        accountRecord("login-form", "users/config/user_login.php", "loginSuccess", "loginFailed", "/account/logged_in");
     });
 }

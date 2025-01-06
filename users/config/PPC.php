@@ -96,14 +96,14 @@
             $this->username = $username;
             $this->password = $password;
 
-            $sql = "SELECT * FROM `users` WHERE `username` = :detail OR email = :detail LIMIT 1";
+            $sql = "SELECT * FROM `users` WHERE `username` = :detail OR `email` = :detail LIMIT 1";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':detail' => $username
             ]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($data->rowCount() == 1) { 
+     
+            if ($data) { 
                 if (password_verify( $password, $data["password"])) {
                     session_start();
                     $_SESSION['user'] = $data['username'];
@@ -191,6 +191,20 @@
                 ':user_id' => $user_id
             ]);
             return $stmt->rowCount();
+        }
+
+
+        public function updateUserPassword($password) {
+            $this->password = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE `users` SET password = :password WHERE `user_id` = :id";
+            $stmt = $this->db->prepare($sql);
+            if ($stmt->execute([
+                ':id' => $this->user_id,
+                ':password' => $this->password,
+            ])) {
+                return true;
+            }   return false;
         }
 
 
