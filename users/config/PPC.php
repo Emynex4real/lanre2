@@ -22,6 +22,7 @@
             $this->coupon_code = $coupon_code;
             $referred_by = null;
 
+            // echo $referral_code;
             // Check if referral code is provided and valid
             if ($referral_code) {
                 $sql = "SELECT `user_id` FROM `users` WHERE `referral_code` = :referral_code";
@@ -179,7 +180,9 @@
             if ($couponData) {
                 if ($couponData["cusage"] == 1) {
                     return "used";
-                } return true;
+                } else {
+                    return "not-used";
+                }
             }
 
             return false;
@@ -189,7 +192,8 @@
         public function couponCodeUsed($coupon) {
             if ($coupon) { $this->coupon_code = $coupon; }
             $sql = "UPDATE `coupons` SET `cusage` = 1 WHERE `code` = :code";
-            $stmt = $this->db->query($sql);
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([":code" => $coupon]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
@@ -294,7 +298,7 @@
                 ':bonus' => $bonus,
                 ':user_id' => $referrerID
             ])) {
-                $Transaction = new PPCTransaction($$referrerID);
+                $Transaction = new PPCTransaction($referrerID);
                 $Transaction->anotherUserTransaction($referrerID ,"Referral Bonus", $bonus, "success", "referral");
             }
         }
@@ -316,7 +320,7 @@
                         ":id"   =>   $referred_by,
                     ));
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $level2Referrer = $result ? $result["user_id"] : null;
+                    $level2Referrer = $result ? $result["referred_by"] : null;
     
                     if ($level2Referrer) {
                         $level2referrerID = $result["user_id"];
