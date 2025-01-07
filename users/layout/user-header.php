@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-mine <?= ($page__title) ? "-" . $page__title : "" ?></title>
-    <base href="https://emine.com.ng/users/" />
+    <base href="http://localhost/php/e-mine/users/" />
 
     <?php if ($page__css) { echo $page__css;  } ?>
 

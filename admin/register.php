@@ -94,7 +94,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Create Admin Account - E-mine</title>
-    <base href="https://emine.com.ng/admin/" /> 
+    <base href="http://localhost/php/e-mine/admin/" /> 
     <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo.jpg" />
 
     <meta content="" name="description">

@@ -2,7 +2,7 @@ RewriteEngine On
 Options -MultiViews
 
 #RewriteCond %{SERVER_PORT} 80
-#RewriteRule ^(.*)$ https://emine.com.ng/ [R,L]
+#RewriteRule ^(.*)$ http://localhost/php/e-mine/ [R,L]
 
 
 # Main Website
