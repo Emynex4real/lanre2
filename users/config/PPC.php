@@ -333,7 +333,7 @@
 
 
         public function getUserReferralDetails() {
-            $sql = "SELECT * FROM `referrals` WHERE `user_id` = :user_id";
+            $sql = "SELECT * FROM `referrals` WHERE `referred_by` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':user_id' => $this->user_id]);
             $referrals =  $stmt->fetchAll(PDO::FETCH_ASSOC);
