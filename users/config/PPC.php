@@ -39,7 +39,7 @@
 			$referral_code = $referral_code_username . $referral_code_added_number;
             $password = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO `users` (email, username, subscription_status, deposit_balance, referral_code, referred_by, password, all_time_earnings) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password, :all_time_earnings)";
+            $sql = "INSERT INTO `users` (email, username, subscription_status, income_balance, referral_code, referred_by, password, all_time_earnings) VALUES (:email, :name, :subscription_status, :balance, :referral_code, :referred_by, :password, :all_time_earnings)";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
                 ':email' => $this->email,
@@ -185,6 +185,14 @@
         }
 
 
+        public function checkResetKey($key) {
+            $sql = "SELECT * FROM `users` WHERE `reset_link` = :key AND `user_id` = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':key' => $key, ':id' => $this->user_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
         public function grantDailyLoginBonus($user_id) {
             $sql = "UPDATE `users` SET `income_balance` = income_balance + :bonus, `all_time_earnings` = all_time_earnings + :bonus WHERE `user_id` = :id";
             $stmt = $this->db->prepare($sql);
@@ -246,7 +254,7 @@
                 ':email'  =>  $email
             ))) {
                 $userDetails = $this->getUserDetails();
-                $reset_links = "Htpps://emine.com.ng/reset-password/" . $this->user_id . "/" . $code;
+                $reset_link = "Htpps://emine.com.ng/reset-password/" . $this->user_id . "/" . $code;
                 $username = ucfirst($userDetails["username"]);
                 require_once("../phpmailer/forgot_password_email.php");
                 return true;

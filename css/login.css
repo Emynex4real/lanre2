@@ -255,3 +255,15 @@ main{
 .danger-text {
     color: red !important;
 }
+
+.password-area {
+    position: relative;
+}
+
+.password-eye {
+    color: #fff;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    position: absolute;
+}

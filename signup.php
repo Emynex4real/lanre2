@@ -69,7 +69,10 @@
                                     </div>
 
                                     <div class="input-otr">
-                                        <input class="input" type="text" name="password" value="" placeholder="Your password">
+                                        <div class="password-area">
+                                            <input class="password" type="text" name="password" id="password" placeholder="Your password">
+                                            <i class="far fa-eye password-eye" id="togglePassword"></i>
+                                        </div>
                                         <p class="danger-text" id="passwordErr"></p>
                                     </div>
 

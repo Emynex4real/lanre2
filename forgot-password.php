@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Forgot Password - E-mine</title>
+    <base href="http://localhost/php/e-mine/" />
     <link rel="stylesheet" href="css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,42 +26,66 @@
                 <div class="sign-up">
                     <div class="row row-login">
                         <div class="container">
-                            <?php if (isset($_GET["user_id"]) && isset($_GET["passkey"])) { ?>
-                                <div class="content">
-                                    <a class='logo-inr' href=''>
-                                        <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
-                                    </a>
+                            <?php 
+                                echo $_GET["user_id"];
+                                if ((isset($_GET["user_id"]) && !empty($_GET["user_id"])) && (isset($_GET["passkey"]) && !empty($_GET["passkey"]))) {
+                                    require_once("users/config/functions.php");
+                                    require_once("users/config/PPC.php");
+                                    $user = new PPCUser($_GET["user_id"]);
+                                    $correctKey = $user->checkResetKey($_GET["passkey"]);
+                                    
+                                    if ($correctKey) { ?>
+                                        <div class="content">
+                                            <a class='logo-inr' href=''>
+                                                <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
+                                            </a>
 
-                                    <div class="alert success mb-3 d-none" id="resetSuccess">
-                                        <p class="alert pl-2">Password changed successfully</p>
-                                    </div>
-
-                                    <div class="alert danger mb-3 d-none" id="resetFailed">
-                                        <p class="alert pl-2">Please check all inputs</p>
-                                    </div>
-
-                                    <form class="form-main" id="reset-password-form" method="post">
-                                        <div class="input-otr ">
-                                            <div class="password-area">
-                                                <input class="input" type="password" name="password" placeholder="Enter new Password">
-                                                <i class="far fa-eye password-eye"></i>
+                                            <div class="alert success mb-3 d-none" id="resetSuccess">
+                                                <p class="alert pl-2">Password changed successfully</p>
                                             </div>
-                                            <p class="danger-text" id="passwordErr"></p>
-                                        </div>
 
-                                        <div class="input-otr ">
-                                            <div class="password-area">
-                                                <input class="input" type="password" name="cpassword" placeholder="Confirm Password">
-                                                <i class="far fa-eye password-eye"></i>
+                                            <div class="alert danger mb-3 d-none" id="resetFailed">
+                                                <p class="alert pl-2">Please check all inputs</p>
                                             </div>
-                                            <p class="danger-text" id="cpasswordErr"></p>
-                                        </div>
 
-                                        <div class="action-otrs">
-                                            <input class="button body-sb" name="reset_password" type="submit" value="Reset password">
+                                            <form class="form-main" id="reset-password-form" method="post">
+                                                <div class="input-otr ">
+                                                    <div class="password-area">
+                                                        <input class="input" type="password" name="password" id="password" placeholder="Enter new Password">
+                                                        <i class="far fa-eye password-eye" id="togglePassword"></i>
+                                                    </div>
+                                                    <p class="danger-text" id="passwordErr"></p>
+                                                </div>
+
+                                                <div class="input-otr ">
+                                                    <div class="password-area">
+                                                        <input class="input" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password">
+                                                        <i class="far fa-eye password-eye" id="togglecPassword"></i>
+                                                    </div>
+                                                    <p class="danger-text" id="cpasswordErr"></p>
+                                                </div>
+
+                                                <div class="action-otrs">
+                                                    <input class="button body-sb" name="reset_password" id="forgot-button" type="submit" value="Reset password">
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
-                                </div>
+                                    <?php } else { ?>
+                                        <div class="content">
+                                            <a class='logo-inr' href=''>
+                                                <center> <img class="logo-img" src="images/light3-logo.png" width="200" alt="logo"></center>
+                                            </a>
+
+                                            <div class="text-center">
+                                                <h3>Invalid or Expired Reset Link</h3>
+                                                <p>The password reset link you clicked on is either invalid or has expired. Please check your email for a new reset link or request a new one below.</p
+                                            </div>
+
+                                            <div class="action-otrs">
+                                                <input class="button body-sb" name="send_link" id="forgot-button" type="submit" value="Request new Password Reset link">
+                                            </div>
+                                        </div>
+                                    <?php } ?>
                             <?php } else { ?>
                                 <div class="content">
                                     <a class='logo-inr' href=''>
@@ -90,7 +115,7 @@
                                         </div>
 
                                         <div class="action-otrs">
-                                            <input class="button body-sb" name="send_link" id="reset-button" type="submit" value="Request Reset link">
+                                            <input class="button body-sb" name="send_link" id="forgot-button" type="submit" value="Request Reset link">
                                         </div>
                                     </form>
                                 </div>

@@ -5,7 +5,7 @@
         require_once("PPC.php");
         
         // Send Reset Link
-        if ($_POST['send_link']) {
+        if (isset($_POST['email'])) {
             $tempUser = new PPCUser();
 
             // Fetch form data
@@ -17,9 +17,10 @@
                 $response['errors']['email'] = "Email is required.";
             } else {
                 $userDetails = $tempUser->checkUserDetail($email);
-                $userID = $userDetails["user_id"];
                 
-                if (!$result) {
+                if ($userDetails) {
+                    $userID = $userDetails["user_id"];
+                } else {
                     $response['errors']['email'] = "There is no account with this email address.";
                 }
             }
@@ -43,7 +44,7 @@
 
         
         // Reset User Password
-        } elseif ($_POST['reset_password']) {
+        } elseif (isset($_POST['password'])) {
             // Fetch form data
             $userID = trim($_POST['user_id'] ?? '');
             $password = trim($_POST['password'] ?? '');

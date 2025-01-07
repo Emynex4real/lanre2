@@ -59,6 +59,7 @@
                         width: fit-content;
                         background-color: #F3893F;
                         color: #ffffff;
+                        cursor: pointer;
                         text-decoration: none;
                         padding: 12px 20px;
                         border-radius: 4px;
@@ -93,7 +94,7 @@
                     <div class="content">
                         <p>Hello, '. ucfirst($username) . '</p>
                         <p>We received a request to reset your password for your E-MINE account. Click the button below to reset your password:</p>
-                        <a href="' .  $reset_link . '" class="reset-button">Reset Password</a>
+                        <a href="' . $reset_link . '" class="reset-button">Reset Password</a>
                         <p>If you didn’t request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
                     </div>
 

@@ -20,6 +20,7 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
 
                 if (successUrl) {
                     setTimeout(() => {
+                        document.querySelectorAll("button")[0].disabled = false;
                         window.location.replace(successUrl);
                     }, 3000);
                 }
@@ -31,6 +32,12 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
                     errorField.textContent = response.errors[key]; // Display error message
                 });
 
+                if (submitButtons.length > 0) {
+                    submitButtons.forEach(button => {
+                        button.disabled = false;; // Disable the button
+                    });
+                }
+
                 document.getElementById(dangerDiv).classList.remove("d-none");
             }
         } catch (e) { console.log(e);}
@@ -38,6 +45,7 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
     xhr.send(formData);
 }
 
+console.log(document.querySelectorAll("input[type='submit']"));
 
 function clearTextDanger() {
     const errorElements = document.querySelectorAll('.danger-text');
@@ -47,6 +55,7 @@ function clearTextDanger() {
 }
 
 
+const submitButtons = document.querySelectorAll("input[type='submit']");
 function scrollToTop() {
     window.scrollTo({
         top: 0,
@@ -72,6 +81,9 @@ if (document.getElementById("login-form")) {
 if (document.getElementById("forgot-password-form")) {
     document.getElementById("forgot-password-form").addEventListener("submit", function (e) {
         e.preventDefault();
+        submitButtons.forEach(button => {
+            button.disabled = true; // Disable the button
+        });
         accountRecord("forgot-password-form", "users/config/forgot_password.php", "forgotSuccess", "forgotFailed");
     });
 }
@@ -79,6 +91,50 @@ if (document.getElementById("forgot-password-form")) {
 if (document.getElementById("reset-password-form")) {
     document.getElementById("reset-password-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        accountRecord("reset-password-form", "users/config/forgot_password.php", "resetSuccess", "resetFailed");
+        submitButtons.forEach(button => {
+            button.disabled = true; // Disable the button
+        });
+        accountRecord("reset-password-form", "users/config/forgot_password.php", "resetSuccess", "resetFailed", "/login");
+    });
+}
+
+if (document.getElementById('togglePassword')) {
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        var passwordField = document.getElementById('password');
+        var passwordToggleEye = document.getElementById('togglePassword');
+ 
+        // Check if the password field type is 'password'
+        if (passwordField.type === 'password') {
+            // Change the type to 'text' to show the password
+            passwordField.type = 'text';
+            passwordToggleEye.classList.remove("fa-eye");
+            passwordToggleEye.classList.add("fa-eye-slash");// Update button text
+        } else {
+            // Change the type back to 'password' to hide the password
+            passwordField.type = 'password';
+            passwordToggleEye.classList.add("fa-eye");
+            passwordToggleEye.classList.remove("fa-eye-slash"); // Update button text
+        }
+    });
+}
+
+
+if (document.getElementById('togglecPassword')) {
+    document.getElementById('togglecPassword').addEventListener('click', function() {
+        var passwordField = document.getElementById('cpassword');
+        var passwordToggleEye = document.getElementById('togglecPassword');
+        
+        // Check if the password field type is 'password'
+        if (passwordField.type === 'password') {
+            // Change the type to 'text' to show the password
+            passwordField.type = 'text';
+            passwordToggleEye.classList.remove("fa-eye");
+            passwordToggleEye.classList.add("fa-eye-slash"); // Update button text
+        } else {
+            // Change the type back to 'password' to hide the password
+            passwordField.type = 'password';
+            passwordToggleEye.classList.add("fa-eye");
+            passwordToggleEye.classList.remove("fa-eye-slash"); // Update button text
+        }
     });
 }

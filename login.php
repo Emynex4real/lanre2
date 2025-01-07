@@ -44,8 +44,11 @@
                                         <p class="danger-text" id="usernameErr"></p>
                                     </div>
 
-                                    <div class="input-otr ">
-                                        <input class="input" type="password" name="password" placeholder="Enter Password">
+                                    <div class="input-otr">
+                                        <div class="password-area">
+                                            <input class="password" type="text" name="password" id="password" placeholder="Enter your password">
+                                            <i class="far fa-eye password-eye" id="togglePassword"></i>
+                                        </div>
                                         <p class="danger-text" id="passwordErr"></p>
                                     </div>
                                     
