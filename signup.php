@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-mine</title>
+    <base href="https://emine.com.ng/" />
     <link rel="stylesheet" href="css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +71,7 @@
 
                                     <div class="input-otr">
                                         <div class="password-area">
-                                            <input class="password" type="text" name="password" id="password" placeholder="Your password">
+                                            <input class="input" type="text" name="password" id="password" placeholder="Your password">
                                             <i class="far fa-eye password-eye" id="togglePassword"></i>
                                         </div>
                                         <p class="danger-text" id="passwordErr"></p>

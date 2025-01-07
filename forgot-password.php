@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Forgot Password - E-mine</title>
-    <base href="http://localhost/php/e-mine/" />
+    <base href="https://emine.com.ng/" />
     <link rel="stylesheet" href="css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,6 @@
                     <div class="row row-login">
                         <div class="container">
                             <?php 
-                                echo $_GET["user_id"];
                                 if ((isset($_GET["user_id"]) && !empty($_GET["user_id"])) && (isset($_GET["passkey"]) && !empty($_GET["passkey"]))) {
                                     require_once("users/config/functions.php");
                                     require_once("users/config/PPC.php");
@@ -49,6 +48,8 @@
                                             </div>
 
                                             <form class="form-main" id="reset-password-form" method="post">
+                                                <input type="hidden" name="user_id" value="<?= $_GET["user_id"] ?>" id="user_id">
+
                                                 <div class="input-otr ">
                                                     <div class="password-area">
                                                         <input class="input" type="password" name="password" id="password" placeholder="Enter new Password">
@@ -82,7 +83,7 @@
                                             </div>
 
                                             <div class="action-otrs">
-                                                <input class="button body-sb" name="send_link" id="forgot-button" type="submit" value="Request new Password Reset link">
+                                                <a href="" class="button body-sb" name="send_link" id="forgot-button">Request new Password Reset link</a>
                                             </div>
                                         </div>
                                     <?php } ?>
@@ -109,7 +110,7 @@
                                         <div class="check-main">
                                             <div class="check">
                                                 <label>
-                                                    <a class="login">Login to Account</a>
+                                                    <a class="/login">Login to Account</a>
                                                 </label>
                                             </div>
                                         </div>

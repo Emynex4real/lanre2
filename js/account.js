@@ -18,9 +18,18 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
                 document.getElementById(successDiv).classList.remove("d-none");
                 form.reset(); 
 
+                if (document.getElementById("forgot-password-form")) {
+                    submitButtons.forEach(button => {
+                        button.value = "Link sent successfully";
+                    });
+                } else if (document.getElementById("forgot-password-form")) {
+                    submitButtons.forEach(button => {
+                        button.value = "Passowrd changed successfully";
+                    });
+                }
+
                 if (successUrl) {
                     setTimeout(() => {
-                        document.querySelectorAll("button")[0].disabled = false;
                         window.location.replace(successUrl);
                     }, 3000);
                 }
@@ -35,6 +44,7 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
                 if (submitButtons.length > 0) {
                     submitButtons.forEach(button => {
                         button.disabled = false;; // Disable the button
+                        button.value = buttonContent;
                     });
                 }
 
@@ -45,7 +55,8 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
     xhr.send(formData);
 }
 
-console.log(document.querySelectorAll("input[type='submit']"));
+
+var buttonContent = "";
 
 function clearTextDanger() {
     const errorElements = document.querySelectorAll('.danger-text');
@@ -82,7 +93,9 @@ if (document.getElementById("forgot-password-form")) {
     document.getElementById("forgot-password-form").addEventListener("submit", function (e) {
         e.preventDefault();
         submitButtons.forEach(button => {
-            button.disabled = true; // Disable the button
+            button.disabled = true;
+            buttonContent = button.value;
+            button.value = "Sending you an email..."; // Disable the button
         });
         accountRecord("forgot-password-form", "users/config/forgot_password.php", "forgotSuccess", "forgotFailed");
     });
@@ -93,6 +106,8 @@ if (document.getElementById("reset-password-form")) {
         e.preventDefault();
         submitButtons.forEach(button => {
             button.disabled = true; // Disable the button
+            buttonContent = button.value;
+            button.value = "Resetting your password...";
         });
         accountRecord("reset-password-form", "users/config/forgot_password.php", "resetSuccess", "resetFailed", "/login");
     });

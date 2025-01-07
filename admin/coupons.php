@@ -50,11 +50,11 @@
 
 		<?php
 			if (isset($_GET["new"]) && $_GET["new"] == "true") {
-				$coupon_title = $_GET["title"];
+				$coupon_code = $_GET["code"];
 				echo '
 					<section class="w-93 success flex-center ai-center no-break my-2 mb-3 new">
 						<section class="w-90 m-auto">
-							<p class="alert text-center">' . $coupon_title . ' created sucessfully.</p> 
+							<p class="alert text-center">' . $coupon_code . ' created sucessfully.</p> 
 						</section>
 					</section>
 				';
@@ -84,8 +84,8 @@
 									</section>
 
 									<div class="pt-2">
-										<h6><?= $product_data["title"] ?></h6>
-										<p class="xxsm b-5 black b-3"><?= $product_data["code"] ?></p>
+										<h6><?= $product_data["code"] ?></h6>
+										<p class="xxsm b-5 black b-3"><?= format_Date($product_data["created_on"]) ?></p>
 									</div>
 
 									<div class="mt-3 flex-between ai-center no-break">

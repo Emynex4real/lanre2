@@ -94,14 +94,14 @@
                     <div class="content">
                         <p>Hello, '. ucfirst($username) . '</p>
                         <p>We received a request to reset your password for your E-MINE account. Click the button below to reset your password:</p>
-                        <a href="' . $reset_link . '" class="reset-button">Reset Password</a>
+                        <a href="https://emine.com.ng/reset-password/' . $reset_link . '" class="reset-button" style="color: #fffff;">Reset Password</a>
                         <p>If you didn’t request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
                     </div>
 
                     <!-- Footer Section -->
                     <div class="footer">
                         <p>&copy; 2025 E-MINE. All rights reserved.</p>
-                        <p><a href="http://localhost/php/e-mine/privacy-policy">Privacy Policy</a> | <a href="http://localhost/php/e-mine/terms-and-conditions">Terms of Service</a></p>
+                        <p><a href="https://emine.com.ng/privacy-policy">Privacy Policy</a> | <a href="https://emine.com.ng/terms-and-conditions">Terms of Service</a></p>
                     </div>
                 </div>
             </body>

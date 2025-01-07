@@ -23,18 +23,14 @@
 		header("Location: /logged_out");
 	}
 	
-	if (isset($_POST["title"])) {
-		$coupon_title = $_POST["title"];
+	if (isset($_POST["code"])) {
 		$coupon_code = $_POST["code"];
 		$amount = $_POST["amount"];
-		$coupon_usage = $_POST["usage"];
 
 		try {
-			$sql = "INSERT INTO coupons (`title`, `cusage`, `code`, `amount`) VALUES (:title, :usage, :code, :amount)";
+			$sql = "INSERT INTO coupons (`code`, `amount`) VALUES (:code, :amount)";
 			$query = $db->prepare($sql);
 			if ($query->execute(array(
-				':title' => $coupon_title,
-				':usage' => $coupon_usage,
 				':code' => $coupon_code,
 				':amount' => $amount,
 			))) {
@@ -71,26 +67,14 @@
 							<p class="error" id="passkeyErr"></p>
 						</div>
 
-						<div class="flex-between">
-							<div class="w-47 tablet-w-100 tablet-mb-1">
-								<input type="text" class="form-control shadow-none none" placeholder="Enter coupon title e.g Coupon1" id="title" name="title">
-								<p class="error" id="titleErr"></p>
-							</div>
-			
-							<div class="w-47 tablet-w-100 tablet-mb-1">
-								<input type="text" class="form-control shadow-none none" placeholder="(₦) Amount each user should collect  e.g 300" id="amount" name="amount">
-								<p class="error" id="amountErr"></p>
-							</div>
-						</div>
-
-						<div class="col-12">
-							<input type="number" class="form-control shadow-none none" placeholder="Number of coupon usage" id="usage" name="usage">
-							<p class="error" id="usageErr"></p>
-						</div>
-
 						<div class="col-12">
 							<input type="text" class="form-control shadow-none" placeholder="Enter coupon code" id="code" name="code">
 							<p id="codeErr" class="error"></p>
+						</div>
+			
+						<div class="col-12">
+							<input type="text" class="form-control shadow-none none" placeholder="(₦) Amount each user should collect  e.g 300" id="amount" name="amount">
+							<p class="error" id="amountErr"></p>
 						</div>
 
 						<div class="mt-0 mt-3 mb-2">

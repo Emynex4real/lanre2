@@ -53,6 +53,7 @@
             ])) {
                 $this->user_id = $this->db->lastInsertId();
 
+                $this->couponCodeUsed($coupon_code);
                 $transaction = new PPCTransaction($this->user_id);
                 $transaction->newTransaction( "Welcome Bonus", 200.00, "success", "income");
 
@@ -177,6 +178,14 @@
         }
 
 
+        public function couponCodeUsed($coupon) {
+            if ($coupon) { $this->coupon_code = $coupon; }
+            $sql = "UPDATE `coupons` SET `cusage` = 1 WHERE `code` = :code";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
         public function checkDataUniqueness($column, $data) {
             $sql = "SELECT * FROM `users` WHERE `$column` = :data";
             $stmt = $this->db->prepare($sql);
@@ -217,10 +226,11 @@
         public function updateUserPassword($password) {
             $this->password = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql = "UPDATE `users` SET password = :password WHERE `user_id` = :id";
+            $sql = "UPDATE `users` SET password = :password, `reset_link` = :link WHERE `user_id` = :id";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
                 ':id' => $this->user_id,
+                ':link' => "",
                 ':password' => $this->password,
             ])) {
                 return true;
@@ -254,7 +264,7 @@
                 ':email'  =>  $email
             ))) {
                 $userDetails = $this->getUserDetails();
-                $reset_link = "Htpps://emine.com.ng/reset-password/" . $this->user_id . "/" . $code;
+                $reset_link = $this->user_id . "/" . $code;
                 $username = ucfirst($userDetails["username"]);
                 require_once("../phpmailer/forgot_password_email.php");
                 return true;

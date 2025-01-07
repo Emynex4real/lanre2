@@ -10,7 +10,6 @@
 
             // Fetch form data
             $email = trim($_POST['email'] ?? '');
-
             
             // Validate inputs
             if (empty($email)) {

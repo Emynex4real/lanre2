@@ -57,51 +57,66 @@
 					<div class="referral-link">
 						<p class="text">Referral Link:</p>
 							<p class="text relative">
-								<span id="referral_code">http://localhost/php/e-mine/reg/<?= $user_details["referral_code"] ?></span> <i class="fas fa-copy ml-2 fa-xl copy"  style="fot-size: 15px;"></i>
+								<span id="referral_code">https://emine.com.ng/reg/<?= $user_details["referral_code"] ?></span> <i class="fas fa-copy ml-2 fa-xl copy"  style="fot-size: 15px;"></i>
 							</p>
 							<input type="hidden" name="username" id="username" value="<?= $user_details["username"] ?>">
 					</div>
 
-				<div class="earnings dashboard-mini-box">
-					<div class="earning-box dashboard-box">
-						<div class="earning-amount amount">
-							<div class="price">&#8358;<?= ($user_details["all_time_earnings"]) ?></div>
-							<div class="text">All Earnings</div>
+					<div class="earnings dashboard-mini-box">
+						<div class="earning-box dashboard-box">
+							<div class="earning-amount amount">
+								<div class="price">&#8358;<?= ($user_details["income_balance"]) ?></div>
+								<div class="text">Current Balance</div>
+							</div>
+							<div class="icon"><i class="fas fa-chart-simple"></i></div>
 						</div>
-						<div class="icon"><i class="fas fa-chart-simple"></i></div>
+
+						<div class="get-more">
+							<a href="/transactions"><i class="fas fa-diamond-turn-right"></i></a>
+						</div>
+					</div>
+						
+
+					<div class="earnings dashboard-mini-box">
+						<div class="earning-box dashboard-box">
+							<div class="earning-amount amount">
+								<div class="price">&#8358;<?= ($user_details["all_time_earnings"]) ?></div>
+								<div class="text">All Earnings</div>
+							</div>
+							<div class="icon"><i class="fas fa-chart-simple"></i></div>
+						</div>
+
+						<div class="get-more">
+							<a href=""><i class="fas fa-diamond-turn-right"></i></a>
+						</div>
+					</div>
+					
+					<div class="earnings dashboard-mini-box">
+						<div class="earning-box dashboard-box">
+							<div class="earning-amount amount">
+								<div class="price"><?= $referral_details["referral_count"] ?></div>
+								<div class="text">Referrals</div>
+							</div>
+							<div class="icon"><i class="fas fa-users"></i></div>
+						</div>
+
+						<div class="get-more" id="referral">
+							<a href=""><i class="fas fa-diamond-turn-right"></i></a>
+						</div>
 					</div>
 
-					<div class="get-more">
-						<a href=""><i class="fas fa-diamond-turn-right"></i></a>
+					<div class="earnings dashboard-mini-box">
+						<div class="earning-box dashboard-box">
+							<div class="earning-amount amount">
+								<div class="price"><?= $user_details["ads_history"] ?></div>
+								<div class="text">My Task</div>
+							</div>
+						<div class="icon"><i class="fas fa-calendar-check"></i></div>
 					</div>
-				</div>
-				
-				<div class="earnings dashboard-mini-box">
-					<div class="earning-box dashboard-box">
-						<div class="earning-amount amount">
-							<div class="price"><?= $referral_details["referral_count"] ?></div>
-							<div class="text">Referrals</div>
+						<div class="get-more" id="task">
+						<a href="ta"><i class="fas fa-diamond-turn-right"></i></a>
 						</div>
-						<div class="icon"><i class="fas fa-users"></i></div>
 					</div>
-
-					<div class="get-more" id="referral">
-						<a href=""><i class="fas fa-diamond-turn-right"></i></a>
-					</div>
-				</div>
-
-				<div class="earnings dashboard-mini-box">
-					<div class="earning-box dashboard-box">
-						<div class="earning-amount amount">
-							<div class="price"><?= $user_details["ads_history"] ?></div>
-							<div class="text">My Task</div>
-						</div>
-					<div class="icon"><i class="fas fa-calendar-check"></i></div>
-				</div>
-					<div class="get-more" id="task">
-					<a href="ta"><i class="fas fa-diamond-turn-right"></i></a>
-					</div>
-				</div>
 				</div>
 			</section>
 		</main>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-mine <?= ($page__title) ? "-" . $page__title : "" ?></title>
-    <base href="http://localhost/php/e-mine/users/" />
+    <base href="https://emine.com.ng/users/" />
 
     <?php if ($page__css) { echo $page__css;  } ?>
 
@@ -42,14 +42,14 @@
                     <div class="side-bar">
                         <p class="text underline pb-2">NAVIGATION</p>
                         <ul>
-                            <li><a href="account/">Dashboard</a></li>
-                            <li><a href="account/profile">Profile</a></li>
+                            <li><a href="/account/">Dashboard</a></li>
+                            <li><a href="/account/profile">Profile</a></li>
                             <!-- <li><a href="account/subscription.php">My Subscriptions</a></li> -->
-                            <li><a href="account/tasks">Tasks</a></li>
-                            <li><a href="account/transaction">Wallet History</a></li>
-                            <li><a href="account/referral">Referrals</a></li>
-                            <li><a href="account/withdrawals">Cashouts</a></li>
-                            <li><a href="account/javascript:void(0)">Games</a></li>
+                            <li><a href="/account/tasks">Tasks</a></li>
+                            <li><a href="/account/transactions">Wallet History</a></li>
+                            <li><a href="/account/referral">Referrals</a></li>
+                            <li><a href="/account/withdrawals">Cashouts</a></li>
+                            <li><a href="javascript:void(0)">Games</a></li>
                         </ul>
 
                         <!-- Coming Soon links -->
