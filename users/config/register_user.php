@@ -8,7 +8,6 @@
         $coupon = trim($_POST['coupon'] ?? '');
         $password = trim($_POST['password'] ?? '');
         $referral_code = trim($_POST['refUsername'] ?? '');
-        echo $password;
 
         require_once("functions.php");
         require_once("PPC.php");
@@ -46,8 +45,10 @@
         } else {
             $result = $user->couponCodeChecker($coupon);
 
-            if (!$result) {
-                $response['errors']['coupon'] = "Incorrect Coupon code";
+            if ($result == false) {
+                $response['errors']['coupon'] = "Invalid Coupon code";
+            } elseif ($result == "used") {
+                $response['errors']['coupon'] = "Coupon code has been used";
             } 
         }
 

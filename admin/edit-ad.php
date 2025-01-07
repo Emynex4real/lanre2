@@ -71,7 +71,7 @@
 		
 						<div class="col-12">
                             <label for="reward">Ad Url:</label>
-							<input type="url" class="form-control shadow-none none" placeholder="Enter Ads Url e.g https://emine.com.ng" value="<?= ucfirst($ad["ad_url"]) ?>" id="url" name="url">
+							<input type="url" class="form-control shadow-none none" placeholder="Enter Ads Url e.g http://localhost/php/e-mine/" value="<?= ucfirst($ad["ad_url"]) ?>" id="url" name="url">
 							<p class="error" id="urlErr"></p>
 						</div>
 

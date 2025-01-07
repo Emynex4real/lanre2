@@ -19,7 +19,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <base href="https://emine.com.ng/" /> 
+  <base href="http://localhost/php/e-mine//" /> 
   <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo.jpg" />
   <title>Admin Login - E-mine</title>
   <meta content="" name="description">

@@ -41,9 +41,10 @@ function accountRecord(formId, url, successDiv, dangerDiv, successUrl = null) {
                     errorField.textContent = response.errors[key]; // Display error message
                 });
 
+                console.log(buttonContent);
                 if (submitButtons.length > 0) {
                     submitButtons.forEach(button => {
-                        button.disabled = false;; // Disable the button
+                        button.disabled = false; // Disable the button
                         button.value = buttonContent;
                     });
                 }
@@ -78,6 +79,11 @@ function scrollToTop() {
 if (document.getElementById("register-form")) {
     document.getElementById("register-form").addEventListener("submit", function (e) {
         e.preventDefault();
+        submitButtons.forEach(button => {
+            button.disabled = true;
+            buttonContent = button.value;
+            button.value = "Checking the details..."; // Disable the button
+        });
         accountRecord("register-form", "users/config/register_user.php", "registerationSuccess", "registerationFailed", "/account/registered");
     });
 }
@@ -85,6 +91,12 @@ if (document.getElementById("register-form")) {
 if (document.getElementById("login-form")) {
     document.getElementById("login-form").addEventListener("submit", function (e) {
         e.preventDefault();
+        e.preventDefault();
+        submitButtons.forEach(button => {
+            button.disabled = true;
+            buttonContent = button.value;
+            button.value = "Checking the details..."; // Disable the button
+        });
         accountRecord("login-form", "users/config/user_login.php", "loginSuccess", "loginFailed", "/account/logged_in");
     });
 }

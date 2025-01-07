@@ -131,4 +131,5 @@ main{
 
 .coming-soon{
     font-weight: var(--very-bold);
+    margin-bottom: 12px;
 }

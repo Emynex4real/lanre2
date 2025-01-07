@@ -1,4 +1,4 @@
-HTTPS://EMINE.COM.NG @ 2025
+http://localhost/php/e-mine/ @ 2025
 
 
 CLIENT NAME: EGCTV 9JA TV

@@ -57,7 +57,7 @@
 					<div class="referral-link">
 						<p class="text">Referral Link:</p>
 							<p class="text relative">
-								<span id="referral_code">https://emine.com.ng/reg/<?= $user_details["referral_code"] ?></span> <i class="fas fa-copy ml-2 fa-xl copy"  style="fot-size: 15px;"></i>
+								<span id="referral_code">http://localhost/php/e-mine//reg/<?= $user_details["referral_code"] ?></span> <i class="fas fa-copy ml-2 fa-xl copy"  style="fot-size: 15px;"></i>
 							</p>
 							<input type="hidden" name="username" id="username" value="<?= $user_details["username"] ?>">
 					</div>

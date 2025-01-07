@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-mine <?= ($page__title) ? "-" . $page__title : "" ?></title>
-    <base href="https://emine.com.ng/users/" />
+    <base href="http://localhost/php/e-mine//users/" />
 
     <?php if ($page__css) { echo $page__css;  } ?>
 
@@ -47,9 +47,10 @@
                             <!-- <li><a href="account/subscription.php">My Subscriptions</a></li> -->
                             <li><a href="/account/tasks">Tasks</a></li>
                             <li><a href="/account/transactions">Wallet History</a></li>
-                            <li><a href="/account/referral">Referrals</a></li>
+                            <li><a href="/account/referrals">Referrals</a></li>
                             <li><a href="/account/withdrawals">Cashouts</a></li>
                             <li><a href="javascript:void(0)">Games</a></li>
+                            <li><a href="/account/logout"><button type="submit" class="menu-logout-button">Logout</button></a></li>
                         </ul>
 
                         <!-- Coming Soon links -->

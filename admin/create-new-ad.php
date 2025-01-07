@@ -58,7 +58,7 @@
 						</div>
 		
 						<div class="col-12">
-							<input type="url" class="form-control shadow-none none" placeholder="Enter Ads Url e.g https://emine.com.ng" id="url" name="url">
+							<input type="url" class="form-control shadow-none none" placeholder="Enter Ads Url e.g http://localhost/php/e-mine/" id="url" name="url">
 							<p class="error" id="urlErr"></p>
 						</div>
 

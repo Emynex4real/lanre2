@@ -52,7 +52,7 @@
 
                     <div class="name">
                         <p class="head">Description</p>
-                        <div class="text"><?= ucfirst($ad["cost_per_click"]) ?></div>
+                        <div class="text"><?= ucfirst($ad["description"]) ?></div>
                     </div>
 
                     <?php if ($ad["status"] == "active") { 

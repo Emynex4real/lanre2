@@ -42,7 +42,7 @@
 			<ul class="d-flex align-items-center">
 				<li class="nav-item dropdown pe-3">
 					<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-						<img src="https://https://emine.com.ng/admin/uploads/users/<?php if (!empty($user_info["image"])) { echo $user_info["image"]; } else { echo "user.png"; }; ?>" alt="<?= $user ?>" class="rounded-circle">
+						<img src="https://http://localhost/php/e-mine//admin/uploads/users/<?php if (!empty($user_info["image"])) { echo $user_info["image"]; } else { echo "user.png"; }; ?>" alt="<?= $user ?>" class="rounded-circle">
 						<span class="d-none d-md-block dropdown-toggle ps-2"><?= $user; ?></span>
 					</a><!-- End Profile Iamge Icon -->
 

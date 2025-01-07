@@ -174,7 +174,15 @@
             $sql = "SELECT * FROM `coupons` WHERE `code` = :code";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':code' => $this->coupon_code]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $couponData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($couponData) {
+                if ($couponData["cusage"] == 1) {
+                    return "used";
+                } return true;
+            }
+
+            return false;
         }
 
 
