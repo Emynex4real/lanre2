@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="back-to-menu">
-                        <a href="">Click here to the homepage</a>
+                        <a href="/">Click here to the homepage</a>
                     </div>
                 </div>
             </div>
