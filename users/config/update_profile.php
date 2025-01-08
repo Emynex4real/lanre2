@@ -76,11 +76,11 @@
             // Update Password form data
             $password = trim($_POST['password'] ?? '');
             $new_password = trim($_POST['new_password'] ?? '');
-            $cpassword = trim($_POST['new_password'] ?? '');
+            $cpassword = trim($_POST['cpassword'] ?? '');
 
             // Validate inputs
             if (empty($password)) {
-                $response['errors']['password'] = "Enter new password.";
+                $response['errors']['password'] = "Enter your current password.";
             } else {
                 $hashed_password = $userDetails["password"];
 
@@ -94,6 +94,8 @@
                     $response['errors']['cpassword'] = "Re-enter the password.";
                 } elseif ($new_password != $cpassword) {
                     $response['errors']['cpassword'] = "Confirm password does not match new password.";
+                } elseif ($new_password == $password) {
+                    $response['errors']['cpassword'] = "You cannot change to the same password.";
                 }
             }
 
