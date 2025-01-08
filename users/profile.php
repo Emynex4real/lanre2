@@ -168,25 +168,25 @@
                 
                     <div class="form-group">
                         <label for="Facebook">Facebook Link</label>
-                        <input type="url" id="facebook" name="facebook" placeholder="Enter your facebook profile link" />
+                        <input type="url" id="facebook" name="facebook" value="<?php if (isset($user_social_details["facebook"])) { echo $user_social_details["facebook"]; } ?>" placeholder="Enter your facebook profile link" />
                         <p class="danger-text" id="facebookErr"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="Facebook">Instagram Link</label>
-                        <input type="url" id="instagram" name="instagram" placeholder="Enter your instagram profile link" />
+                        <input type="url" id="instagram" name="instagram" value="<?php if (isset($user_social_details["instagram"])) { echo $user_social_details["instagram"]; } ?>" placeholder="Enter your instagram profile link" />
                         <p class="danger-text" id="instagramErr"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="Twitter">Twitter Link</label>
-                        <input type="url" id="twitter" name="twitter" placeholder="Enter your twitter profile link" />
+                        <input type="url" id="twitter" name="twitter" value="<?php if (isset($user_social_details["twitter"])) { echo $user_social_details["twitter"]; } ?>" placeholder="Enter your twitter profile link" />
                         <p class="danger-text" id="twitterErr"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="whatsapp">Whatsapp Number</label>
-                        <input type="number" id="whatsapp" name="whatsapp" placeholder="Enter your active whatsapp number" />
+                        <input type="number" id="whatsapp" value="<?php if (isset($user_social_details["whatsapp"])) { echo $user_social_details["whatsapp"]; } ?>" name="whatsapp" placeholder="Enter your active whatsapp number" />
                         <p class="danger-text" id="whatsappErr"></p>
                     </div>
 
