@@ -25,21 +25,21 @@
 
         <section class="dashboard">
             <section class="profile-form-container">
-                <div class="alert success mb-3 d-none w-100" id="profileSuccess">
-                    <p class="alert pl-2">Profile updated successfully</p>
-                </div>
-
-                <div class="alert danger mb-3 d-none w-100" id="profileFailed">
-                    <p class="alert pl-2">Please check all inputs</p>
-                </div>
-
                 <form class="profile-form" id="profile-form">
                     <p class="md mb-3 profile-headline">Update Profile</p>
+
+                    <div class="alert success mb-3 d-none w-100" id="profileSuccess">
+                        <p class="alert pl-2">Profile updated successfully</p>
+                    </div>
+
+                    <div class="alert danger mb-3 d-none w-100" id="profileFailed">
+                        <p class="alert pl-2">Please check all inputs</p>
+                    </div>
 
                     <input type="hidden" name="user_id" value="<?= $_SESSION["user_id"] ?>">
 
                     <!-- Full Name -->
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 20px;">
                         <label for="fullName">Username</label>
                         <input type="text" id="username" name="username" value="<?= $user_details["username"] ?>" placeholder="Enter your user name" />
                         <p class="danger-text" id="usernameErr"></p>
@@ -73,21 +73,21 @@
             </section>
 
             <section class="profile-form-container">
-                <div class="alert success mb-3 d-none w-100" id="bankSuccess">
-                    <p class="alert pl-2">Bank settings updated successfully</p>
-                </div>
-
-                <div class="alert danger mb-3 d-none w-100" id="bankFailed">
-                    <p class="alert pl-2">Please check all inputs</p>
-                </div>
-
                 <form class="profile-form" id="bank-settings-form">
                     <p class="profile-headline mb-3 md">Bank Settings</p>
+
+                    <div class="alert success mb-3 d-none w-100" id="bankSuccess">
+                        <p class="alert pl-2">Bank settings updated successfully</p>
+                    </div>
+
+                    <div class="alert danger mb-3 d-none w-100" id="bankFailed">
+                        <p class="alert pl-2">Please check all inputs</p>
+                    </div>
 
                     <input type="hidden" name="user_id" value="<?= $_SESSION["user_id"] ?>">
 
                     <!-- Full Name -->
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 20px;">
                         <label for="fullName">Bank Name</label>
                             <select name="bank_name" id="bank_name" class="form-control" style="border:1px solid #dcdcdc !important;">
                                 <?php if (isset($user_bank_details["bank_name"])) { ?>
@@ -127,13 +127,13 @@
                     <!-- Email -->
                     <div class="form-group">
                         <label for="name">Account Name</label>
-                        <input type="text" id="account_name" value="<?php if (isset($user_bank_details["account_name"])) { echo $user_bank_details["account_name"]; } ?>" name="account_name" placeholder="Enter the name on the bank Account" />
+                        <input type="text" name="account_name" value="<?php if (isset($user_bank_details["account_name"])) { echo $user_bank_details["account_name"]; } ?>" name="account_name" placeholder="Enter the name on the bank Account" />
                         <p class="danger-text" id="account_nameErr"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="name">Account Number</label>
-                        <input type="text" id="account_number" value="<?php if (isset($user_bank_details["account_number"])) { echo $user_bank_details["account_name"]; } ?>" name="account_number" placeholder="Enter the account number" />
+                        <input type="text" name="account_number" value="<?php if (isset($user_bank_details["account_number"])) { echo $user_bank_details["account_name"]; } ?>" name="account_number" placeholder="Enter the account number" />
                         <p class="danger-text" id="account_numberErr"></p>
                     </div>
 
@@ -145,20 +145,20 @@
             </section>
 
             <section class="profile-form-container">
-                <div class="alert success mb-3 d-none w-100" id="socialSuccess">
-                    <p class="alert pl-2">Social Accounts updated successfully</p>
-                </div>
-
-                <div class="alert danger mb-3 d-none w-100" id="socialFailed">
-                    <p class="alert pl-2">Please check all inputs</p>
-                </div>
-
                 <form class="profile-form" id="social-accounts-form">
                     <p class="md mb-3 profile-headline">Social Accounts</p>
 
+                    <div class="alert success mb-3 d-none w-100" id="socialSuccess">
+                        <p class="alert pl-2">Social Accounts updated successfully</p>
+                    </div>
+
+                    <div class="alert danger mb-3 d-none w-100" id="socialFailed">
+                        <p class="alert pl-2">Please check all inputs</p>
+                    </div>
+
                     <input type="hidden" name="user_id" value="<?= $_SESSION["user_id"] ?>">
 
-                    <div class="mb-3">
+                    <div class="mb-3" style="margin-top: 20px;">
                         <ul>
                             <li>Our team will check to see if your ink is correct</li>
                             <li>All links should follow the format <b class="b-3">https://social.com/Username</b></li>
@@ -198,21 +198,21 @@
             </section>
 
             <section class="profile-form-container">
-                <div class="alert success mb-3 d-none w-100" id="passwordSuccess">
-                    <p class="alert pl-2">Password updated successfully</p>
-                </div>
-
-                <div class="alert danger mb-3 d-none w-100" id="passwordFailed">
-                    <p class="alert pl-2">Please check all inputs</p>
-                </div>
-
                 <form class="profile-form" id="change-password-form">
                     <p class="md mb-3 profile-headline">Change Password</p>
+
+                    <div class="alert success mb-3 d-none w-100" id="passwordSuccess">
+                        <p class="alert pl-2">Password updated successfully</p>
+                    </div>
+
+                    <div class="alert danger mb-3 d-none w-100" id="passwordFailed">
+                        <p class="alert pl-2">Please check all inputs</p>
+                    </div>
 
                     <input type="hidden" name="user_id" value="<?= $_SESSION["user_id"] ?>">
 
                     <!-- Full Name -->
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 20px;">
                         <label for="password">Current Password</label>
                         <input type="text" id="password" name="password" placeholder="Enter your current password" />
                         <p class="danger-text" id="passwordErr"></p>

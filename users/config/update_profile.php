@@ -2,7 +2,7 @@
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $response = [];
+        $response = ["errors" => [], "success" == false];
         // Get USER ID
         $userID = trim($_POST['user_id'] ?? '');
 

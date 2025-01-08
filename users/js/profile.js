@@ -25,6 +25,8 @@ function updateRecord(formId, url, successDiv, dangerDiv, button, buttonText) {
 
                 if (formId == "change-password-form") {
                     form.reset();
+                } else if (formId == "profile-form")  {
+                    uploadFile.files[0] = null;
                 }
 
             } else {
