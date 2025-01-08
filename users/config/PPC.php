@@ -304,8 +304,8 @@
             $level2Bonus = 50;
     
             if ($referred_by) {
-                $user = new PPCUser($referred_by);
-                $user->createReferralRelations($userId, $referred_by, 1,$level1Bonus);
+                $referralUser = new PPCUser($referred_by);
+                $referralUser->createReferralRelations($userId, $referred_by, 1,$level1Bonus);
                     
                 if ($referred_by) {
                     // Get the referrer of the Direct referral
@@ -317,7 +317,7 @@
                     $level2Referrer = $result ? $result["referred_by"] : null;
     
                     if ($level2Referrer) {
-                        $level2referrerID = $result["user_id"];
+                        $level2referrerID = $result["referred_by"];
                         $user = new PPCUser($level2referrerID);
                         $user->createReferralRelations($userId, $level2referrerID , 2, $level2Bonus);
                     }
