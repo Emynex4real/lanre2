@@ -47,7 +47,7 @@ function updateRecord(formId, url, successDiv, dangerDiv, button, buttonText) {
 
 
 function clearTextDanger() {
-    const errorElements = document.querySelectorAll('p.error');
+    const errorElements = document.querySelectorAll('.danger-text');
     errorElements.forEach(element => {
         element.innerHTML = ''; // Clear the inner HTML
     });

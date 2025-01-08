@@ -127,13 +127,13 @@
                     <!-- Email -->
                     <div class="form-group">
                         <label for="name">Account Name</label>
-                        <input type="text" name="account_name" value="<?php if (isset($user_bank_details["account_name"])) { echo $user_bank_details["account_name"]; } ?>" name="account_name" placeholder="Enter the name on the bank Account" />
+                        <input type="text" name="account_name" value="<?php if (isset($user_bank_details["account_name"])) { echo $user_bank_details["account_name"]; } ?>" placeholder="Enter the name on the bank Account" />
                         <p class="danger-text" id="account_nameErr"></p>
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Account Number</label>
-                        <input type="text" name="account_number" value="<?php if (isset($user_bank_details["account_number"])) { echo $user_bank_details["account_name"]; } ?>" name="account_number" placeholder="Enter the account number" />
+                        <label for="account_number">Account Number</label>
+                        <input type="number" name="account_number" value="<?php if (isset($user_bank_details["account_number"])) { echo $user_bank_details["account_number"]; } ?>" placeholder="Enter the account number" />
                         <p class="danger-text" id="account_numberErr"></p>
                     </div>
 
