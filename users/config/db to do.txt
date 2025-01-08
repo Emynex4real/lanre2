@@ -1,3 +1,0 @@
-Add column image to user
-create bank_details table
-create social_accounts column
