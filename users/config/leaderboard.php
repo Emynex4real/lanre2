@@ -47,7 +47,7 @@
                 <td class="number">' . ($index + 1) . '</td>
                 <td class="name">' .  $leader["username"]. '</td>
                 <td class="points">
-                    ₦' .  $leader["total_earned"] .   $winner. '
+                    ₦' .  number_format($leader["total_earned"]) .   $winner. '
                 </td>
             </tr>
         ';

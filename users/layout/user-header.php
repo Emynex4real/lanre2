@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-mine <?= ($page__title) ? "-" . $page__title : "" ?></title>
-    <base href="http://localhost/php/e-mine//users/" />
+    <base href="http://localhost/php/e-mine/users/" />
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+    <link rel="favicon" href="images/logo.png" />
 
     <?php if ($page__css) { echo $page__css;  } ?>
 

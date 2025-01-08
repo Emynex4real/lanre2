@@ -32,5 +32,4 @@ darkMode.addEventListener('click', ()=>{
     document.body.classList.add('darkMode')
     lightMode.style.display = 'block'
     darkMode.style.display = 'none'
-
 })

@@ -113,7 +113,7 @@ html{
     font-weight: 700;
     margin-bottom: 12px;
 }
-.light-dark{
+.light-dark {
     display: flex;
     background-color: rgba(0, 0, 0, 0.556);
     width: 40px;
@@ -594,4 +594,9 @@ html{
 
 .menu-logout-button:hover {
     background-color: #d32f2f; /* Darker red on hover */
+}
+
+.darkMode * p,
+.darkMode * li {
+  color: #ffffff !important;
 }

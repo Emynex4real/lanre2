@@ -252,3 +252,8 @@ main{
   .b-3 {
     font-weight: 800 !important;
   }
+  
+  .profile-form * p,
+  .profile-form * li {
+      color: #fff;
+  }
