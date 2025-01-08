@@ -5,6 +5,7 @@
         private $user_id;
         private $email;
         private $username;
+        private $image;
         private $password;
         private $coupon_code;
 
@@ -134,25 +135,18 @@
         }
 
 
-        public function updateUserDetails($email, $username, $password) {
+        public function updateUserDetails($email, $username, $image) {
             $this->email = $email;
             $this->username = $username;
+            $this->image = $image;
 
-            if ($password) {
-                $this->password = password_hash($password, PASSWORD_DEFAULT);
-            } else {
-                $user_details = $this->getUserDetails();
-                $this->password = $user_details["password"];
-            }
-
-
-            $sql = "UPDATE `users` SET email = :email, username = :name, password = :password WHERE `user_id` = :id";
+            $sql = "UPDATE `users` SET email = :email, username = :name, image = :image WHERE `user_id` = :id";
             $stmt = $this->db->prepare($sql);
             if ($stmt->execute([
                 ':id' => $this->user_id,
                 ':email' => $this->email,
                 ':name' => $this->username,
-                ':password' => $this->password,
+                ':image' => $this->image,
             ])) {
                 return true;
             }
@@ -251,7 +245,7 @@
 
 
         public function getUserDetails() {
-            $sql = "SELECT * FROM users WHERE user_id = :user_id";
+            $sql = "SELECT * FROM `users` WHERE `user_id` = :user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':user_id' => $this->user_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -381,6 +375,104 @@
                 }  
             }   return false;
         }
+
+
+        public function get_user_bank_details() {
+            global $db;
+            $sql = "SELECT * FROM `account_details` WHERE `user_id` = :id LIMIT 1";
+            $query = $db->prepare($sql);
+            $query->execute([":id" => $this->user_id]);
+            $email_count = $query->rowCount(); 
+    
+            // CHECK IF USER EXISTS
+            if ($email_count == 1) {
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+                return $data;
+            } return [];
+        }
+
+
+        public function get_user_social_accounts() {
+            global $db; // Database connection
+            $sql = "SELECT * FROM `social_accounts` WHERE `user_id` = :id LIMIT 1";
+            $query = $db->prepare($sql);
+            $query->execute([":id" => $this->user_id]);
+            $row_count = $query->rowCount(); 
+        
+            // Check if the user has social accounts
+            if ($row_count == 1) {
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+                return $data;
+            }
+            return [];
+        }
+
+
+
+        public function updateUserBandDetails( $account_number, $bank_name, $account_name) {
+            global $db;
+            $sql = "SELECT * FROM `account_details` WHERE `user_id` = :id" ;
+            $query = $db->prepare($sql);
+            $query->execute([":id" => $this->user_id]);
+            $account_count = $query->rowCount();
+            
+            if ($account_count == 0) {
+                $sql = "INSERT INTO `account_details` (`user_id`, `bank_name`, `account_name`, `account_number`) VALUES (:user_id, :bank_name, :account_name, :account_number)";
+                $query = $db->prepare($sql);
+                $query->execute(array (
+                    ':user_id'                  =>   $this->user_id,
+                    ':bank_name'                =>   $bank_name,
+                    ':account_name'             =>   $account_name,
+                    ':account_number'           =>   $account_number
+                ));
+    
+            } else {
+                $sql = "UPDATE `account_details` SET `bank_name` = :bank_name, `account_name` = :account_name, `account_number` = :account_number WHERE `user_id` = :user_id";
+                $query = $db->prepare($sql);
+                $query->execute(array (
+                    ':user_id'                  =>   $this->user_id,
+                    ':bank_name'                =>   $bank_name,
+                    ':account_name'             =>   $account_name,
+                    ':account_number'           =>   $account_number
+                ));
+            }     
+            return true;
+        }
+
+
+
+        public function updateUserSocialDetails($facebook, $instagram, $twitter, $whatsapp) {
+            global $db;
+            $sql = "SELECT * FROM `social_accounts` WHERE `user_id` = :id" ;
+            $query = $db->prepare($sql);
+            $query->execute([":id" => $this->user_id]);
+            $social_count = $query->rowCount();
+            
+            if ($social_count == 0) {
+                $sql = "INSERT INTO `social_accounts` (`user_id`, `facebook`, `instagram`, `twitter`, `whatsapp`) VALUES (:user_id, :facebook, :instagram, :twitter, :whatsapp)";
+                $query = $db->prepare($sql);
+                $query->execute(array (
+                    ':user_id'       =>   $this->user_id,
+                    ':facebook'      =>   $facebook,
+                    ':instagram'     =>   $instagram,
+                    ':twitter'       =>   $twitter,
+                    ':whatsapp'      =>   $whatsapp
+                ));
+    
+            } else {
+                $sql = "UPDATE `social_accounts` SET `facebook` = :facebook, `instagram` = :instagram, `twitter` = :twitter, `whatsapp` = :whatsapp WHERE `user_id` = :user_id";
+                $query = $db->prepare($sql);
+                $query->execute(array (
+                    ':user_id'       =>   $this->user_id,
+                    ':facebook'      =>   $facebook,
+                    ':instagram'     =>   $instagram,
+                    ':twitter'       =>   $twitter,
+                    ':whatsapp'      =>   $whatsapp
+                ));
+            }     
+            return true;
+        }
+    
 
 
         public function logout() {

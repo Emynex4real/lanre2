@@ -80,4 +80,15 @@
         // Generate a secure random token
         return bin2hex(random_bytes(32)); // Creates a 64-character hexadecimal token
     }
+
+    
+    function validate_url($url) {
+        // Check if the URL is valid
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            return true; // URL is valid
+        }
+        return false; // URL is invalid
+    }
+    
+ 
     

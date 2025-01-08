@@ -49,6 +49,8 @@ RewriteRule ^account/withdrawals   users/withdrawal.php [QSA,NC,L]
 
 RewriteRule ^account/login  login.php [QSA,NC,L]
 
+RewriteRule ^top-earners  top-referrals.html [QSA,NC,L]
+
 RewriteRule ^account/register  register.php [QSA,NC,L]
 
 RewriteRule ^account/logged_in   users/index.php?login=true [QSA,NC,L]
